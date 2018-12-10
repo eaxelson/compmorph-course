@@ -94,6 +94,18 @@ print(tr.extract_paths())
 tr = regex('a [ b | c ]')
 print(tr.extract_paths())
 
+# Some examples of regular expressions used via xfst commands:
+#
+# ```
+# read regex [ d o g | c a t | r a t | e l e p h a n t ] - [ d o g | r a t ];
+# print words
+# read regex (r e )[[m a k e] | [c o m p i l e]]
+# print words
+# ```
+# Try yourself in interactive mode (with function start_xfst):
+
+from hfst_dev import start_xfst
+
 # A more comprehensive list of operators and special symbols:
 #
 # ```
@@ -185,3 +197,6 @@ from hfst_dev import HfstTransducer
 
 generator = HfstTransducer(tr)
 print(generator.lookup('cat+N+Sg+Poss'))
+
+# This demonstrates both the usage of regular expressions and creating transducers from scratch
+# as well as how much easier it is to use higher-level tools for morphologies.

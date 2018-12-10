@@ -40,7 +40,7 @@
 #
 # We can then construct a simple LexC script for the above case of Finnish morphology:
 
-from hfst_dev import compile_lexc_script, HfstTransducer
+from hfst_dev import compile_lexc_script, regex, HfstTransducer
 
 tr = compile_lexc_script("""
 Multichar_Symbols +N +Sg +Pl +Nom +Abl ^S ^T
@@ -69,9 +69,20 @@ LEXICON Case
 END
 """)
 
-print(tr.lookup('lautanen+N+Pl+Abl'))
-print(tr.lookup('lauta#silta+N+Sg+Nom'))
-print(tr.lookup('lautanen#ilta+N+Sg+Nom'))
+# Fix phonology with ad-hoc rules:
+
+ruleS = regex('[ %^S -> s || _ [i|"#"] ] .o. [ %^S -> n e n ]')
+ruleT = regex('[ %^T -> l || l _ a l t a ] .o. [ %^T -> d || _ a l t a ] .o. [ %^T -> t ]')
+tr.compose(ruleS)
+tr.compose(ruleT)
+# Invert into an analyzer:
+tr.invert()
+tr.minimize()
+
+# Test the analyzer:
+
+print(tr.lookup('lautasilta', output='text'))
 
 # Probablities of "lauta#silta+N+Sg+Nom'" and "lautanen#ilta+N+Sg+Nom" are almost the same,
-# because we have no semantic information in our simple model.
+# because we have no semantic information in our simple model. Or separate probability
+# for the compound "lauta#silta".
