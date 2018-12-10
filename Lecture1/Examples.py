@@ -84,7 +84,7 @@ print(generator.lookup('cat[N]+N', output='text'))
 
 from hfst_dev import compile_xfst_script
 
-compile_xfst_script('hfst-en-morph-wn-bnc/src/english.script')
+compile_xfst_file('hfst-en-morph-wn-bnc/src/english.script')
 analyzer = HfstTransducer.read_from_file('hfst-en-morph-wn-bnc/src/english.hfst')
 analyzer.lookup_optimize()
 generator = HfstTransducer(analyzer)
@@ -174,3 +174,5 @@ END
 
 generator.lookup_optimize()
 print(generator.lookup('sky+N+Pl'))
+
+# We could also write the script to a file and then call compile_lexc_file.

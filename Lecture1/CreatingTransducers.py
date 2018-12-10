@@ -1,21 +1,56 @@
-# # Creating transducers from scratch
+# # Creating transducers with HFST
 #
+# ## Some terminology
+#
+# Finite-State Transducer (FST) is a network that consists of states
+# and transitions between the states.
+# The states can be final or non-final. One of the states is an initial
+# state. The transitions have an input
+# and output symbol. If each transition has the same input and
+# output symbol, we are dealing with a Finite-State Automaton (FSA).
+# 
+# The transitions and final states can have a weight. Then we talk about
+# Weighted Finite-State Transducers (WFST) and Weighted Finite-State
+# Automata (WFSA).
+#
+# We will generally refer to all of these as transducers.
+#
+# A transducer essentially _encodes_ a language/relation, i.e. a set of
+# strings or string pairs. A regular expression _denotes_ a language/relation and
+# can be _compiled_ into a transducer.
+#
+# For example, the regular expression [ a ] denotes the language {"a"}, i.e. a language
+# that contains the string "a". The regular expression can be compiled into a finite-state
+# transducer that has two states (an initial and a final one) and a transition from the initial
+# state to the final state with input symbol "a" and output symbol "a". The finite-state
+# transducer thus _encodes the language {"a"}.
+#
+# Another example: the regular expression [ a:b ]* denotes the language {<"":"">, <"a":"b">, <"aa":"bb">, ...},
+# i.e. a relation that contains all string pairs with the same number of "a" and "b", including the
+# empty string pair. The regular expression can be compiled into a finite-state transducer
+# that has one state that is both initial and final and a transition from that state to itself
+# with input symbol "a" and output symbol "b". The transducer encodes the language
+# {<"":"">, <"a":"b">, <"aa":"bb">, ...}.
+#
+# The language {} is the empty language that contains no strings. It is encoded by the empty
+# transducer that has one state that is initial and has no transitions.
+# The language {""} is the empty-string language that contains the empty string "".
+# It is encoded byt the epsilon transducer that has one state that is both initial
+# and final and has no transitions.
+
 # ## Xerox-style regular expressions.
 #
 # The regexp syntax is explained [here](https://github.com/hfst/python-hfst-4.0/wiki/Regular-Expression-Operators).
-#
-# ## Set theory for finite-state networks
-#
+
 # Networks for the empty language and the empty-string language created
 # directly with special functions, regular expressions, and from scratch:
-
 from hfst_dev import empty_fst, epsilon_fst, regex, HfstIterableTransducer
 
 # ready-made functions for empty and empty-string languages/relations:
 empty1 = empty_fst()
 epsilon1 = epsilon_fst()
 
-# same with regexps that denote the languages (note that there are more than one possible solution, basically amn infinite number)
+# same with regexps that denote the languages (note that there are more than one possible solution, basically an infinite number)
 empty20 = regex('0 - 0')
 empty21 = regex('~[?*]')
 
@@ -27,19 +62,38 @@ empty3 = HfstIterableTransducer() # one initial, non-final state
 epsilon3 = HfstIterableTransducer()
 epsilon3.set_final_weight(0, 0) # make the initial state final
 
-# The brackets [ and ] are used for grouping regular expressions.
-# For example  a b | c is the same as language {"ab","c"} and a [ b | c ] the same as {"ab","ac"} (concatenation has higher precedence than union).
+# ## Some regular expression operators
 #
 # ```
 # [ A | B ] denotes the union of the two languages A and B ("or"-operation)
 # [ A & B ] denotes the intersection ("and"-operation)
 # [ A - B ] denotes the subtraction of B from A
 # [ A B ] denotes the concatenation
-# [ A .o. B ] denotes the concatenation
+# [ A .o. B ] denotes the composition
 # A.u denotes the upper (i.e. input) projection
 # A.l denotes the lower (o.e. output) projection
 # ```
-# 
+
+from hfst_dev import HfstTransducer
+
+a = regex('a')
+b = regex('b')
+union = HfstTransducer(a)
+union.disjunct(b)
+assert(union.compare(regex('a | b')))
+intersection = HfstTransducer(a)
+intersection.intersect(b)
+assert(intersection.compare(regex('a & b')))
+assert(intersection.compare(regex('0 - 0')))
+
+# The brackets [ and ] are used for grouping regular expressions.
+# For example  a b | c is the same as language {"ab","c"} and a [ b | c ] the same as {"ab","ac"} (concatenation has higher precedence than union).
+
+tr = regex('a b | c')
+print(tr.extract_paths())
+tr = regex('a [ b | c ]')
+print(tr.extract_paths())
+
 # A more comprehensive list of operators and special symbols:
 #
 # ```
@@ -50,7 +104,6 @@ epsilon3.set_final_weight(0, 0) # make the initial state final
 # " "  quote symbol
 # :    pair separator
 # ::   weight
-#
 # [ ]  group expression
 # ~    complement
 # \    term complement
@@ -84,6 +137,8 @@ epsilon3.set_final_weight(0, 0) # make the initial state final
 # ```
 
 
+# ## Using regular expressions for lexical entries
+#
 # We create a transducer that maps "cat+N+Sg+Poss" into "cat's".
 # In LexC, we could list the set of symbols, but now we must tokenize manually,
 # i.e. symbols must be separated by spaces. Also note that some special symbols
@@ -100,7 +155,7 @@ generator = regex("[c a t %+N %+Sg %+Poss] .x. [c a t ' s]")
 print(generator.lookup('cat+N+Sg+Poss'))
 
 
-# ## Constructing transducers state by state and transition by transition
+# ## Constructing lexical entries state by state and transition by transition
 #
 # Classes HfstIterableTransducer and HfstTransition can be used for this.
 # We also need the special symbol EPSILON.
