@@ -112,6 +112,86 @@
 #
 # ## 6. A Finite-State Transducer that implements a morphological generator
 #
-# A finite-state transducer for purely concatenative I&A English noun inflection
-# <img src="">
-# 
+# A finite-state transducer for purely concatenative I&A English noun inflection:
+#
+# <img src="image11.png">
+#
+# ## 7. LexC code that represents this transducer
+#
+# ### 1. Define all symbols consisting of multiple characters
+#
+# ```
+# Multichar_Symbols
+#         +N      ! Noun tag
+#         +Sg     ! Singular
+#         +Pl     ! Plural
+#         +Poss   ! Possessive form
+#                 ! Another comment that is ignored by the compiler
+# ```
+#
+# Anything between an exclamation mark and the end of a line
+# is a comment. Comments are ignored by the lexc compiler.
+# Use comments a lot!
+# Your code will be clearer to yourself and to others.
+#
+# ### 2. Define the compulsory Root lexicon
+#
+# ```
+# LEXICON Root
+#         Nouns ; ! No input, no output
+# ```
+#
+# This is equivalent to writing:
+#
+# ```
+# LEXICON Root
+# 0:0     Nouns ; ! Explicitly showing no input, no output
+# ```
+#
+# This is further equivalent to writing:
+#
+# ```
+# LEXICON Root
+# 0       Nouns ; ! When the input and output are identical,
+#                 ! you can type only the input side
+# ```
+#
+# ### 3. Define the Nouns lexicon
+#
+# ```
+# ...
+# ```
+#
+# ### 4. Continuation lexicons for the N paradigm
+#
+# ```
+# ...
+# ```
+#
+# ### 5. Continuation lexicons for the N_s paradigm
+#
+# ```
+# ...
+# ```
+#
+# ### 6. Continuation lexicons for the N_y paradigm
+#
+# ```
+# ...
+# ```
+#
+# ### 7. Continuation lexicons for possessive ending
+#
+# ```
+# ...
+# ```
+#
+# ### 8. 
+#
+# ```
+# ...
+# ```
+#
+# Note that END siginifies the end of lexc file.
+#
+#

@@ -37,6 +37,10 @@
 # The language {""} is the empty-string language that contains the empty string "".
 # It is encoded byt the epsilon transducer that has one state that is both initial
 # and final and has no transitions.
+#
+# An example of a transducer:
+#
+# <img src="a2b.png">
 
 # ## Xerox-style regular expressions.
 #
