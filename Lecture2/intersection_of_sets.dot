@@ -1,0 +1,10 @@
+// This graph generated with hfst-fst2txt
+digraph "text(<stdin>)" {
+charset = UTF8;
+rankdir = LR;
+label = "The intersection of sets {} and {}";
+node [shape=ellipse]
+"SET1" [label="M Q R"]
+"SET2" [label="A P Q"]
+"INTERSECTION" [label="Q"]
+}
