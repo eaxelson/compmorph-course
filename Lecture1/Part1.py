@@ -133,7 +133,8 @@
 #
 # ## 6. A Finite-State Transducer that implements a morphological generator
 #
-# Below is a finite-state transducer (FST) for purely concatenative I&A English noun inflection.
+# Below is a finite-state transducer (FST) for purely concatenative I&A English noun inflection
+# for our simple example data.
 # _Root_ is the initial state and _#_ the final one. The yellow circles represent _states_
 # and arrows _transitions_ between the states. Above each transition, there is the input
 # that the transition _consumes_ and the output that it _produces_, separated with a colon ":".
@@ -141,7 +142,7 @@
 # any input or producing any output. We will return to finite-state transducers in more detail
 # in the next part.
 #
-# <img src="image11.png">
+# <img src="noun_inflection.png">
 #
 # ## 7. LexC code that represents this transducer
 #
@@ -183,42 +184,94 @@
 #                 ! you can type only the input side
 # ```
 #
+# <img src="root_lexicon.png">
+#
 # ### 7.3 Define the Nouns lexicon
 #
 # ```
-# 
+# !
+# ! NOUNS start here
+# !
+#
+# LEXICON Nouns
+#
+# cat     N ;
+# dog     N ;
+#
+# church    N_s ;
+# kiss      N_s ;
+#
+# beauty:beaut    N_y ;
+# sky:sk          N_y ; 
+#
 # ```
+# <img src="nouns_lexicon.png">
 #
 # ### 7.4 Continuation lexicons for the N paradigm
 #
 # ```
-# ...
+# ! The noun lexica N and Num are used for stems without
+# ! any alternation
+# 
+# LEXICON N
+# +N:0    Num ;
+# 
+# LEXICON Num
+# +Sg:0   PossWithS ;
+# +Pl:s   PossWithoutS ;
 # ```
+#
+# <img src="n_paradigm.png">
 #
 # ### 7.5 Continuation lexicons for the N_s paradigm
 #
 # ```
-# ...
+# ! The noun lexica N_s and Num_s are used for stems that
+# ! end in a sibilant and need an extra inserted "e"
+#
+# LEXICON N_s
+# +N:0    Num_s ;
+#
+# LEXICON Num_s
+# +Sg:0   PossWithS ;
+# +Pl:es  PossWithoutS ;
 # ```
+#
+# <img src="ns_paradigm.png">
 #
 # ### 7.6 Continuation lexicons for the N_y paradigm
 #
 # ```
-# ...
+# ! The noun lexica N_y and Num_y are used for stems with
+# ! "y" -> "ie" alternation
+#
+# LEXICON N_y
+# +N:0    Num_y ;
+#
+# LEXICON Num_y
+# +Sg:y   PossWithS ;
+# +Pl:ies PossWithoutS ;
 # ```
+#
+# <img src="ny_paradigm.png">
 #
 # ### 7.7 Continuation lexicons for possessive ending
 #
 # ```
-# ...
-# ```
+# ! Possessive endings: usually the singular is 's and 
+# ! the plural is '
 #
-# ### 7.8 
+# LEXICON PossWithS
+# +Poss:'s    # ; 
+#             # ; ! No ending: no input/output 
+# 
+# LEXICON PossWithoutS 
+# +Poss:'     # ;
+#             # ; ! No ending: no input/output
 #
+# END
 # ```
-# ...
-# ```
+# <img src="poss_ending.png">
 #
 # Note that END siginifies the end of lexc file.
-#
 #
