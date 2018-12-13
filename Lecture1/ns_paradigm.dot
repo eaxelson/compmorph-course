@@ -10,8 +10,4 @@ node [shape=ellipse,style=filled,fillcolor=yellow]
 "N_s" -> "Num_s" [label="+N:ε "];
 "Num_s" -> "PossWithS" [label="+Sg:ε "];
 "Num_s" -> "PossWithoutS" [label="+Pl:es "];
-"PossWithS" -> "#" [label="+Poss:'s "];
-"PossWithS" -> "#" [label="ε:ε "];
-"PossWithoutS" -> "#" [label="+Poss:' "];
-"PossWithoutS" -> "#" [label="ε:ε "];
 }
