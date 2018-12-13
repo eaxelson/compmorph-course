@@ -35,24 +35,96 @@
 #
 # ## 2. Set Theory for Finite-State Networks
 #
-# Examples of sets
+# Examples of sets:
 #
 # <img src="two_sets.png">
 #
 # <img src="empty_set.png">
 #
+# Some sets viewed as networks:
 #
+# <img src="empty_network.png">
 #
+# <img src="empty_string_network.png">
 #
+# Some infinite sets:
 #
+# <img src="zero_or_more_a.png">
 #
+# <img src="universal_language.png">
 #
+# Relations:
 #
+# <img src="lowercase2uppercase.png">
 #
+# The example above shows an infinite relation containing pairs, such as
+# `{<"dog","DOG">,<"cat","CAT">,<"mouse","MOUSE">,...}`
 #
+# We can also have relations between lexical forms and surface forms, such as:
+# ```
+# {<"cantar+Verb+PresInd+1P+Sg", "canto">,
+#  <"cantar+Verb+PresInd+1P+Pl","cantamos">,
+#  <"canto+Noun+Masc+Sg","canto">, ...}
 #
+# ```
 #
+# Union of sets
 #
+# <img src="union_of_sets.png">
 #
+# For instance, the union of the sets `{"clear", "clever", "ear", "ever"}` and `{"fat", "father"}` is
+# `{"clear", "clever", "ear", "ever", "fat", "father"}`.
 #
-
+# The union shown as a network:
+#
+# <img src="union_of_sets_as_network.png">
+#
+# Intersection of sets
+#
+# <img src="intersection_of_sets.png">
+#
+# For instance, the intersection of sets `{}` and `{}` is `{}`
+#
+# Subtraction of one set from another
+#
+# <img src="subtraction_of_sets.png">
+#
+# For instance, the subtraction of sets `{}` and `{}` is `{}`
+#
+# Concatenation of sets
+#
+# <img src="concatenation_of_sets.png">
+#
+# Composition of transducers
+#
+# <img src="">
+#
+# <img src="">
+#
+# Another composition of transducers
+#
+# <img src="">
+#
+# Projection
+#
+# * Projection is extracting one side of a relation.
+# * The upper projection of `<"cat", "CHAT">` is "cat".
+# * The lower projection of `<"cat", "CHAT">` is "CHAT".
+#
+# <img src="">
+#
+# ### Set operations expressed in the xfst language
+#
+# ```
+# [ A | B ] denotes the union of the two languages or relations A and B ("or"-operation).
+# [ A & B ] denotes the intersection ("and"-operation).
+# [ A - B ] denotes the subtraction of B from A.
+# [ A B ] denotes the concatenation.
+# [ A .o. B ] denotes the composition of the relations.
+# A.u denotes the upper (i.e. input) projection.
+# A.l denotes the lower (o.e. output) projection.
+# ```
+#
+# ## 3. Item & Process morphology using xfst rules
+#
+# 

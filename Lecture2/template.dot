@@ -1,0 +1,12 @@
+// This graph generated with hfst-fst2txt
+digraph "text(<stdin>)" {
+charset = UTF8;
+rankdir = LR;
+label = "foobar automaton";
+node [shape=circle]
+"INITIAL" [label=""]
+"foo" [label=""]
+"FINAL" [label="", shape=doublecircle]
+"INITIAL" -> "foo" [label="foo"];
+"foo" -> "FINAL" [label="bar"];
+}
