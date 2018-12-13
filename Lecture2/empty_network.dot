@@ -2,12 +2,7 @@
 digraph "text(<stdin>)" {
 charset = UTF8;
 rankdir = LR;
-label = "";
+label = "Network for the empty language {}";
 node [shape=circle]
 "INITIAL" [label=""]
-"" [label=""]
-"FINAL" [label="", shape=doublecircle]
-"INITIAL" -> "" [label=""];
-"" -> "" [label=""]
-"" -> "FINAL" [label=""];
 }
