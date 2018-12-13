@@ -1,5 +1,13 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS
 #
+# ## HFST - Helsinki Finite-State Technology
+#
+# The HFST toolkit is intended for processing natural language
+# morphologies. The toolkit is demonstrated by wide-coverage
+# implementations of a number of languages of varying morphological
+# complexity. HFST is written mainly in C++, but there is a Python interface
+# which is demonstrated on these notebooks.
+#
 # ## Prerequisites
 #
 # * Foundations of general linguistics
@@ -16,8 +24,23 @@
 #
 # Links:
 #
-# * [HFST toolset](https://hfst.github.io)
+# * HFST [main page](https://hfst.github.io).
+# * For installation of the HFST package for Python, see our [PyPI pages](https://pypi.org/project/hfst/).
+# * For more information about the interface, see our [Github wiki pages](https://github.com/hfst/python-hfst-4.0/wiki).
 #
+# First, import the package and list its contents with `help`.
+
+import hfst_dev
+help(hfst_dev)
+
+# Then, see for more information on some of the functions, e.g. `compile_lexc_file`.
+
+help(hfst_dev.compile_lexc_file)
+
+# Also print the version number of the package.
+
+print(hfst_dev.__version__)
+
 # ## Course overview
 #
 # | Lecture | Topics |
@@ -29,8 +52,7 @@
 # | 5 | Optimization of finite-state networks |
 # | 6 | (Guest lecture) |
 # | 7 | (Final project demos, technical presentetions) |
-#
-#
+
 # ## 4. Hockett's models of morphology
 #
 # ### Word and Paradigm (W&P), Example: Finnish nouns
@@ -77,12 +99,28 @@
 #
 # ### Corresponding HFST tools
 #
-# | Model/Tool | hfst-twolc | hfst-lexc | hfst-xfst
+# | Model/Tool | [compile_twolc_file](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_twolc_file-inputfilename-outputfilename-kwargs) | [compile_lexc_file](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_lexc_file-filename-kwargs) | [compile_xfst_file](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_xfst_file-filename-kwargs) |
 # | - | - | - | - |
 # | Word & Paradigm |  | ✔ | ✔ |
 # | Item & Arrangement |  | ✔ | ✔ |
 # | Item & Process | ✔ |  | ✔ |
 #
+# See how they work. twolc:
+
+help(hfst_dev.compile_twolc_file)
+
+# lexc:
+
+help(hfst_dev.compile_lexc_file)
+
+# xfst:
+
+help(hfst_dev.compile_xfst_file)
+
+# interactive version of xfst:
+
+help(hfst_dev.start_xfst)
+
 # ## 5. Morphological generators and analyzers
 #
 # ### Morphological generator
@@ -107,7 +145,7 @@
 #   - The output of the analyzer is the input of the generator.
 # * An analyzer is very useful, for instance:
 #   - when we want to parse natural language text syntactically
-#   - when we want to *normalize* text, such that we only care about the base form (lemma) of every word in the text; this is used, for instance, in *information retrieval*.
+#   - when we want to _normalize_ text, such that we only care about the base form (lemma) of every word in the text; this is used, for instance, in _information_ _retrieval_.
 #
 # ## Some simple noun paradigms in English
 #
@@ -130,20 +168,21 @@
 # ```
 #
 # Let's create a morphological generator and analyzer for this data.
-#
+
 # ## 6. A Finite-State Transducer that implements a morphological generator
 #
 # Below is a finite-state transducer (FST) for purely concatenative I&A English noun inflection
 # for our simple example data.
-# _Root_ is the initial state and _#_ the final one. The yellow circles represent _states_
-# and arrows _transitions_ between the states. Above each transition, there is the input
+# The yellow circles represent _states_ and the arrows represent _transitions_ between the states.
+# State named _"Root"_ is the initial state and state named_"#"_ the final one.
+# Above each transition, there is the input
 # that the transition _consumes_ and the output that it _produces_, separated with a colon ":".
 # The "ε:ε" signifies the _epsilon_ transition which is possible without consuming
-# any input or producing any output. We will return to finite-state transducers in more detail
-# in the next part.
+# any input or producing any output.
+# We will return to finite-state transducers in more detail in the next part.
 #
 # <img src="noun_inflection.png">
-#
+
 # ## 7. LexC code that represents this transducer
 #
 # ### 7.1 Define all symbols consisting of multiple characters
@@ -273,5 +312,96 @@
 # ```
 # <img src="poss_ending.png">
 #
-# Note that END siginifies the end of lexc file.
+# Note that `END` signifies the end of lexc file. It must be included at the end of each LexC file.
 #
+# Finally, let's compile the LexC script into a transducer:
+
+from hfst_dev import compile_lexc_script
+
+generator = compile_lexc_script(
+"""
+Multichar_Symbols
+	+N	! Noun tag
+        +Sg	! Singular
+        +Pl	! Plural
+ 	+Poss	! Possessive form
+
+LEXICON Root
+	Nouns ; ! No input, no output
+
+!
+! NOUNS start here
+!
+
+LEXICON Nouns
+
+cat	N ;
+dog	N ;
+
+church	  N_s ;
+kiss	  N_s ;
+
+beauty:beaut	N_y ;
+sky:sk		N_y ;
+
+
+! The noun lexica N and Num are used for stems without any alternation
+
+LEXICON N
++N:0	Num ;
+
+LEXICON Num
++Sg:0	PossWithS ;
++Pl:s	PossWithoutS ;
+
+! The noun lexica N_s and Num_s are used for stems that end in a sibilant
+! and need an extra inserted "e"
+
+LEXICON N_s
++N:0	Num_s ;
+
+LEXICON Num_s
++Sg:0	PossWithS ;
++Pl:es	PossWithoutS ;
+
+! The noun lexica N_y and Num_y are used for stems with "y" -> "ie" alternation
+
+LEXICON N_y
++N:0	Num_y ;
+
+LEXICON Num_y
++Sg:y	PossWithS ;
++Pl:ies	PossWithoutS ;
+
+! Possessive endings: usually the singular is 's and the plural is '
+
+LEXICON PossWithS
++Poss:'s     # ;
+	     # ; ! No ending: no input, no output
+
+LEXICON PossWithoutS
++Poss:'	     # ;
+	     # ; ! No ending: no input, no output
+
+END
+"""
+)
+
+# We could also write the script to a file and then call `compile_lexc_file`.
+#
+# Test the transducer:
+
+print(generator.lookup('sky+N+Pl'))
+
+# expect the result `(('skies', 0.0),)`, i.e. output "skies" with a zero _weight_. We will return to weights in later lectures.
+#
+# Next, _invert_ the transducer to get an analyzer:
+
+from hfst_dev import HfstTransducer
+analyzer = HfstTransducer(generator)
+analyzer.invert()
+analyzer.minimize()
+
+print(analyzer.lookup('skies'))
+
+# expect the result `(('sky+N+Pl', 0.0),)`, i.e. output "a noun 'skies' in plural with a zero weight".
