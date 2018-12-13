@@ -1,0 +1,9 @@
+// This graph generated with hfst-fst2txt
+digraph "text(<stdin>)" {
+charset = UTF8;
+rankdir = LR;
+label = "Two sets";
+node [shape=ellipse]
+"SET1" [label="A B C D"]
+"SET2" [label="E F"]
+}
