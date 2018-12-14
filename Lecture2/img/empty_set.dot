@@ -1,8 +1,0 @@
-// This graph generated with hfst-fst2txt
-digraph "text(<stdin>)" {
-charset = UTF8;
-rankdir = LR;
-label = "Empty set";
-node [shape=ellipse]
-"EMPTY" [label=""]
-}

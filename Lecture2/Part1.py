@@ -97,13 +97,7 @@
 #
 # Composition of transducers
 #
-# <img src="img/">
-#
-# <img src="img/">
-#
-# Another composition of transducers
-#
-# <img src="img/">
+# <img src="img/composition.png">
 #
 # Projection
 #
@@ -111,7 +105,7 @@
 # * The upper projection of `<"cat", "CHAT">` is "cat".
 # * The lower projection of `<"cat", "CHAT">` is "CHAT".
 #
-# <img src="img/">
+# <img src="img/projection.png">
 #
 # ### Set operations expressed in the xfst language
 #
@@ -130,11 +124,11 @@
 # Recall the finite-state transducer for purely concatenative I&A English
 # noun inflection (from previous lecture):
 #
-# <img src="img/noun_inflection.dot">
+# <img src="img/noun_inflection.png">
 #
 # A more compact finite-state transducer for I&P English noun inflection:
 #
-# <img src="img/noun_inflection_compact.dot">
+# <img src="img/noun_inflection_compact.png">
 #
 # ### Cascade of transducers: Rule 1
 #
