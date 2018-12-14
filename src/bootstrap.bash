@@ -9,5 +9,5 @@ export GIT_COMMITTER_EMAIL=anon@localhost
 
 git clone https://github.com/eaxelson/hfst-notebooks.git
 
-pip install hfst
-python3 -c "import hfst"
+python3 -m pip install hfst-dev
+python3 -c "import hfst_dev"
