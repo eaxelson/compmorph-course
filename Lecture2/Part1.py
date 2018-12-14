@@ -127,4 +127,87 @@
 #
 # ## 3. Item & Process morphology using xfst rules
 #
-# 
+# Recall the finite-state transducer for purely concatenative I&A English
+# noun inflection (from previous lecture):
+#
+# <img src="noun_inflection.dot">
+#
+# A more compact finite-state transducer for I&P English noun inflection:
+#
+# <img src="noun_inflection_compact.dot">
+#
+# ### Cascade of transducers: Rule 1
+#
+# Insert 'e' after the end of the stem in front of 's', if the stem ends in
+# 's', 'x', 'ch', 'sh' or 'y'.
+#
+# Expressed as an xfst rule:
+#
+# `define InsertE   [. .] -> e || [ s | x | c h | s h | y ] %^ _ s ;`
+#
+# <img src="InsertE.png">
+#
+# ### Cascade of transducers: Rule 2
+#
+# Rewrite 'y' as 'i' when followed by the end of the stem, which is
+# further followed by 'e'.
+#
+# Expressed as an xfst rule:
+#
+# `define YToI    y -> i || _ %^ e ;`
+#
+# <img src="YToI.png">
+#
+# ### Cascade of transducers: Rule 3
+#
+# Remove the end of stem marker
+#
+# Expressed as an xfst rule:
+#
+# `define CleanUp    %^ -> 0 ;`
+#
+# <img src="CleanUp.png">
+#
+# ### Cascade equivalent to single FST
+#
+# <img src="cascade1.png">
+#
+# When our lexicon is composed with our rules, we can actually produce one
+# single FST and 'jump' from the lexical-form input straight to the final
+# output in one go, without producing the intermediate steps.
+#
+# ### The order of the rules matters!
+#
+# What would happen if we reordered the rules (below) used in our simple
+# English noun morphology?
+#
+# <img src="cascade2.png">
+#
+# ### xfst notation explained in context
+#
+# ## 4. Example: English adjectives
+#
+# ### Lexicon (lexc) of some English adjectives
+#
+# ```
+# ...
+# ```
+#
+# ### Suggested xfst script for English adjectives
+#
+# ```
+# ...
+# ```
+#
+# ### Corrected xfst script for English adjectives
+#
+# ```
+# ...
+# ```
+#
+# More information
+#
+# * Chapter 1 of the Beesley & Karttunen book: "A Gentle Introduction"
+# * Chapter 3 of the Beesley & Karttunen book: "The xfst Interface"
+#
+
