@@ -5,7 +5,7 @@
 # Recall the finite-state transducer (FST) for purely concatenative I&A (Item and Arrangement)
 # English noun inflection from Lecture 1:
 #
-# <img src="noun_inflection.png">
+# <img src="img/noun_inflection.png">
 #
 # The yellow circles represent _states_ or _nodes_ and the arrows represent _transitions_
 # or _arcs_ between states. Each transition consumes an input symbol and produces an output symbol.
@@ -16,7 +16,7 @@
 # a finite-state automaton (FSA). It does not produce output, but just recognizes
 # (or rejects) input. Finite-state automaton for a 3-word language:
 #
-# <img src="three_word_language.png">
+# <img src="img/three_word_language.png">
 #
 # * Inputs to the automaton are _symbols_ like: m, e, c.
 # * The set of valid symbols that the automaton will accept is its _alphabet_: { a, c, e, g, i, m, n, o, r, s, t }.
@@ -25,37 +25,37 @@
 #
 # Sharing structure in minimal networks:
 #
-# <img src="fat_father.png">
+# <img src="img/fat_father.png">
 #
-# <img src="clear_clever_ear_ever.png">
+# <img src="img/clear_clever_ear_ever.png">
 #
 # Removing a word from a minimal network may actually increase the size of the network!
 #
-# <img src="clear_clever_ever.png">
+# <img src="img/clear_clever_ever.png">
 #
 # ## 2. Set Theory for Finite-State Networks
 #
 # Examples of sets:
 #
-# <img src="two_sets.png">
+# <img src="img/two_sets.png">
 #
-# <img src="empty_set.png">
+# <img src="img/empty_set.png">
 #
 # Some sets viewed as networks:
 #
-# <img src="empty_network.png">
+# <img src="img/empty_network.png">
 #
-# <img src="empty_string_network.png">
+# <img src="img/empty_string_network.png">
 #
 # Some infinite sets:
 #
-# <img src="zero_or_more_a.png">
+# <img src="img/zero_or_more_a.png">
 #
-# <img src="universal_language.png">
+# <img src="img/universal_language.png">
 #
 # Relations:
 #
-# <img src="lowercase2uppercase.png">
+# <img src="img/lowercase2uppercase.png">
 #
 # The example above shows an infinite relation containing pairs, such as
 # `{<"dog","DOG">,<"cat","CAT">,<"mouse","MOUSE">,...}`
@@ -70,40 +70,40 @@
 #
 # Union of sets
 #
-# <img src="union_of_sets.png">
+# <img src="img/union_of_sets.png">
 #
 # For instance, the union of the sets `{"clear", "clever", "ear", "ever"}` and `{"fat", "father"}` is
 # `{"clear", "clever", "ear", "ever", "fat", "father"}`.
 #
 # The union shown as a network:
 #
-# <img src="union_of_sets_as_network.png">
+# <img src="img/union_of_sets_as_network.png">
 #
 # Intersection of sets
 #
-# <img src="intersection_of_sets.png">
+# <img src="img/intersection_of_sets.png">
 #
 # For instance, the intersection of sets `{}` and `{}` is `{}`
 #
 # Subtraction of one set from another
 #
-# <img src="subtraction_of_sets.png">
+# <img src="img/subtraction_of_sets.png">
 #
 # For instance, the subtraction of sets `{}` and `{}` is `{}`
 #
 # Concatenation of sets
 #
-# <img src="concatenation_of_sets.png">
+# <img src="img/concatenation_of_sets.png">
 #
 # Composition of transducers
 #
-# <img src="">
+# <img src="img/">
 #
-# <img src="">
+# <img src="img/">
 #
 # Another composition of transducers
 #
-# <img src="">
+# <img src="img/">
 #
 # Projection
 #
@@ -111,7 +111,7 @@
 # * The upper projection of `<"cat", "CHAT">` is "cat".
 # * The lower projection of `<"cat", "CHAT">` is "CHAT".
 #
-# <img src="">
+# <img src="img/">
 #
 # ### Set operations expressed in the xfst language
 #
@@ -130,11 +130,11 @@
 # Recall the finite-state transducer for purely concatenative I&A English
 # noun inflection (from previous lecture):
 #
-# <img src="noun_inflection.dot">
+# <img src="img/noun_inflection.dot">
 #
 # A more compact finite-state transducer for I&P English noun inflection:
 #
-# <img src="noun_inflection_compact.dot">
+# <img src="img/noun_inflection_compact.dot">
 #
 # ### Cascade of transducers: Rule 1
 #
@@ -145,7 +145,7 @@
 #
 # `define InsertE   [. .] -> e || [ s | x | c h | s h | y ] %^ _ s ;`
 #
-# <img src="InsertE.png">
+# <img src="img/InsertE.png">
 #
 # ### Cascade of transducers: Rule 2
 #
@@ -156,7 +156,7 @@
 #
 # `define YToI    y -> i || _ %^ e ;`
 #
-# <img src="YToI.png">
+# <img src="img/YToI.png">
 #
 # ### Cascade of transducers: Rule 3
 #
@@ -166,11 +166,11 @@
 #
 # `define CleanUp    %^ -> 0 ;`
 #
-# <img src="CleanUp.png">
+# <img src="img/CleanUp.png">
 #
 # ### Cascade equivalent to single FST
 #
-# <img src="cascade1.png">
+# <img src="img/cascade1.png">
 #
 # When our lexicon is composed with our rules, we can actually produce one
 # single FST and 'jump' from the lexical-form input straight to the final
@@ -181,7 +181,7 @@
 # What would happen if we reordered the rules (below) used in our simple
 # English noun morphology?
 #
-# <img src="cascade2.png">
+# <img src="img/cascade2.png">
 #
 # ### xfst notation explained in context
 #

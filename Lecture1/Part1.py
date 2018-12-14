@@ -181,7 +181,7 @@ help(hfst_dev.start_xfst)
 # any input or producing any output.
 # We will return to finite-state transducers in more detail in the next part.
 #
-# <img src="noun_inflection.png">
+# <img src="img/noun_inflection.png">
 
 # ## 7. LexC code that represents this transducer
 #
@@ -223,7 +223,7 @@ help(hfst_dev.start_xfst)
 #                 ! you can type only the input side
 # ```
 #
-# <img src="root_lexicon.png">
+# <img src="img/root_lexicon.png">
 #
 # ### 7.3 Define the Nouns lexicon
 #
@@ -244,7 +244,7 @@ help(hfst_dev.start_xfst)
 # sky:sk          N_y ; 
 #
 # ```
-# <img src="nouns_lexicon.png">
+# <img src="img/nouns_lexicon.png">
 #
 # ### 7.4 Continuation lexicons for the N paradigm
 #
@@ -260,7 +260,7 @@ help(hfst_dev.start_xfst)
 # +Pl:s   PossWithoutS ;
 # ```
 #
-# <img src="n_paradigm.png">
+# <img src="img/n_paradigm.png">
 #
 # ### 7.5 Continuation lexicons for the N_s paradigm
 #
@@ -276,7 +276,7 @@ help(hfst_dev.start_xfst)
 # +Pl:es  PossWithoutS ;
 # ```
 #
-# <img src="ns_paradigm.png">
+# <img src="img/ns_paradigm.png">
 #
 # ### 7.6 Continuation lexicons for the N_y paradigm
 #
@@ -292,7 +292,7 @@ help(hfst_dev.start_xfst)
 # +Pl:ies PossWithoutS ;
 # ```
 #
-# <img src="ny_paradigm.png">
+# <img src="img/ny_paradigm.png">
 #
 # ### 7.7 Continuation lexicons for possessive ending
 #
@@ -310,7 +310,7 @@ help(hfst_dev.start_xfst)
 #
 # END
 # ```
-# <img src="poss_ending.png">
+# <img src="img/poss_ending.png">
 #
 # Note that `END` signifies the end of lexc file. It must be included at the end of each LexC file.
 #
