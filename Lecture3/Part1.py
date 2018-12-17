@@ -105,11 +105,23 @@
 # 1/36
 # ```
 # 
-# 
-
+# Probability of mutually exclusive events 🡒 Involves both addition and multiplication
+#
+# ```
+# P((Sblack = 5 and Swhite = 6) or (Sblack = 6 and Swhite = 5)) =
+# P(Sblack = 5) * P(Swhite = 6) + P(Sblack = 6) * P(Swhite = 5) =
+# 1/6 * 1/6 + 1/6 * 1/6 =
+# 1/36 + 1/ 36 =
+# 2/36 =
+# 1/18
+# ```
+#
 # For comparison: A continuous probability distribution
 #
 # <img src="img/continuous_probability_distribution.png">
+#
+# * The variables are here real-valued ("floats") rather than discrete categories ("ints").
+# * We get a smooth curve for the probability distribution, such as this Gaussian curve, the so-called normal distribution.
 #
 # Subjective probability
 #
@@ -131,4 +143,5 @@
 # * The posterior probability is a product of two probabilities: the prior probability and a conditional probability, such as:
 #   * P("It snows in Helsinki on 23 Jan 2018" | "It snows in Helsinki in January") * P("It snows in Helsinki in January")
 #
-# # 
+# ## Section 3: Back to disambiguation
+#
