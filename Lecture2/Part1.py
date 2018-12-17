@@ -164,39 +164,167 @@
 #
 # ### Cascade equivalent to single FST
 #
-# <img src="img/cascade1.png">
+# <img src="img/cascade.png">
 #
 # When our lexicon is composed with our rules, we can actually produce one
 # single FST and 'jump' from the lexical-form input straight to the final
 # output in one go, without producing the intermediate steps.
+#
+# ```
+# Example input:  sky+N+Pl+Poss
+# Lexicon output: sky^s'
+# Rule 1 output:  sky^es
+# Rule 2 output:  ski^es
+# Rule 3 output:  skies
+# ```
+#
+# The single FST will give directly: sky+N+Pl+Poss 🡒 skies.
 #
 # ### The order of the rules matters!
 #
 # What would happen if we reordered the rules (below) used in our simple
 # English noun morphology?
 #
-# <img src="img/cascade2.png">
-#
 # ### xfst notation explained in context
+#
+# <img src="img/xfst_notation_explained_1.png">
+#
+# <img src="img/xfst_notation_explained_2.png">
+#
+# <img src="img/xfst_notation_explained_3.png">
+#
+# <img src="img/xfst_notation_explained_4.png">
+#
+# <img src="img/xfst_notation_explained_5.png">
 #
 # ## 4. Example: English adjectives
 #
 # ### Lexicon (lexc) of some English adjectives
 #
 # ```
-# ...
+# Multichar_Symbols
+# +A       ! Adjective tag
+# +Pos     ! Positive
+# +Cmp     ! Comparative
+# +Sup     ! Superlative
+# 
+# LEXICON Root
+# Adjectives ;
+# 
+# LEXICON Adjectives
+# big     A ;
+# cool    A ;
+# crazy   A ;
+# great   A ;
+# grim    A ;
+# happy   A ;
+# hot     A ;
+# long    A ;
+# quick   A ;
+# sad     A ;
+# short   A ;
+# slow    A ;
+# small   A ;
+# warm    A ;
+#
+# LEXICON A
+# +A:^    Comparison ;
+# 
+# LEXICON Comparison
+# +Pos:0  # ;
+# +Cmp:er # ;
+# +Sup:est  # ;
+# 
+# END 
 # ```
 #
 # ### Suggested xfst script for English adjectives
 #
 # ```
-# ...
+# ! Read lexicon and make a regex of it
+# read lexc en_ip_adjectives_lexicon.lexc
+# define Lexicon ;
+# regex Lexicon ;
+# 
+# ! y/i alternation
+# define YToI     y -> i || _ %^ e ;
+# 
+# ! Last rule cleans away the boundary marker
+# define CleanUp  %^ -> 0 ;
+# 
+# ! Compose lexicon with rules
+# regex Lexicon .o. YToI .o. CleanUp ;
+# 
+# ! Output all surface forms of the words
+# lower-words 
+# ```
+#
+# There are issues with some word forms...
+# ```
+# big         biger       bigest
+# cool        cooler      coolest
+# crazier     craziest    crazy
+# great       greater     greatest
+# grim        grimer      grimest
+# happier     happiest    happy
+# hot         hoter       hotest
+# long        longer      longest
+# quick       quicker     quickest
+# sad         sader       sadest
+# short       shorter     shortest
+# slow        slower      slowest
+# small       smaller     smallest
+# warm        warmer      warmest
 # ```
 #
 # ### Corrected xfst script for English adjectives
 #
 # ```
-# ...
+# ! Read lexicon and make a regex of it
+# read lexc en_ip_adjectives_lexicon.lexc
+# define Lexicon ;
+# regex Lexicon ;
+# 
+# define Vowel [ a | e | i | o | u | y ] ;
+# define Cons  [ b | c | d | f | g | h | j | k | l | m |
+# n | p | q | r | s | t | v | w | x | z ] ;
+# 
+# ! y/i alternation
+# define YToI     y -> i || _ %^ e ;
+# 
+# ! Consonant reduplication
+# define DoubleCons d -> d d ,
+# g -> g g ,
+# m -> m m ,
+# t -> t t || Cons Vowel _ %^ e ;
+# 
+# ! Last rule cleans away the boundary marker
+# define CleanUp  %^ -> 0 ;
+# 
+# ! Compose lexicon with rules
+# regex Lexicon .o. YToI .o. DoubleCons .o. CleanUp ;
+# 
+# ! Output all surface forms of the words
+# lower-words 
+# ```
+#
+# Now it works!
+#
+# ```
+# big        bigger      biggest
+# cool       cooler      coolest
+# crazier    craziest    crazy
+# great      greater     greatest
+# grim       grimmer     grimmest
+# happier    happiest    happy
+# hot        hotter      hottest
+# long       longer      longest
+# quick      quicker     quickest
+# sad        sadder      saddest
+# short      shorter     shortest
+# slow       slower      slowest
+# small      smaller     smallest
+# warm       warmer      warmest
 # ```
 #
 # More information
@@ -204,4 +332,3 @@
 # * Chapter 1 of the Beesley & Karttunen book: "A Gentle Introduction"
 # * Chapter 3 of the Beesley & Karttunen book: "The xfst Interface"
 #
-
