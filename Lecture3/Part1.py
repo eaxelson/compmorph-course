@@ -145,3 +145,69 @@
 #
 # ## Section 3: Back to disambiguation
 #
+# The "poikasilla" ambiguity: 1) poikanen +N +Pl +Ade
+#
+# <img src="img/poikanen_n_pl_ade.png">
+#
+# Do the calculations
+#
+# ```
+# Prob(poikanen +N +Pl +Ade)
+# = Prob(+N) * Prob("poikanen") * Prob(+Pl) * Prob(+Ade)
+# = 0.5 * 0.0001 * 0.3 * 0.05
+# = 0.00000075
+# = 7.5 * 10^-7
+# ```
+#
+# The "poikasilla" ambiguity: 2) poika#silla +N +Sg +Nom
+#
+# <img src="poika_silla_n_sg_nom.png">
+#
+# Do the calculations:
+#
+# ```
+# Prob(poika#silla +N +Sg +Nom)
+# = Prob(+N) * Prob(“poika”) * Prob(Compound word) * Prob(“silla”) * Prob(+Sg) * Prob(+Nom)
+# = 0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55
+# = 0.0000000000165
+# = 1.65 * 10^-11
+# ```
+#
+# Compare and pick the more likely alternative 🡒 The analysis "poikanen +N +Pl +Ade" is almost 50000 times more likely
+# than #poika#silla +N +Sg +Nom# (in this invented model).
+#
+# Formulated in lexc format with weights (The syntax is correct, but don't do it exactly like this yet):
+#
+# ```
+# Multichar_Symbols +N +Sg +Pl +Nom +Ade +Abl ^A ^I ^J ^K ^S ^T
+# 
+# LEXICON Root
+# Nouns "weight: 0.5" ;
+# Verbs "weight: 0.3" ;
+# ...
+# 
+# LEXICON Nouns
+# ilta:il^Ta          Number "weight: 0.0002" ;
+# lauta:lau^Ta        Number "weight: 0.00001" ;
+# lautanen:lauta^S    Number "weight: 0.0001" ;
+# nainen:nai^S        Number "weight: 0.001" ;
+# poika:po^J^Ka       Number "weight: 0.001" ;
+# poikanen:poika^S    Number "weight: 0.0001" ;
+# silla:silla         Number "weight: 0.000001" ;
+# silta:sil^Ta        Number "weight: 0.0005" ;
+# ...
+# 
+# LEXICON Number
+# +Sg:0               Case "weight: 0.6" ;
+# +Pl:^I              Case "weight: 0.3" ;
+# #:0  Nouns "weight: 0.1" ; ! Back to collect more stems
+# 
+# LEXICON Case
+# +Nom:0              # "weight: 0.55" ;
+# +Ade:ll^A           # "weight: 0.05" ;
+# ...
+# ```
+#
+# ## Section 4: Spelling correction
+#
+
