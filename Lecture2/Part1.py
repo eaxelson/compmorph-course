@@ -263,10 +263,10 @@
 # ```
 # big         biger       bigest
 # cool        cooler      coolest
-# crazier     craziest    crazy
+# crazy       crazier     craziest
 # great       greater     greatest
 # grim        grimer      grimest
-# happier     happiest    happy
+# happy       happier     happiest
 # hot         hoter       hotest
 # long        longer      longest
 # quick       quicker     quickest
@@ -313,10 +313,10 @@
 # ```
 # big        bigger      biggest
 # cool       cooler      coolest
-# crazier    craziest    crazy
+# crazy      crazier     craziest
 # great      greater     greatest
 # grim       grimmer     grimmest
-# happier    happiest    happy
+# happy      happier     happiest
 # hot        hotter      hottest
 # long       longer      longest
 # quick      quicker     quickest
