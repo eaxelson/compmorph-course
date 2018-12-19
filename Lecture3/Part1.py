@@ -210,4 +210,60 @@
 #
 # ## Section 4: Spelling correction
 #
-
+# Virtual keyboard of a mobile device
+#
+# The D key was "pressed" (that is, touched).
+#
+# <img src="img/d_pressed.png">
+#
+# Noisy virtual keyboard of a mobile device
+#
+# The D key was "pressed" (that is, touched), but the intended key was actually F!
+#
+# <img src="img/f_intended.png">
+#
+# For instance, read the last line as: "The Probability that V was
+# pressed when actually F was the intended key  is 0.0125."
+#
+# Create an FST that generates "noise" (errors) and invert it to get a spell checker
+#
+# <img src="img/spell_checker_model.png">
+#
+# ```
+# Noisy surface 1:  poikasilla   (no error)
+# Noisy surface 2:  loikasilla   (substitution)
+# Noisy surface 3:  poikaslla    (deletion)
+# Noisy surface 4:  ppoikasilla  (insertion)
+# Noisy surface 5:  opikasilla   (transposition)
+# ... etc
+# ```
+#
+# xfst script snippet for a spell checker
+#
+# ```
+# ! Use the .l operator to project only lower level (= surface forms) of the
+# ! transducer; we are not interested in the upper level (= lexical forms)
+# define Vocabulary [ Lexicon .o. AlternationRules ].l ;
+# 
+# ! Add "noise" (spelling errors); replace rules are optional when in brackets ()
+# define Substitution  [ f (->) d::0.1 ] .o. [ f (->) g::0.1 ] .o.
+#                      [ f (->) r::0.025 ] .o. [ f (->) t::0.025 ] .o.
+#                      etc ... ;
+# 
+# ! Define a transducer from correctly spelled words to words containing errors
+# define NoisyVocabulary  Vocabulary .o. Substitution ;
+# 
+# ! Use the .i operator to invert the transducer, such that the input is noisy
+# ! words and the output is correctly spelled words
+# define SpellChecker  [ NoisyVocabulary ].i ;
+# 
+# ! The spell checker is ready to use
+# regex SpellChecker ;
+# 
+# ```
+#
+# Again, the syntax is correct, but there is something left to fix with the weights...
+#
+# ## Logprobs
+#
+# 
