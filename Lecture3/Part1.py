@@ -264,6 +264,22 @@
 #
 # Again, the syntax is correct, but there is something left to fix with the weights...
 #
-# ## Logprobs
+# ## Section 5: Logprobs
 #
 # 
+#
+# ## Section 6: Summary of types of finite-state automata and transducers
+#
+# <img src="img/fsa.png">
+#
+# <img src="img/wfsa.png">
+#
+# <img src="img/fst.png">
+#
+# <img src="img/wfst.png">
+#
+# ## More information
+#
+# * The Beesley & Karttunen book does not cover weighted finite-state machines. Weights were fairly new at about the time when the book was published in 2003.
+# * HFST: [Using weights]()
+# * HFST [ospell]()
