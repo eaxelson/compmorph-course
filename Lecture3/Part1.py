@@ -337,16 +337,58 @@
 #
 # ## Section 6: Summary of types of finite-state automata and transducers
 #
+# ### Finite-state automaton (FSA)
+#
+# A finite-state automaton (FSA) - or finite automaton - is a network consisting of nodes,
+# which represent states, and directed arcs connecting the states,
+# which represent transitions between states.
+# Every arc is labeled with a symbol that is consumed from input.
+# State transitions can also take place without consuming any input;
+# these transitions are called epsilon transitions.
+#
 # <img src="img/fsa.png">
+#
+# ### Weighted finite-state automaton (WFSA)
+#
+# A weighted finite-state automaton (WFSA) is an FSA with weights on the arcs.
+# Weights make it possible to find the best way “through" an automaton for the given input;
+# you want to take the path with the lowest weight.
 #
 # <img src="img/wfsa.png">
 #
+# Weighted automata can be used to decide between two alternatives.
+# For example, you’re running a speech recognition system and the user says "I have to go."
+# How do you know the user didn’t say, "I have two go"?
+# First, you come up with a probability of words occurring next to each other
+# (for example, P("to go") and P("two go")) - a language model.
+# Then, you translate those probabilities into weights for your finite state machine.
+# Then, when you’re deciding between "to" and "two," you pick the sentence with lower weight ("to").
+#
+# ### Finite-state transducer (FST)
+#
+# A finite-state transducer (FST) is a finite automaton for which
+# each transition has an input label and an output label.
+#
 # <img src="img/fst.png">
 #
+# It recognizes whether the two strings are valid correspondences (or translations)
+# of each other.
+#
+# ### Weighted finite-state transducer (WFST)
+#
+# A weighted finite-state transducer (WFST) is a finite automaton for which
+# each transition has an input label, an output label, and a weight.
+#
 # <img src="img/wfst.png">
+#
+# The initial state is labeled 0. The final state is 2 with final weight of 3.5.
+# Any state with non-infinite final weight is a final state. There is a transition
+# from state 0 to 1 with input label a, output label x, and weight 0.5.
+# This machine transduces, for instance, the string ac to xz with weight 6.5
+# (the sum of the arc and final weights).
 #
 # ## More information
 #
 # * The Beesley & Karttunen book does not cover weighted finite-state machines. Weights were fairly new at about the time when the book was published in 2003.
-# * HFST: [Using weights]()
-# * HFST [ospell]()
+# * HFST: [Using weights](https://github.com/hfst/python-hfst-4.0/wiki/Weights)
+# * HFST [ospell](https://github.com/hfst/hfst-ospell/wiki)
