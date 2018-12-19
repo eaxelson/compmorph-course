@@ -266,7 +266,74 @@
 #
 # ## Section 5: Logprobs
 #
-# 
+# Back to the probabilities
+#
+# We had the probability:
+#
+# ```
+# Prob(poika#silla +N +Sg +Nom)
+# = Prob(+N) * Prob("poika") * Prob(Compound word) * Prob("silla") * Prob(+Sg) * Prob(+Nom)
+# = 0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55
+# = 0.0000000000165
+# = 1.65 * 10^-11    
+# ```
+#
+# This product of probabilities can be written as:
+#
+# ```
+# This product of probabilities can be written as:
+# (5 * 10^-1) * 10^-3 * 10^-1 * 10^-6 * (6 * 10^-1) * (5.5 * 10^-1)
+# = 10^-0.301 * 10^-3 * 10^-1 * 10^-6 * 10^-0.222 * 10^-0.260
+# = 10^-(0.301 + 3 + 1 + 6 + 0.222 + 0.260) =
+# = 10^-10.783
+# = 0.0000000000165
+# ```
+#
+# If we agree on some base, such as 10, then instead of multiplying actual probabilities
+# of co-occuring indendent events, we can add the (negative) exponents of the probabilities,
+# which is faster and more manageable.
+#
+# Instead of 0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55 = 0.0000000000165,
+# we get: 0.301 + 3 + 1 + 6 + 0.222 + 0.260 = 10.783
+#
+# What we are doing is taking the negative logarithm of the probabilities:
+# 10^-10.783 = 0.0000000000165 🡒 -log10 0.0000000000165 = 10.783
+#
+# * A negative logarithm of a probability is called a _logprob_.
+# * A logprob can be seen as a penalty term or a cost: "if you do this operation you'll have to pay this much."
+# * Logprobs add up from operations performed in a sequence. 
+# * If the probability of some operation is 1, that is, there is only one possible outcome:
+#   * The logprob is -log10 1 = 0
+#   * That is, there is no penalty if there is only one certain outcome.
+#   * This makes sense.
+#
+# ### Weights in HFST
+#
+# * HFST does not really support probabilities as such.
+# * HFST supports additive weights, such as logprobs.
+# * Weights in lexc could look like:
+#
+# ```
+# LEXICON Nouns
+# ilta:il^Ta          Number "weight: 3.69897" ;
+# lauta:lau^Ta        Number "weight: 5.00000" ;
+# ...
+# ```
+#
+# * Weights in xfst rules could look like:
+#
+# ```
+# [ f (->) g::1.000 ] .o. [ f (->) r::1.602 ]
+# ```
+#
+# ### Lexc with weights revisited
+#
+# <img src="img/lexc_with_weights_revisited.png">
+#
+# ### Revisited xfst script for a spell checker
+#
+# <img src="img/xfst_with_weights_revisited.png">
+#
 #
 # ## Section 6: Summary of types of finite-state automata and transducers
 #
