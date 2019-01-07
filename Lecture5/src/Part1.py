@@ -154,6 +154,100 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 #
 # <img src="img/alternative_for_portuguese.png">
 
-# ## 
+# ## Regular expressions in xfst
+#
+# ### Kleene (1956): Formal language theory
+#
+# <img src="img/kleene_formal_language_theory.png">
+#
+# ### Examples (1)
+#
+# <img src="img/kleene_example_1.png">
+#
+# ### Examples (2)
+#
+# <img src="img/kleene_example_2.png">
+#
+# ### Examples (3)
+#
+# <img src="img/kleene_example_3.png">
+
+# ### Writing regular expressions in xfst (1)
+hfst_dev.start_xfst()
+# ```
+# read regex d o g | c a t | h o r s e ;
+# print words
+# ```
+#
+# ### Writing regular expressions in xfst (2)
+#
+# ```
+# read regex [ d o g | c a t | r a t | e l e p h a n t ] - [ d o g | r a t ];
+# print words
+# ```
+#
+# ### Writing regular expressions in xfst (3)
+# ```
+# read regex (r e)[[m a k e] | [c o m p i l e]]
+# print words
+# ```
+#
+# It is a bit like writing a lexicon in xfst without using lexc.
+#
+# ### Writing regular expressions in xfst (4)
+#
+# ```
+# read regex a b c* d (e) f+ ;
+# random-words
+# ```
+#
+# ### Writing regular expressions in xfst (5)
+#
+# ```
+# read regex [ g o:e o:e s e | m o:i u:0 s:c e | b o o k 0:s ] ;
+# upper-words
+# lower-words
+# down mouse
+# ```
+#
+# ### Summary: Regular expression syntax in xfst for repetition
+#
+# <img src="img/xfst_repetition.png">
+#
+# ### Syntax for complement (= something else than)
+#
+# <img src="img/xfst_complement.png">
+#
+# ### Writing regular expressions in xfst (6)
+#
+# ```
+# read regex [ b o b | j o b | r o b | k n o b ] .o. [ o -> u || \\[b | j | n] _ ];
+# upper-words
+# lower-words
+# ```
+#
+# ### Syntax for contain/ignore (= is part of)
+#
+# <img src="img/xfst_contain_ignore.png">
+#
+# ### Writing regular expressions in xfst (7)
+#
+# ```
+# read regex [[t a l o | k y l ä | k o r i] s s A] .o. [ A -> a || $[a|o|u] ~$[ä|ö|y] _ ] .o. [ A -> ä ] ;
+# upper-words
+# lower-words
+# ```
+#
+# ### Writing regular expressions in xfst (8)
+#
+# ```
+# read regex [[{talo} | {kylä} | {kori}] {ssA}] .o. [ A -> a || $[a|o|u] ~$[ä|ö|y] _ ] .o. [ A -> ä ] ;
+# upper-words
+# lower-words
+# ```
+#
+# You can write a sequence of symbols, such as t a l o, together, if you enclose it in curly brackets: {talo}.
+
+# ## Section 5: Pronunciation lexicon for a Language with Irregular Orthography: English
 #
 
