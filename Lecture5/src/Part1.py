@@ -250,4 +250,56 @@ hfst_dev.start_xfst()
 
 # ## Section 5: Pronunciation lexicon for a Language with Irregular Orthography: English
 #
+# ### Symbol set for English pronunciation
+#
+# <img src="img/english_phonemes.png">
+#
+# From: Jurafsky & Martin: Speech and Language Processing, Prentice Hall, 1999.
+#
+# ### "Two levels times two"
+#
+# * We do not transduce between the orthographic form and the pronounced form.
+# * We transduce between the morphological lexical form and surface form (as earlier on this course).
+# * Every input and output symbol consists of two parts:
+# *   orthographic form
+# *   pronounced form
+# *   For instance: o|aa
+#
+# <img src="img/two_levels_times_two.png">
+#
+# ### Example entries from the noun stem lexicon
+#
+# <img src="img/example_entries.png">
+#
+# ### Transducer for singular and plural inflection
+#
+# <img src="img/singular_and_plural_inflection.png">
+#
+# ### Noun stems and inflections composed
+#
+# <img src="img/noun_stems_and_inflections_composed.png">
 
+# ## Section 6: Sound Change in Indo-European languages
+#
+# ### Research initiative
+#
+# * Creation of an interactive lexicon available on the Internet
+# * Using finite-state alternation rules to model sound change from Proto-Indo-European (PIE) to descendant languages
+# * HFST Foma engine (similar to HFST xfst)
+# * People
+#   * Jouna Pyysalo
+#   * Måns Huldén
+#
+# <img src="img/pie_lexicon.png">
+#
+# ### Example 1: Autumn, End
+#
+# <img src="img/autumn_end.png">
+#
+# ### Example 2: Spring, Warmth
+#
+# <img src="img/spring_warmth.png">
+
+# ## More information
+#
+# * Selected parts of Chapter 2 and 3 of the Beesley & Karttunen book: “A Systematic Introduction” and “The xfst Interface”
