@@ -91,3 +91,69 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 # tozezus
 # ugrucas
 # vabis
+
+# ### Stemming
+#
+# * A term used particularly in information retrieval to describe the process of reducing inflected (or sometimes derived) words to their word stem, base or root form —generally a written word form.
+#   * The stem is “fish” for “fishing”, “fished”, and “fisher”.
+#   * The stem is “argu” for “argue”, “argued”, “argues”, “arguing”, and “argus”...(!)
+# * The stem does not need to be identical to the morphological root of the word.
+#   * It is sufficient that related words map to the same stem, even if this stem is not in itself a valid root, such as the stem “argu” above, or the stem “citi” for “city” and “cities”.
+# * Algorithms for stemming have been studied in computer science since the 1960s.
+# * Many search engines treat words with the same stem as synonyms, as a kind of query expansion, a process called conflation.
+
+# ### Porter’s stemmer (1979-1980)
+#
+# * Idea:
+#   * Remove what looks like suffixes of English words
+#   * Tidy up a bit
+# * Feasible for English with such “simple morphology”
+# * The full algorithm is described here: http://tartarus.org/martin/PorterStemmer/def.txt
+# * There are other English stemmers:
+#   * Snowball
+#   * Lancaster
+#   * They are more “aggressive” than the Porter stemmer; they remove more “suffixes”.
+#
+# <img src="img/porters_stemmer.png">
+
+# ## Section 3: Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese
+#
+# ### Transducing between orthographic and pronounced forms of words
+#
+# * Section 3.5.4 in the Beesley & Karttunen book
+# * Exercise on Portuguese Brazilian
+# * The task is to create a cascade of rules that maps from orthographical strings in Portuguese (this will be the lexical side) down to strings that represent their pronunciation (this will be the surface side).
+#   * There will not be a lexicon.
+#   * A sample mapping of written “caso” to spoken “kazu” looks like this:
+#
+# ```
+# Lexical: caso
+# Surface: kazu
+# ```
+#
+# ### Phonetic symbols for Portuguese
+#
+# <img src="phonetic_symbols_for_portuguese.png">
+#
+# ### Some example words
+#
+# * What applications that you can think of need a mapping between orthographic and pronounced forms?
+#
+# <img src="img/test_data_for_portuguese.png">
+#
+# ### Conversion from orthography to pronunciation for Brazilian Portuguese (1)
+#
+#
+# ### Conversion from orthography to pronunciation for Brazilian Portuguese (2)
+#
+# ### Conversion from orthography to pronunciation for Brazilian Portuguese (3)
+#
+# ### Conversion from orthography to pronunciation for Brazilian Portuguese (4)
+#
+# ### Alternative: Don't define individual rules, but rather one large regular expression
+#
+# <img src="img/alternative_for_portuguese.png">
+
+# ## 
+#
+
