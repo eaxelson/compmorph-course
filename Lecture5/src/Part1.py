@@ -46,6 +46,9 @@
 #
 # ### Case study: Esperanto verb guesser xfst script
 #
+
+from hfst_dev import compile_xfst
+compile_xfst(
 """
 clear stack
 
@@ -68,7 +71,8 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
                  ! Make verb vocabulary ready to use
                  define AllPossibleVerbs ;
                  regex AllPossibleVerbs ;
-"""
+""")
+
 # ### Case study: Esperanto verb guesser example output
 #
 #
@@ -173,7 +177,9 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 # <img src="img/kleene_example_3.png">
 
 # ### Writing regular expressions in xfst (1)
+
 hfst_dev.start_xfst()
+
 # ```
 # read regex d o g | c a t | h o r s e ;
 # print words
