@@ -133,7 +133,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 #
 # ### Phonetic symbols for Portuguese
 #
-# <img src="phonetic_symbols_for_portuguese.png">
+# <img src="img/phonetic_symbols_for_portuguese.png">
 #
 # ### Some example words
 #
