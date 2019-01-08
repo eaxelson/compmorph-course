@@ -47,8 +47,8 @@
 # ### Case study: Esperanto verb guesser xfst script
 #
 
-from hfst_dev import compile_xfst
-compile_xfst(
+from hfst_dev import compile_xfst_script
+compile_xfst_script(
 """
 clear stack
 
@@ -71,11 +71,14 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
                  ! Make verb vocabulary ready to use
                  define AllPossibleVerbs ;
                  regex AllPossibleVerbs ;
+up donadas
+random-upper
+random-lower
 """)
 
 # ### Case study: Esperanto verb guesser example output
 #
-# Try the following commands in start_xfst:
+# Try the following commands by adding them to the end of input that is given to compile_xfst_script:
 #
 # ```
 # up donadas     random-upper     random-lower
@@ -163,7 +166,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 # ### Conversion from orthography to pronunciation for Brazilian Portuguese
 #
 
-compile_xfst(
+compile_xfst_script(
 """
 define Vowel [ a | e | i | o | u
              | á | é | í | ó | ú
@@ -207,6 +210,8 @@ define Rule16 [ z -> s || _ .#. ];
 
 read regex Rule1 .o. Rule2 .o. Rule3 .o. Rule4 .o. Rule5 .o. Rule6 .o. Rule7 .o. Rule8 .o.
 Rule9 .o. Rule10 .o. Rule11 .o. Rule12 .o. Rule13 .o. Rule14 .o. Rule15 .o. Rule16 ;
+
+random-words
 """)
 
 #
@@ -234,7 +239,8 @@ Rule9 .o. Rule10 .o. Rule11 .o. Rule12 .o. Rule13 .o. Rule14 .o. Rule15 .o. Rule
 
 # ### Writing regular expressions in xfst (1)
 
-hfst_dev.start_xfst()
+from hfst_dev import start_xfst
+start_xfst()
 
 # ```
 # read regex d o g | c a t | h o r s e ;
