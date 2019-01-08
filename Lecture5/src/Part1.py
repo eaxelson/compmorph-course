@@ -75,19 +75,33 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 
 # ### Case study: Esperanto verb guesser example output
 #
+# Try the following commands in start_xfst:
 #
-# Try: up donadas, random-upper, random-lower
+# ```
+# up donadas     random-upper     random-lower
+# ```
 #
+# You should get something like this as a result for up donadas:
+#
+# ```
 # don+Guess+Verb+Cont+Pres
 # don+Verb+Cont+Pres
 # donad+Guess+Verb+Pres
+# ```
 #
+# for random-upper:
+#
+# ```
 # dip+Guess+Verb+Fut
 # egrust+Guess+Verb+Subj
 # fust+Guess+Verb+Fut
 # obr+Guess+Verb+Cont+Fut
 # opop+Guess+Verb+Cond
+# ```
 #
+# for random-lower:
+#
+# ```
 # etros
 # hemodas
 # jumadis
@@ -95,6 +109,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 # tozezus
 # ugrucas
 # vabis
+# ```
 
 # ### Stemming
 #
@@ -145,14 +160,55 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 #
 # <img src="img/test_data_for_portuguese.png">
 #
-# ### Conversion from orthography to pronunciation for Brazilian Portuguese (1)
+# ### Conversion from orthography to pronunciation for Brazilian Portuguese
 #
-#
-# ### Conversion from orthography to pronunciation for Brazilian Portuguese (2)
-#
-# ### Conversion from orthography to pronunciation for Brazilian Portuguese (3)
-#
-# ### Conversion from orthography to pronunciation for Brazilian Portuguese (4)
+
+compile_xfst(
+"""
+define Vowel [ a | e | i | o | u
+             | á | é | í | ó | ú
+             | â | ê |     ô
+             | ã |         õ
+             | à
+             |                 ü
+] ;
+
+define Rule1 [ s -> z || Vowel _ Vowel ];
+
+define Rule2 [ ç -> s ];
+
+define Rule3 [ c h -> %$ ];
+
+define Rule4 [ c -> s || _ [ e | i | é | í | ê ] ];
+
+define Rule5 [ c -> k ];
+
+define Rule6 [ s s -> s ];
+
+define Rule7 [ n h -> N ];
+
+define Rule8 [ l h -> L ];
+
+define Rule9 [ h -> 0 ];
+
+define Rule10 [ r r -> R ];
+
+define Rule11 [ r -> R || .#. _ ];
+
+define Rule12 [ e -> i || _ (s) .#. , .#. p _ r ];
+
+define Rule13 [ o -> u || _ (s) .#. ];
+
+define Rule14 [ d -> J || _ [ i | í ] ];
+
+define Rule15 [ t -> C || _ [ i | í ] ];
+
+define Rule16 [ z -> s || _ .#. ];
+
+read regex Rule1 .o. Rule2 .o. Rule3 .o. Rule4 .o. Rule5 .o. Rule6 .o. Rule7 .o. Rule8 .o.
+Rule9 .o. Rule10 .o. Rule11 .o. Rule12 .o. Rule13 .o. Rule14 .o. Rule15 .o. Rule16 ;
+""")
+
 #
 # ### Alternative: Don't define individual rules, but rather one large regular expression
 #
