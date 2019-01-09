@@ -30,6 +30,8 @@
 #
 # First, import the package and list its contents with `help`.
 
+import sys
+sys.path.insert(0, '/data/eaxelson/hfst-git/hfst-dev-4.0/hfst/python')
 import hfst_dev
 help(hfst_dev)
 
@@ -384,7 +386,7 @@ LEXICON PossWithoutS
 	     # ; ! No ending: no input, no output
 
 END
-"""
+""", verbosity=2
 )
 
 # We could also write the script to a file and then call `compile_lexc_file`.
