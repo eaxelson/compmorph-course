@@ -30,8 +30,6 @@
 #
 # First, import the package and list its contents with `help`.
 
-import sys
-sys.path.insert(0, '/data/eaxelson/hfst-git/hfst-dev-4.0/hfst/python')
 import hfst_dev
 help(hfst_dev)
 
