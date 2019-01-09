@@ -161,7 +161,7 @@
 #
 # The "poikasilla" ambiguity: 2) poika#silla +N +Sg +Nom
 #
-# <img src="poika_silla_n_sg_nom.png">
+# <img src="img/poika_silla_n_sg_nom.png">
 #
 # Do the calculations:
 #
