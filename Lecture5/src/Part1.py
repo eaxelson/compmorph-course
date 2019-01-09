@@ -238,15 +238,19 @@ random-words
 # <img src="img/kleene_example_3.png">
 
 # ### Writing regular expressions in xfst (1)
-
-from hfst_dev import start_xfst
-start_xfst()
-
+#
 # ```
 # read regex d o g | c a t | h o r s e ;
 # print words
 # ```
 #
+# Test by copying the above and giving it as input for interactive xfst program:
+
+from hfst_dev import start_xfst
+start_xfst()
+
+# Also test the examples given below.
+
 # ### Writing regular expressions in xfst (2)
 #
 # ```

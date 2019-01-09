@@ -329,12 +329,64 @@
 # ### Lexc with weights revisited
 #
 # <img src="img/lexc_with_weights_revisited.png">
-#
+
+from hfst_dev import compile_lexc_script
+
+tr = compile_lexc_script("""
+Multichar_Symbols +N +Sg +Pl +Nom +Ade +Abl ^A ^I ^J ^K ^S ^T 
+
+LEXICON Root
+           Nouns "weight: 0.30103" ;   ! Probability: 0.5
+           Verbs "weight: 0.52288" ;   ! Probability: 0.3
+
+LEXICON Nouns
+ilta:il^Ta          Number "weight: 3.69897" ; ! Probability: 0.0002
+lauta:lau^Ta        Number "weight: 5.00000" ; ! Probability: 0.00001
+lautanen:lauta^S    Number "weight: 4.00000" ; ! Probability: 0.0001
+nainen:nai^S        Number "weight: 3.00000" ; ! Probability: 0.001
+poika:po^J^Ka       Number "weight: 3.00000" ; ! Probability: 0.001
+poikanen:poika^S    Number "weight: 4.00000" ; ! Probability: 0.0001
+silla:silla         Number "weight: 6.00000" ; ! Probability: 0.000001
+silta:sil^Ta        Number "weight: 3.30103" ; ! Probability: 0.0005
+
+LEXICON Number
++Sg:0               Case "weight: 0.22185" ;  ! Probability: 0.6
++Pl:^I              Case "weight: 0.52288" ;  ! Probability: 0.3
+#:0  Nouns "weight: 1.00000" ; ! Back to collect more stems
+                                              ! Probability: 0.1
+LEXICON Case
++Nom:0              # "weight: 0.259637" ;    ! Probability: 0.55
++Ade:ll^A           # "weight: 1.301030" ;    ! Probability: 0.05
+
+END
+""")
+
 # ### Revisited xfst script for a spell checker
 #
 # <img src="img/xfst_with_weights_revisited.png">
-#
-#
+
+from hfst_dev import compile_xfst_script
+compile_xfst_script("""
+! Use the .l operator to project only lower level (= surface forms) of the 
+! transducer; we are not interested in the upper level (= lexical forms)
+define Vocabulary [ Lexicon .o. AlternationRules ].l ;
+
+! Add "noise" (spelling errors); replace rules are optional when in brackets ()
+define Substitution  [ f (->) d::1.000 ] .o. [ f (->) g::1.000 ] .o. 
+                     [ f (->) r::1.602 ] .o. [ f (->) t::1.602 ] ; 
+!                                                                .o. etc ... ;
+
+! Define a transducer from correctly spelled words to words containing errors
+define NoisyVocabulary  Vocabulary .o. Substitution ;
+
+! Use the .i operator to invert the transducer, such that the input is noisy
+! words and the output is correctly spelled words
+define SpellChecker  [ NoisyVocabulary ].i ;
+
+! The spell checker is ready to use
+regex SpellChecker ;
+""")
+
 # ## Section 6: Summary of types of finite-state automata and transducers
 #
 # ### Finite-state automaton (FSA)
