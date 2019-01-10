@@ -1,6 +1,6 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 3
 #
-# ## Section 1: Disambiguation
+# ## 1. Disambiguation
 #
 # Some Finnish noun examples:
 #
@@ -33,9 +33,9 @@
 # How disambiguate?
 #
 # * We could disambiguate (= find one unambiguous analysis) by looking at the word in context.
-# * However, if we don’t have any context, we may still have a sense of which analyses are more likely _a_ _priori_.
+# * However, if we don’t have any context, we may still have a sense of which analyses are more likely _a priori_.
 # * A priori = in general, without further information.
-# * _A_ _posteriori_, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.
+# * _A posteriori_, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.
 #
 # A priori assumptions:
 #
@@ -49,7 +49,7 @@
 #
 # <img src="img/model_with_probabilities.png">
 #
-# ## Section 2: Probabilities, basics
+# ## 2. Probabilities, basics
 #
 # What is probability?
 #
@@ -145,7 +145,7 @@
 # * The posterior probability is a product of two probabilities: the prior probability and a conditional probability, such as:
 #   * P("It snows in Helsinki on 23 Jan 2018" | "It snows in Helsinki in January") * P("It snows in Helsinki in January")
 #
-# ## Section 3: Back to disambiguation
+# ## 3. Back to disambiguation
 #
 # The "poikasilla" ambiguity: 1) poikanen +N +Pl +Ade
 #
@@ -210,15 +210,15 @@
 # ...
 # ```
 #
-# ## Section 4: Spelling correction
+# ## 4. Spelling correction
 #
-# Virtual keyboard of a mobile device
+# ### Virtual keyboard of a mobile device
 #
 # The D key was "pressed" (that is, touched).
 #
 # <img src="img/d_pressed.png">
 #
-# Noisy virtual keyboard of a mobile device
+# ### Noisy virtual keyboard of a mobile device
 #
 # The D key was "pressed" (that is, touched), but the intended key was actually F!
 #
@@ -279,7 +279,7 @@
 #
 # Again, the syntax is correct, but there is something left to fix with the weights...
 #
-# ## Section 5: Logprobs
+# ## 5. Logprobs
 #
 # Back to the probabilities
 #
@@ -376,12 +376,24 @@ LEXICON Case
 END
 """)
 
+# Invert and test the transducer:
+
+tr.invert()
+tr.minimize()
+print(tr.lookup('poika^S^Ill^A'))
+print(tr.lookup('poika^Sil^Ta'))
+print(tr.lookup('po^J^Kasil^Ta'))
+
 # ### Revisited xfst script for a spell checker
 #
 # <img src="img/xfst_with_weights_revisited.png">
 
 from hfst_dev import compile_xfst_script
 compile_xfst_script("""
+! Toy example
+define Lexicon {for}|{fight}|{right}|{tight}|{of}|{or} ;
+define AlternationRules ?* ;
+
 ! Use the .l operator to project only lower level (= surface forms) of the 
 ! transducer; we are not interested in the upper level (= lexical forms)
 define Vocabulary [ Lexicon .o. AlternationRules ].l ;
@@ -400,9 +412,18 @@ define SpellChecker  [ NoisyVocabulary ].i ;
 
 ! The spell checker is ready to use
 regex SpellChecker ;
+invert net
+minimize net
+set print-weight ON
+
+apply up right
+echo --
+apply up or
+echo --
+apply up for
 """)
 
-# ## Section 6: Summary of types of finite-state automata and transducers
+# ## 6. Summary of types of finite-state automata and transducers
 #
 # ### Finite-state automaton (FSA)
 #
@@ -414,6 +435,8 @@ regex SpellChecker ;
 # these transitions are called epsilon transitions.
 #
 # <img src="img/fsa.png">
+
+# TODO: use graphviz package
 
 # HfstIterableTransducer is a special class for generating transducers
 # from scratch or iterating them state by state and transition by transition.

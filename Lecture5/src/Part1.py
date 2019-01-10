@@ -1,26 +1,26 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 5
 #
-# ## Section 1: Big picture
+# ## 1. Big picture
 #
-# ### Lecture 1: lexc
+# ### lexc
 #
 # "Lexicon without any replace rules"
 #
 # <img src="img/big_picture_lexc.png">
 #
-# ### Lectures 2 and 3: xfst and twolc
+# ### xfst and twolc
 #
 # "Lexicon combined with replace rules"
 #
 # <img src="img/big_picture_xfst_and_twolc.png">
 #
-# ### Lecture 4?: xfst / regular expressions 
+# ### xfst / regular expressions
 #
 # "Rules without much of a lexicon" 
 #
 # <img src="img/big_picture_xfst_and_regexps.png">
 #
-# ## Section 2: Guessers and stemmers
+# ## 2. Guessers and stemmers
 #
 # ### Increased coverage with guessers 
 #
@@ -71,9 +71,6 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
                  ! Make verb vocabulary ready to use
                  define AllPossibleVerbs ;
                  regex AllPossibleVerbs ;
-up donadas
-random-upper
-random-lower
 """)
 
 # ### Case study: Esperanto verb guesser example output
@@ -211,7 +208,13 @@ define Rule16 [ z -> s || _ .#. ];
 read regex Rule1 .o. Rule2 .o. Rule3 .o. Rule4 .o. Rule5 .o. Rule6 .o. Rule7 .o. Rule8 .o.
 Rule9 .o. Rule10 .o. Rule11 .o. Rule12 .o. Rule13 .o. Rule14 .o. Rule15 .o. Rule16 ;
 
-random-words
+invert net
+minimize net
+apply up
+disse
+simpático
+chato
+braços
 """)
 
 #
@@ -281,7 +284,7 @@ start_xfst()
 # lower-words
 # down mouse
 # ```
-#
+
 # ### Summary: Regular expression syntax in xfst for repetition
 #
 # <img src="img/xfst_repetition.png">
@@ -319,6 +322,8 @@ start_xfst()
 # ```
 #
 # You can write a sequence of symbols, such as t a l o, together, if you enclose it in curly brackets: {talo}.
+
+start_xfst()
 
 # ## Section 5: Pronunciation lexicon for a Language with Irregular Orthography: English
 #

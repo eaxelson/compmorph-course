@@ -23,7 +23,7 @@
 # * The sequences of symbols that the automaton will accept are _words_ like: `canto, mesa`.
 # * The entire set of words that the automaton accepts or recognizes is its _language_: `{ canto, mesa, tigre }`.
 #
-# Sharing structure in minimal networks:
+# ### Sharing structure in minimal networks:
 #
 # <img src="img/fat_father.png">
 #
@@ -35,25 +35,25 @@
 #
 # ## 2. Set Theory for Finite-State Networks
 #
-# Examples of sets:
+# ### Examples of sets:
 #
 # <img src="img/two_sets.png">
 #
 # <img src="img/empty_set.png">
 #
-# Some sets viewed as networks:
+# ### Some sets viewed as networks:
 #
 # <img src="img/empty_network.png">
 #
 # <img src="img/empty_string_network.png">
 #
-# Some infinite sets:
+# ### Some infinite sets:
 #
 # <img src="img/zero_or_more_a.png">
 #
 # <img src="img/universal_language.png">
 #
-# Relations:
+# ### Relations:
 #
 # <img src="img/lowercase2uppercase.png">
 #
@@ -68,7 +68,7 @@
 #
 # ```
 #
-# Union of sets
+# ### Union of sets
 #
 # <img src="img/union_of_sets.png">
 #
@@ -86,7 +86,7 @@ print(union_set.extract_paths())
 #
 # <img src="img/union_of_sets_as_network.png">
 #
-# Intersection of sets
+# ### Intersection of sets
 #
 # <img src="img/intersection_of_sets.png">
 #
@@ -99,7 +99,7 @@ set2 = fst(('ear','ever'))
 intersection_set = intersect((set1, set2))
 print(intersection_set.extract_paths())
 
-# Subtraction of one set from another
+# ### Subtraction of one set from another
 #
 # <img src="img/subtraction_of_sets.png">
 #
@@ -111,7 +111,7 @@ set2 = fst(('clever','ear'))
 subtraction_set = subtract((set1, set2))
 print(subtraction_set.extract_paths())
 
-# Concatenation of sets
+# ### Concatenation of sets
 #
 # <img src="img/concatenation_of_sets.png">
 #
@@ -123,7 +123,7 @@ set2 = fst(('s','ing','ed'))
 concatenation_set = concatenate((set1, set2))
 print(concatenation_set.extract_paths())
 
-# Composition of transducers
+# ### Composition of transducers
 #
 # <img src="img/composition.png">
 #
@@ -133,9 +133,9 @@ from hfst_dev import compose
 set1 = fst({'cat':'chat'})
 set2 = fst({'chat':'Katze'})
 composition_set = compose((set1, set2))
-print(composition_set.extract_paths())
+print(composition_set.extract_paths()) # TODO: @_EPSILON_SYMBOL_@ is printed
 
-# Projection
+# ### Projection
 #
 # * Projection is extracting one side of a relation.
 # * The upper/input projection of `<"cat", "CHAT">` is "cat".
@@ -145,12 +145,12 @@ print(composition_set.extract_paths())
 
 cat = fst({'cat':'CHAT'})
 cat.input_project()
-cat.minimize()
+cat.minimize() # get rid of epsilons
 print(cat.extract_paths())
 
 CHAT = fst({'cat':'CHAT'})
 CHAT.output_project()
-CHAT.minimize()
+CHAT.minimize() # get rid of epsilons
 print(CHAT.extract_paths())
 
 
@@ -270,7 +270,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 #
 # ### Lexicon (lexc) of some English adjectives
 #
-# en_ip_adjectives_lexicon.lexc
+# The file `en_ip_adjectives_lexicon.lexc`
 #
 # ```
 # Multichar_Symbols
