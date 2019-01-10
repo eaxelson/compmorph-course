@@ -8,14 +8,14 @@
 # complexity. HFST is written mainly in C++, but there is a Python interface
 # which is demonstrated on these notebooks.
 #
-# ## Prerequisites
+# ## 1. Prerequisites
 #
 # * Foundations of general linguistics
 # * Basic knowledge on how to use a computer
 # * Some programming experience is desirable
 # * Knowledge of Natural Language Processing (NLP) is also a plus
 #
-# ## Course material
+# ## 2. Course material
 #
 # If you want a book:
 #
@@ -25,7 +25,7 @@
 # Links:
 #
 # * HFST [main page](https://hfst.github.io).
-# * For installation of the HFST package for Python, see our [PyPI pages](https://pypi.org/project/hfst/).
+# * For installation of the HFST package for Python, see our [PyPI pages](https://pypi.org/project/hfst_dev/).
 # * For more information about the interface, see our [Github wiki pages](https://github.com/hfst/python-hfst-4.0/wiki).
 #
 # First, import the package and list its contents with `help`.
@@ -41,17 +41,18 @@ help(hfst_dev.compile_lexc_file)
 
 print(hfst_dev.__version__)
 
-# ## Course overview
+# ## 3. Course overview
 #
 # | Lecture | Topics |
 # | - | - |
-# | 1 | (Introduction), lexc, xfst, replace rules |
-# | 2 | Weighted finite state machines, (unsupervised morphology) |
-# | 3 | Regular expressions, pronunciation lexicons, guessers, stemmers, twolc, two-level rules |
-# | 4 | Flag diacritics, non-concatenative morphology |
-# | 5 | Optimization of finite-state networks |
-# | 6 | (Guest lecture) |
-# | 7 | (Final project demos, technical presentetions) |
+# | 1 | Lexc, xfst, replace rules |
+# | 2 | Weighted finite state machines |
+# | (3) | (unsupervised morphology) |
+# | 4 | Regular expressions, pronunciation lexicons |
+# | 5 | Guessers, stemmers |
+# | 6 | Twolc, two-level rules |
+# | 7 | Flag diacritics, non-concatenative morphology |
+# | 8 | Optimization of finite-state networks |
 
 # ## 4. Hockett's models of morphology
 #
@@ -94,12 +95,12 @@ print(hfst_dev.__version__)
 # We have roots or bases of morphemes and different processes apply to them.
 #
 # * Nominative: word final 'e' becomes 'i'; 't' in front of 'i' becomes 's' 🡒 "susi"
-# * Genitive: add suffix '+n'; soften 't' to 'd' in closed syllable 🡒 "suden"
-# * Etc.
+#   - Genitive: add suffix '+n'; soften 't' to 'd' in closed syllable 🡒 "suden"
+#   - Etc.
 #
 # ### Corresponding HFST tools
 #
-# | Model/Tool | [compile_twolc_file](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_twolc_file-inputfilename-outputfilename-kwargs) | [compile_lexc_file](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_lexc_file-filename-kwargs) | [compile_xfst_file](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_xfst_file-filename-kwargs) |
+# | Model/Tool | [twolc](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_twolc_file-inputfilename-outputfilename-kwargs) | [lexc](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_lexc_file-filename-kwargs) | [xfst](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_xfst_file-filename-kwargs) |
 # | - | - | - | - |
 # | Word & Paradigm |  | ✔ | ✔ |
 # | Item & Arrangement |  | ✔ | ✔ |
@@ -147,25 +148,21 @@ help(hfst_dev.start_xfst)
 #   - when we want to parse natural language text syntactically
 #   - when we want to _normalize_ text, such that we only care about the base form (lemma) of every word in the text; this is used, for instance, in _information_ _retrieval_.
 #
-# ## Some simple noun paradigms in English
+# ### Some simple noun paradigms in English
 #
-# ```
-# Paradigm: N
-# cat +Sg (singular)
-# cat|s +Pl (plural)
-# cat|'s +Sg +Poss (singular possessive)
-# cat|s' +Pl +Poss (plural possessive)
-# Similarly: dog, pet, book, hill, fan
-# ```
+# Paradigm: N  
+# __cat__ +Sg (singular)  
+# __cat|s__ +Pl (plural)  
+# __cat|'s__ +Sg +Poss (singular possessive)  
+# __cat|s'__ +Pl +Poss (plural possessive)  
+# _Similarly:_ dog, pet, book, hill, fan
 #
-# ```
-# Paradigm: N_s
-# kiss +Sg (singular)
-# kiss|es +Pl (plural)
-# kiss|'s +Sg +Poss (singular possessive)
-# kiss|es|' +Pl +Poss (plural possessive)
-# Similarly: wish, mess, church, search, waitress
-# ```
+# Paradigm: N_s  
+# __kiss__ +Sg (singular)  
+# __kiss|es__ +Pl (plural)  
+# __kiss|'s__ +Sg +Poss (singular possessive)  
+# __kiss|es|'__ +Pl +Poss (plural possessive)  
+# _Similarly:_ wish, mess, church, search, waitress
 #
 # Let's create a morphological generator and analyzer for this data.
 
@@ -183,7 +180,7 @@ help(hfst_dev.start_xfst)
 #
 # <img src="img/noun_inflection.png">
 
-# ## 7. LexC code that represents this transducer
+# ## 7. Lexc code that represents this transducer
 #
 # ### 7.1 Define all symbols consisting of multiple characters
 #
@@ -312,9 +309,9 @@ help(hfst_dev.start_xfst)
 # ```
 # <img src="img/poss_ending.png">
 #
-# Note that `END` signifies the end of lexc file. It must be included at the end of each LexC file.
+# Note that `END` signifies the end of lexc file. It must be included at the end of each lexc file.
 #
-# Finally, let's compile the LexC script into a transducer:
+# Finally, let's compile the lexc script into a transducer:
 
 from hfst_dev import compile_lexc_script
 
@@ -387,13 +384,15 @@ END
 """, verbosity=2
 )
 
-# We could also write the script to a file and then call `compile_lexc_file`.
+# We could also write the script to a file and then call `compile_lexc_file`. Note that we set the keyword argument _verbosity_ to _2_.
+# Then we will get more information about the compilation process.
+# You can test the above command also with `verbosity=1` and `verbosity=0` (or just leaving the argument out).
 #
 # Test the transducer:
 
 print(generator.lookup('sky+N+Pl'))
 
-# expect the result `(('skies', 0.0),)`, i.e. output "skies" with a zero _weight_. We will return to weights in later lectures.
+# and expect the result `(('skies', 0.0),)`, i.e. `skies` with a zero _weight_. We will return to weights in later lectures.
 #
 # Next, _invert_ the transducer to get an analyzer:
 
@@ -404,4 +403,4 @@ analyzer.minimize()
 
 print(analyzer.lookup('skies'))
 
-# expect the result `(('sky+N+Pl', 0.0),)`, i.e. output "a noun 'skies' in plural with a zero weight".
+# and expect the result `(('sky+N+Pl', 0.0),)`, i.e. "the noun sky in plural with a zero weight".

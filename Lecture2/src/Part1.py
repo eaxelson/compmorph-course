@@ -74,7 +74,14 @@
 #
 # For instance, the union of the sets `{"clear", "clever", "ear", "ever"}` and `{"fat", "father"}` is
 # `{"clear", "clever", "ear", "ever", "fat", "father"}`.
-#
+
+from hfst_dev import fst, disjunct
+
+set1 = fst(('clear','clever','ear','ever'))
+set2 = fst(('fat','father'))
+union_set = disjunct((set1, set2))
+print(union_set.extract_paths())
+
 # The union shown as a network:
 #
 # <img src="img/union_of_sets_as_network.png">
@@ -83,30 +90,70 @@
 #
 # <img src="img/intersection_of_sets.png">
 #
-# For instance, the intersection of sets `{}` and `{}` is `{}`
-#
+# For instance, the intersection of sets `{"clear", "clever", "ear"}` and `{"ear", "ever"}` is `{"ear"}`.
+
+from hfst_dev import intersect
+
+set1 = fst(('clear','clever','ear'))
+set2 = fst(('ear','ever'))
+intersection_set = intersect((set1, set2))
+print(intersection_set.extract_paths())
+
 # Subtraction of one set from another
 #
 # <img src="img/subtraction_of_sets.png">
 #
-# For instance, the subtraction of sets `{}` and `{}` is `{}`
-#
+# For instance, the subtraction of sets `{"clear", "clever", "ear"}` and `{"clever", "ear"}` is `{"clear"}`.
+
+from hfst_dev import subtract
+set1 = fst(('clear','clever','ear'))
+set2 = fst(('clever','ear'))
+subtraction_set = subtract((set1, set2))
+print(subtraction_set.extract_paths())
+
 # Concatenation of sets
 #
 # <img src="img/concatenation_of_sets.png">
 #
+# The concatenation is `{"works", "working", "worked"}`
+
+from hfst_dev import concatenate
+set1 = fst(('work'))
+set2 = fst(('s','ing','ed'))
+concatenation_set = concatenate((set1, set2))
+print(concatenation_set.extract_paths())
+
 # Composition of transducers
 #
 # <img src="img/composition.png">
 #
+# The composition is `{<"cat","Katze">}`.
+
+from hfst_dev import compose
+set1 = fst({'cat':'chat'})
+set2 = fst({'chat':'Katze'})
+composition_set = compose((set1, set2))
+print(composition_set.extract_paths())
+
 # Projection
 #
 # * Projection is extracting one side of a relation.
-# * The upper projection of `<"cat", "CHAT">` is "cat".
-# * The lower projection of `<"cat", "CHAT">` is "CHAT".
+# * The upper/input projection of `<"cat", "CHAT">` is "cat".
+# * The lower/output projection of `<"cat", "CHAT">` is "CHAT".
 #
 # <img src="img/projection.png">
-#
+
+cat = fst({'cat':'CHAT'})
+cat.input_project()
+cat.minimize()
+print(cat.extract_paths())
+
+CHAT = fst({'cat':'CHAT'})
+CHAT.output_project()
+CHAT.minimize()
+print(CHAT.extract_paths())
+
+
 # ### Set operations expressed in the xfst language
 #
 # ```
