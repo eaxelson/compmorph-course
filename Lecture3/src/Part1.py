@@ -12,30 +12,32 @@
 #
 # The Finnish noun examples with analyses:
 #
-# * nainen => nainen +N +Sg +Nom (“woman”)
-# * lautasilla => lautanen +N +Pl +Ade (“on plates”)
-# * lautasilta => lautanen +N +Pl +Abl (“from plates”)
-# * poikasilla => poikanen +N +Pl +Ade (“with cubs”)
-# * poikasilta => poikanen +N +Pl +Abl (“from cubs”)
+# * nainen 🡒 nainen +N +Sg +Nom (“woman”)
+# * lautasilla 🡒 lautanen +N +Pl +Ade (“on plates”)
+# * lautasilta 🡒 lautanen +N +Pl +Abl (“from plates”)
+# * poikasilla 🡒 poikanen +N +Pl +Ade (“with cubs”)
+# * poikasilta 🡒 poikanen +N +Pl +Abl (“from cubs”)
 #
 # The Finnish noun examples with more analyses:
 #
-# * nainen => naida +V +Pot +Pres +Sg1 (“it seems I’ll marry”)
-# * lautasilla => lauta#silla +N +Sg +Ade (“board rayon”)
-# * lautasilta => lauta#silta +N +Sg +Nom (“board bridge”)
-# *            => lautas#ilta +N +Sg +Nom (“plate evening”)
-# *  poikasilla => poika#silla +N +Sg +Ade (“boy rayon”)
-# *  poikasilta => poika#silta +N +Sg +Nom (“boy bridge”)
-# *             => poikas#ilta +N +Sg +Nom (“cub evening”)
+# * nainen 🡒 naida +V +Pot +Pres +Sg1 (“it seems I’ll marry”)
+# * lautasilla 🡒 lauta#silla +N +Sg +Ade (“board rayon”)
+# * lautasilta:
+#   - 🡒 lauta#silta +N +Sg +Nom (“board bridge”)
+#   - 🡒 lautas#ilta +N +Sg +Nom (“plate evening”)
+# *  poikasilla 🡒 poika#silla +N +Sg +Ade (“boy rayon”)
+# *  poikasilta:
+#   - 🡒 poika#silta +N +Sg +Nom (“boy bridge”)
+#   - 🡒 poikas#ilta +N +Sg +Nom (“cub evening”)
 #
 # How disambiguate?
 #
 # * We could disambiguate (= find one unambiguous analysis) by looking at the word in context.
-# * However, if we don’t have any context, we may still have a sense of which analyses are more likely a priori.
+# * However, if we don’t have any context, we may still have a sense of which analyses are more likely _a_ _priori_.
 # * A priori = in general, without further information.
-# * A posteriori, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.
+# * _A_ _posteriori_, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.
 #
-# A priori assumptions
+# A priori assumptions:
 #
 # * "Nainen +N" is more common than "naida +V".
 # * Singular (+Sg) is more common than Plural (+Pl).
@@ -131,7 +133,7 @@
 # * Examples:
 #   * Is there life on Mars?
 #   * Will Trump win the presidential election in the USA? (Now, we know he did.)
-#   * Will it snow in Helsinki tomorrow (23 January 2018)?
+#   * Will it snow in Helsinki tomorrow?
 #   * Given specific symptoms, does a patient have cancer?
 #
 # Prior and posterior probabilities
@@ -173,8 +175,8 @@
 # = 1.65 * 10^-11
 # ```
 #
-# Compare and pick the more likely alternative 🡒 The analysis "poikanen +N +Pl +Ade" is almost 50000 times more likely
-# than #poika#silla +N +Sg +Nom# (in this invented model).
+# Compare and pick the more likely alternative 🡒 The analysis `poikanen +N +Pl +Ade` is almost 50000 times more likely
+# than `poika#silla +N +Sg +Nom` (in this invented model).
 #
 # Formulated in lexc format with weights (The syntax is correct, but don't do it exactly like this yet):
 #
@@ -221,6 +223,19 @@
 # The D key was "pressed" (that is, touched), but the intended key was actually F!
 #
 # <img src="img/f_intended.png">
+#
+# Assume probabilities:
+#
+# ```
+# P(p = F | i = F) = 0.7
+# P(p = D | i = F) = 0.1
+# P(p = G | i = F) = 0.1
+# P(p = R | i = F) = 0.025
+# P(p = T | i = F) = 0.025
+# P(p = C | i = F) = 0.025
+# P(p = X | i = F) = 0.0125
+# P(p = V | i = F) = 0.0125
+# ```
 #
 # For instance, read the last line as: "The Probability that V was
 # pressed when actually F was the intended key  is 0.0125."
@@ -293,17 +308,17 @@
 # of co-occuring indendent events, we can add the (negative) exponents of the probabilities,
 # which is faster and more manageable.
 #
-# Instead of 0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55 = 0.0000000000165,
-# we get: 0.301 + 3 + 1 + 6 + 0.222 + 0.260 = 10.783
+# Instead of `0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55 = 0.0000000000165`,
+# we get: `0.301 + 3 + 1 + 6 + 0.222 + 0.260 = 10.783`
 #
 # What we are doing is taking the negative logarithm of the probabilities:
-# 10^-10.783 = 0.0000000000165 🡒 -log10 0.0000000000165 = 10.783
+# `10^-10.783 = 0.0000000000165` 🡒 `-log10 0.0000000000165 = 10.783`
 #
 # * A negative logarithm of a probability is called a _logprob_.
 # * A logprob can be seen as a penalty term or a cost: "if you do this operation you'll have to pay this much."
 # * Logprobs add up from operations performed in a sequence. 
 # * If the probability of some operation is 1, that is, there is only one possible outcome:
-#   * The logprob is -log10 1 = 0
+#   * The logprob is `-log10 1 = 0`
 #   * That is, there is no penalty if there is only one certain outcome.
 #   * This makes sense.
 #
@@ -399,7 +414,26 @@ regex SpellChecker ;
 # these transitions are called epsilon transitions.
 #
 # <img src="img/fsa.png">
-#
+
+# HfstIterableTransducer is a special class for generating transducers
+# from scratch or iterating them state by state and transition by transition.
+# It does not support most of the ordinary transducer functions.
+from hfst_dev import HfstIterableTransducer, EPSILON
+
+tr = HfstIterableTransducer()
+tr.add_transition(0, 1, EPSILON, EPSILON, 0)
+tr.add_transition(0, 2, EPSILON, EPSILON, 0)
+tr.add_transition(1, 3, 'b', 'b', 0)
+tr.add_transition(2, 1, EPSILON, EPSILON, 0)
+tr.add_transition(2, 2, 'b', 'b', 0)
+tr.add_transition(3, 3, 'b', 'b', 0)
+tr.add_transition(3, 4, EPSILON, EPSILON, 0)
+tr.add_transition(3, 4, 'c', 'c', 0)
+tr.set_final_weight(4, 0)
+
+# Print the transducer in AT&T format:
+print(tr)
+
 # ### Weighted finite-state automaton (WFSA)
 #
 # A weighted finite-state automaton (WFSA) is an FSA with weights on the arcs.
@@ -407,7 +441,18 @@ regex SpellChecker ;
 # you want to take the path with the lowest weight.
 #
 # <img src="img/wfsa.png">
-#
+
+tr = HfstIterableTransducer()
+tr.add_transition(0, 1, 'a', 'a', 2.7002)
+tr.add_transition(0, 2, 'b', 'b', 1.0)
+tr.add_transition(1, 1, 'a', 'a', 1.0)
+tr.add_transition(1, 2, 'b', 'b', 0)
+tr.add_transition(2, 2, 'b', 'b', 0.59961)
+tr.add_transition(2, 3, 'c', 'c', 0)
+tr.set_final_weight(2, 0)
+tr.set_final_weight(3, 1.0)
+print(tr)
+
 # Weighted automata can be used to decide between two alternatives.
 # For example, you’re running a speech recognition system and the user says "I have to go."
 # How do you know the user didn’t say, "I have two go"?
@@ -425,7 +470,16 @@ regex SpellChecker ;
 #
 # It recognizes whether the two strings are valid correspondences (or translations)
 # of each other.
-#
+
+tr = HfstIterableTransducer()
+tr.add_transition(0, 1, 'a', 'a', 0)
+tr.add_transition(1, 2, 'b', 'b', 0)
+tr.add_transition(1, 3, 'a', 'a', 0)
+tr.add_transition(2, 1, 'b', 'c', 0)
+tr.add_transition(2, 3, 'a', 'a', 0)
+tr.set_final_weight(3, 0)
+print(tr)
+
 # ### Weighted finite-state transducer (WFST)
 #
 # A weighted finite-state transducer (WFST) is a finite automaton for which
@@ -436,9 +490,21 @@ regex SpellChecker ;
 # The initial state is labeled 0. The final state is 2 with final weight of 3.5.
 # Any state with non-infinite final weight is a final state. There is a transition
 # from state 0 to 1 with input label a, output label x, and weight 0.5.
-# This machine transduces, for instance, the string ac to xz with weight 6.5
+# This machine transduces, for instance, the string "ac" to "xz" with weight 6.5
 # (the sum of the arc and final weights).
-#
+
+tr = HfstIterableTransducer()
+tr.add_transition(0, 1, 'a', 'x', 0.5)
+tr.add_transition(0, 1, 'b', 'y', 1.5)
+tr.add_transition(1, 2, 'c', 'z', 2.5)
+tr.set_final_weight(2, 3.5)
+print(tr)
+
+# Convert to HfstTransducer before lookup.
+from hfst_dev import HfstTransducer
+TR = HfstTransducer(tr)
+print(TR.lookup('ac'))
+
 # ## More information
 #
 # * The Beesley & Karttunen book does not cover weighted finite-state machines. Weights were fairly new at about the time when the book was published in 2003.
