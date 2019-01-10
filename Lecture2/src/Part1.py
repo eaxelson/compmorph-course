@@ -18,10 +18,10 @@
 #
 # <img src="img/three_word_language.png">
 #
-# * Inputs to the automaton are _symbols_ like: m, e, c.
-# * The set of valid symbols that the automaton will accept is its _alphabet_: { a, c, e, g, i, m, n, o, r, s, t }.
-# * The sequences of symbols that the automaton will accept are _words_ like: canto, mesa.
-# * The entire set of words that the automaton accepts or recognizes is its _language_: { canto, mesa, tigre }.
+# * Inputs to the automaton are _symbols_ like: `m, e, c`.
+# * The set of valid symbols that the automaton will accept is its _alphabet_: `{ a, c, e, g, i, m, n, o, r, s, t }`.
+# * The sequences of symbols that the automaton will accept are _words_ like: `canto, mesa`.
+# * The entire set of words that the automaton accepts or recognizes is its _language_: `{ canto, mesa, tigre }`.
 #
 # Sharing structure in minimal networks:
 #
