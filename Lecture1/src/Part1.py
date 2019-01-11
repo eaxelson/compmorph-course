@@ -171,7 +171,7 @@ help(hfst_dev.start_xfst)
 # Below is a finite-state transducer (FST) for purely concatenative I&A English noun inflection
 # for our simple example data.
 # The yellow circles represent _states_ and the arrows represent _transitions_ between the states.
-# State named _"Root"_ is the initial state and state named_"#"_ the final one.
+# State named _"Root"_ is the initial state and state named_"\#"_ the final one.
 # Above each transition, there is the input
 # that the transition _consumes_ and the output that it _produces_, separated with a colon ":".
 # The "ε:ε" signifies the _epsilon_ transition which is possible without consuming
@@ -318,13 +318,13 @@ from hfst_dev import compile_lexc_script
 generator = compile_lexc_script(
 """
 Multichar_Symbols
-	+N	! Noun tag
-        +Sg	! Singular
-        +Pl	! Plural
- 	+Poss	! Possessive form
+        +N      ! Noun tag
+        +Sg     ! Singular
+        +Pl     ! Plural
+        +Poss   ! Possessive form
 
 LEXICON Root
-	Nouns ; ! No input, no output
+        Nouns ; ! No input, no output
 
 !
 ! NOUNS start here
@@ -332,53 +332,53 @@ LEXICON Root
 
 LEXICON Nouns
 
-cat	N ;
-dog	N ;
+cat     N ;
+dog     N ;
 
-church	  N_s ;
-kiss	  N_s ;
+church    N_s ;
+kiss      N_s ;
 
-beauty:beaut	N_y ;
-sky:sk		N_y ;
+beauty:beaut    N_y ;
+sky:sk          N_y ;
 
 
 ! The noun lexica N and Num are used for stems without any alternation
 
 LEXICON N
-+N:0	Num ;
++N:0    Num ;
 
 LEXICON Num
-+Sg:0	PossWithS ;
-+Pl:s	PossWithoutS ;
++Sg:0   PossWithS ;
++Pl:s   PossWithoutS ;
 
 ! The noun lexica N_s and Num_s are used for stems that end in a sibilant
 ! and need an extra inserted "e"
 
 LEXICON N_s
-+N:0	Num_s ;
++N:0    Num_s ;
 
 LEXICON Num_s
-+Sg:0	PossWithS ;
-+Pl:es	PossWithoutS ;
++Sg:0   PossWithS ;
++Pl:es  PossWithoutS ;
 
 ! The noun lexica N_y and Num_y are used for stems with "y" -> "ie" alternation
 
 LEXICON N_y
-+N:0	Num_y ;
++N:0    Num_y ;
 
 LEXICON Num_y
-+Sg:y	PossWithS ;
-+Pl:ies	PossWithoutS ;
++Sg:y   PossWithS ;
++Pl:ies PossWithoutS ;
 
 ! Possessive endings: usually the singular is 's and the plural is '
 
 LEXICON PossWithS
 +Poss:'s     # ;
-	     # ; ! No ending: no input, no output
+             # ; ! No ending: no input, no output
 
 LEXICON PossWithoutS
-+Poss:'	     # ;
-	     # ; ! No ending: no input, no output
++Poss:'      # ;
+             # ; ! No ending: no input, no output
 
 END
 """, verbosity=2
