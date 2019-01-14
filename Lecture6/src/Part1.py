@@ -88,7 +88,7 @@
 #
 # Also recall the corrected script (xfst) from Lecture 2 that is shown below with an equivalent script implemented with twolc:
 #
-# <img = "src/xfst_and_twolc_scripts.png">
+# <img src="img/xfst_and_twolc_scripts.png">
 #
 # Which one to use is mostly a matter of taste.
 #
@@ -96,15 +96,15 @@
 #
 # twolc rule operators
 #
-# <img src="twolc_rule_operators.png">
+# <img src="img/twolc_rule_operators.png">
 #
 # Examples of twolc operators in context
 #
-# <img src="twolc_rule_operator_examples.png">
+# <img src="img/twolc_rule_operator_examples.png">
 #
 # Resolving conflicting rules
 #
-# <img src="resolving_conflicting_rules.png">
+# <img src="img/resolving_conflicting_rules.png">
 #
 # ## 4. Example: consonant gradation in English
 #
@@ -112,11 +112,11 @@
 #
 # Consonant gradation in Finnish
 #
-# <img src="consonant_gradation_in_finnish.png"> 
+# <img src="img/consonant_gradation_in_finnish.png"> 
 #
 # Two-level grammar for consonant gradation
 #
-# <img src="consonant_gradation_twolc.png">
+# <img src="img/consonant_gradation_twolc.png">
 #
 # More information
 #
