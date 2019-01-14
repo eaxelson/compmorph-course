@@ -94,4 +94,15 @@
 #
 # ## 3. Twol rule operators
 #
-# 
+# twolc rule operators
+#
+# <img src="twolc_rule_operators.png">
+#
+# Examples of twolc operators in context
+#
+# <img src="twolc_rule_operator_examples.png">
+#
+# Resolving conflicting rules
+#
+# <img src="resolving_conflicting_rules.png">
+#
