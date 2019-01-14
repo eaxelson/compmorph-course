@@ -106,3 +106,21 @@
 #
 # <img src="resolving_conflicting_rules.png">
 #
+# ## 4. Example: consonant gradation in English
+#
+# Examples taken from From: Karttunen & Beesley (1992): Two-Level Rule Compiler. http://www.cis.upenn.edu/~cis639/docs/twolc.html.
+#
+# Consonant gradation in Finnish
+#
+# <img src="consonant_gradation_in_finnish.png"> 
+#
+# Two-level grammar for consonant gradation
+#
+# <img src="consonant_gradation_twolc.png">
+#
+# More information
+#
+# * Unpublished chapter of Beesley & Karttunen (2003): “Two-Level Rule Compiler”: http://web.stanford.edu/~laurik/.book2software/twolc.pdf
+# * Karttunen & Beesley (1992): Two-Level Rule Compiler. Technical Report. ISTL-92-2. Xerox Palo Alto Research Center, California. http://www.cis.upenn.edu/~cis639/docs/twolc.html
+# * HFST: Tutorial hfst-lexc and hfst-twolc: TODO
+#
