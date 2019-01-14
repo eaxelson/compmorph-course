@@ -30,5 +30,68 @@
 # 
 # The order of the rules matters!
 #
+# Two-level morphology is different
+#
+# <img src="img/series.png">
+#
+# * The order of the rules does not matter
+# * The rule transducers are combined by intersection rather than composition
+#
+# Compare rule declarations for xfst vs. twol:
+#
+# <img src="img/rule_declarations_compared.png">
+#
+# Some of the twol notation explained:
+#
+# <img src="img/twol_notation_explained.png">
+#
+# ## 2. Example: English adjectives
+#
+# Recall the lexicon (lexc) of some English adjectives from lecture 2:
+#
+# ```
+# Multichar_Symbols
+# +A       ! Adjective tag
+# +Pos     ! Positive
+# +Cmp     ! Comparative
+# +Sup     ! Superlative
+#
+# LEXICON Root
+# Adjectives ;
+#
+# LEXICON Adjectives
+# big     A ;
+# cool    A ;
+# crazy   A ;
+# great   A ;
+# grim    A ;
+# happy   A ;
+# hot     A ;
+# long    A ;
+# quick   A ;
+# sad     A ;
+# short   A ;
+# slow    A ;
+# small   A ;
+# warm    A ;
+#
+# LEXICON A
+# +A:^    Comparison ;
+#
+# LEXICON Comparison
+# +Pos:0  # ;
+# +Cmp:er # ;
+# +Sup:est  # ;
+#
+# END
+# ```
+#
+# Also recall the corrected script (xfst) from Lecture 2 that is shown below with an equivalent script implemented with twolc:
+#
+# <img = "src/xfst_and_twolc_scripts.png">
+#
+# Which one to use is mostly a matter of taste.
+#
+# ## 3. Twol rule operators
+#
 # 
-
