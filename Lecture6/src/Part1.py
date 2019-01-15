@@ -130,7 +130,19 @@ assert(twolc.compare(xfst))
 # Resolving conflicting rules
 #
 # <img src="img/resolving_conflicting_rules.png">
-#
+
+compile_twolc_file('conflicting_rules.twolc', 'conflicting_rules.twolc.hfst')
+twolc_rules = HfstTransducer.read_all_from_file('conflicting_rules.twolc.hfst')
+twolc = intersect(twolc_rules)
+print(twolc.lookup('rar'))
+print(twolc.lookup('lar'))
+
+# Expect the result:
+# ```
+# rar: (('rbr', 0.0),)
+# lar: (('lcr', 0.0),)
+# ```
+
 # ## 4. Example: consonant gradation in English
 #
 # Examples taken from From: Karttunen & Beesley (1992): Two-Level Rule Compiler. http://www.cis.upenn.edu/~cis639/docs/twolc.html.
