@@ -44,7 +44,7 @@
 # Some of the twol notation explained:
 #
 # <img src="img/twol_notation_explained.png">
-#
+
 # ## 2. Example: English adjectives
 #
 # Recall the lexicon (lexc) of some English adjectives from lecture 2:
@@ -90,8 +90,33 @@
 #
 # <img src="img/xfst_and_twolc_scripts.png">
 #
-# Which one to use is mostly a matter of taste.
-#
+# Which one to use is mostly a matter of taste. The xfst syntax allows lexicon to be read from file
+# and composed with the rules. In twolc, this must be done by hand(?). Compare the following:
+
+from hfst_dev import compile_xfst_file, compile_twolc_file, compile_lexc_file
+from hfst_dev import intersect, compose, HfstTransducer
+
+# The xfst script reads en_ip_adjectives_lexicon.lexc, composes it
+# with the xfst rules, and stores the result to en_adjectives.xfst.hfst.
+compile_xfst_file('en_adjectives.xfst')
+xfst = HfstTransducer.read_from_file('en_adjectives.xfst.hfst')
+print(xfst.lookup('big+A+Pos'))
+
+# Explicitely compile the lexicon.
+lexicon = compile_lexc_file('en_ip_adjectives_lexicon.lexc')
+# Compile the twolc file and store the result to en_adjectives.twolc.hfst.
+compile_twolc_file('en_adjectives.twolc', 'en_adjectives.twolc.hfst')
+# Read the rules from file,
+twolc_rules = HfstTransducer.read_all_from_file('en_adjectives.twolc.hfst')
+# intersect them (not compose!),
+twolc_rule = intersect(twolc_rules)
+# and the lexicon with them.
+twolc = compose((lexicon, twolc_rule))
+print(twolc.lookup('big+A+Pos'))
+
+# The results should be the same.
+assert(twolc.compare(xfst))
+
 # ## 3. Twol rule operators
 #
 # twolc rule operators
