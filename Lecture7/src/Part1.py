@@ -1,8 +1,11 @@
+import sys
+sys.path.insert(0, '/data/eaxelson/hfst-git/hfst-dev-4.0/hfst/python')
+
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 7
 #
 # ## 1. Flag diacritics
 #
-# Inflection of Arabic “kitaab” (= book):
+# Inflection of Arabic "kitaab" (= book):
 #
 # <img src="img/inflection_of_kitaab.png">
 #
@@ -80,7 +83,37 @@
 #
 # The long-distance dependency is encoded by flags that are stored in memory
 # as we progress through the network.
-#
+
+from hfst_dev import compile_lexc_script
+tr = compile_lexc_script("""
+Multichar_Symbols +Def +Indef +Nom +Acc +Gen
+                  @U.ART.PRESENT@ @U.ART.ABSENT@
+ 
+LEXICON Root
+        Nouns ;
+ 
+LEXICON Nouns
+al@U.ART.PRESENT@  Stems ;
+                   Stems ;
+
+LEXICON Stems
+kitaab  Case ;   ! add other stems here
+ 
+LEXICON Case
++Def+Nom:u      # ;
++Def+Acc:a      # ;
++Def+Gen:i      # ;
+@U.ART.ABSENT@IndefCase ;
+ 
+LEXICON IndefCase
++Indef+Nom:uN   # ;
++Indef+Acc:aN   # ;
++Indef+Gen:iN   # ;                                             
+""")
+print(tr.lookup('alkitaab+Def+Gen'))
+tr.invert()
+print(tr.lookup('alkitaabi'))
+
 # Lexc with “bi” article that governs the genitive case:
 #
 # ```
@@ -126,7 +159,50 @@
 # Transducer with “bi” article governing the genitive case:
 #
 # <img src="img/fst_of_kitaab_genitive.png">
-#
+
+tr = compile_lexc_script("""
+Multichar_Symbols +Def +Indef +Nom +Acc +Gen
+                  @U.ART.PRESENT@ @U.ART.ABSENT@
+                  @U.CASE.NOM@ @U.CASE.ACC@ @U.CASE.GEN@
+
+LEXICON Root
+        Preposition ;
+
+LEXICON Preposition
+bi@U.CASE.GEN@  Article ; ! optional preposition prefix
+                Article ; ! empty string entry
+
+LEXICON Article
+al@U.ART.PRESENT@ Stems ; ! opt. def. article prefix
+                  Stems ; ! empty string entry
+
+LEXICON Stems
+kitaab  Case ;            ! add other stems here
+
+LEXICON Case
++Def+Nom:u      MarkNOM ;
++Def+Acc:a      MarkACC ;
++Def+Gen:i      MarkGEN ;
+@U.ART.ABSENT@  IndefCase ;
+
+LEXICON IndefCase
++Indef+Nom:uN   MarkNOM ;
++Indef+Acc:aN   MarkACC ;
++Indef+Gen:iN   MarkGEN ;
+
+LEXICON MarkNOM
+@U.CASE.NOM@    # ;
+
+LEXICON MarkACC
+@U.CASE.ACC@    # ;
+
+LEXICON MarkGEN
+@U.CASE.GEN@    # ;
+""")
+print(tr.lookup('bikitaab+Def+Gen'))
+tr.invert()
+print(tr.lookup('bikitaabi'))
+
 # Tricky lexc syntax when upper and lower forms are different:
 #
 # <img src="img/tricky_lexc_syntax.png">
@@ -200,7 +276,19 @@
 #     - Fails
 #   - `bi@P.CASE.GEN@al@U.ART.PRESENT@kitaabi@U.CASE.GEN@`
 #     - Succeeds
-#
+
+from hfst_dev import regex
+
+failing = regex('@U.ART.PRESENT@', use_c_streams=True)
+print(failing)
+
+# note that at signs must be inside double quotes to be interpreted literally
+fails = regex('al"@U.ART.PRESENT@"kitaab"@U.ART.ABSENT@"uN"@U.CASE.NOM@"')
+print(fails.lookup('alkitaabuN'))
+
+succeeds = regex('bi"@P.CASE.GEN@"al"@U.ART.PRESENT@"kitaabi"@U.CASE.GEN@"')
+print(succeeds.lookup('bialkitaabi'))
+
 # ### More examples with the same flag-diacritic operators
 #
 # <img src="img/n_foo_blah.png">
@@ -228,11 +316,25 @@
 # ### Tagalog limited reduplication: easy with two-level morphology!
 #
 # <img src="img/tagalog_reduplication.png">
-#
+
+from hfst_dev import compile_lexc_file, compile_twolc_file, HfstTransducer, intersect, compose
+lexc = compile_lexc_file('tagalog.lexc')
+compile_twolc_file('tagalog.twolc', 'tagalog.twolc.hfst')
+twolc_rules = HfstTransducer.read_all_from_file('tagalog.twolc.hfst')
+twolc = intersect(twolc_rules)
+tagalog = compose((lexc, twolc))
+print(tagalog.lookup('RE+pili'))
+
 # ### Malay full-stem reduplication with compile-replace
 #
 # <img src="img/malay_reduplication.png">
-#
+
+from hfst_dev import compile_xfst_file
+# todo: Regexp must start from the same line as Define, else the parser fails.
+compile_xfst_file('malay.xfst')
+xfst = HfstTransducer.read_from_file('malay.xfst.hfst')
+print(xfst.lookup('buku+Noun+Plural'))
+
 # ### Arabic “morphemes”
 #
 # <img src="img/arabic_morphemes.png">
@@ -249,7 +351,15 @@
 # ### Arabic morphotactics with Twol regular expression center rules
 #
 # <img src="img/arabic_morphotactics.png">
-#
+
+lexc = compile_lexc_file('arabic.lexc')
+# todo: unresolvable conflicting rules
+compile_twolc_file('arabic.twolc', 'arabic.twolc.hfst')
+twolc_rules = HfstTransducer.read_all_from_file('arabic.twolc.hfst')
+twolc = intersect(twolc_rules)
+arabic = compose((lexc, twolc))
+print(arabic.lookup('ktb+FormI+Pass]+3P+Fem+Sg'))
+
 # ### More information
 #
 # * Chapter 7 of the Beesley & Karttunen book: “Flag Diacritics”
