@@ -122,6 +122,8 @@
 #
 # Shown as a network with probability weights:
 #
+# <img src="img/network_with_probability_weights.png">
+#
 # However, usually weights are not probabilities as such.
 #
 # ### Semirings
@@ -147,6 +149,8 @@
 #
 # Shown as a network with logprob weights in the log semiring
 #
+# <img src="img/network_with_logprob_weights.png">
+#
 # ### 3. Tropical semiring
 #
 # * The weights can still be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)
@@ -155,13 +159,22 @@
 #
 # Shown as a network with logprob weights in the tropical semiring:
 #
+# <img src="img/network_with_tropical_weights.png">
+#
 # Another example of weighted determinization in the tropical semiring:
+#
+# <img src="img/weighted_determinization_example.png">
 #
 # Weight pushing and minimization:
 #
+# <img src="img/weight_pushing_and_minimization.png">
+#
 # Mehryar Mohri did not work on morphology,but on automatic speech recognition:
 #
+# <img src="img/speech_recognition.png">
+#
 # ### Further reading
+#
 # * To learn more, you can read the full article by Mohri et al. at: http://www.cs.nyu.edu/~mohri/pub/csl01.pdf
 # * There are more similar articles, such as the version that was actually published in Computer Speech and Language in 2002.
 # * Or look at the OpenFST library: http://www.cs.columbia.edu/~mohri/
