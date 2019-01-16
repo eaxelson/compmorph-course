@@ -1,6 +1,3 @@
-import sys
-sys.path.insert(0, '/data/eaxelson/hfst-git/hfst-dev-4.0/hfst/python')
-
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 7
 #
 # ## 1. Flag diacritics
@@ -358,7 +355,7 @@ compile_twolc_file('arabic.twolc', 'arabic.twolc.hfst')
 twolc_rules = HfstTransducer.read_all_from_file('arabic.twolc.hfst')
 twolc = intersect(twolc_rules)
 arabic = compose((lexc, twolc))
-print(arabic.lookup('ktb+FormI+Pass]+3P+Fem+Sg'))
+print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))
 
 # ### More information
 #
