@@ -2,19 +2,33 @@
 #
 # ## 1. Optimizing unweighted finite-state networks
 #
-# Let’s first create a noun lexiconand add word stems to it.
+# Let’s first create a noun lexicon and add word stems to it.
+#
+# <img src="img/noun_lexicon.png">
 #
 # Then let’s create a continuation lexicon with case endings and start populating it.
 #
-# Then we tie the lexicons togetherand also add an epsilon transition from the end of the stem lexiconto its beginning in order to allow compound words
+# <img src="img/continuation_lexicon.png">
+#
+# Then we tie the lexicons together and also add an epsilon transition from the end of the stem lexicon to its beginning in order to allow compound words
+#
+# <img src="img/compound_lexicon.png"> 
 #
 # Next let’s add a lexicon for verb stems.
 #
+# <img src="img/lexicon_verb_stems.png">
+#
 # ... and a continuation lexicon for present-tense person endings (mainly)
+#
+# <img src="img/lexicon_person_endings.png">
 #
 # Let’s tie the verb stem lexicon together with the endings lexicon.
 #
+# <img src="img/lexicon_verbs_and_endings.png">
+#
 # ... and let’s tie the whole network together with a start state and end state
+#
+# <img src="img/lexicon_tied_together.png">
 #
 # The network is now ready. It has some advantages
 #
@@ -28,14 +42,22 @@
 #   * For instance, from the initial state 103, the symbol “k” could take you to state 3, 10, 16, 22, 27, or 70.
 #   * Imagine a scenario with a more realistic, larger vocabulary: using the network would be very slow, because of all the paths that have to be investigated.
 #
+# <img src="img/lexicon_epsilon_transitions.png">
+#
 # To start determinizing the network...
 #
 # * 1. We would merge the states 3, 10, 16, 22, 27, and 70 into one single, new state.
 # * 2. We would create one transition with the symbol “k” from the initial state to our new state. (Not shown in the picture on the next page.)
 #
+# <img src="img/determinizing_the_network_1.png">
+#
 # * 3. Then, from the new state, the symbol “o” takes us to the states 17, 23 or 28, so we would merge these states into one new state, too.
 #
+# <img src="img/determinizing_the_network_2.png">
+#
 # * 4. And the symbol “i” takes us to the states 4, 11, and 71, so we keep merging states and updating the transitions.
+#
+# <img src="img/determinizing_the_network_3.png">
 #
 # Furthermore, there is another disadvantage with the original network
 #
@@ -44,12 +66,18 @@
 #   * For instance, the ends of the stems “kori” and “tori” are identical, as are the ends of the stems “koulu” and “taulu”.
 #   * Determinization will not fix these issues, so we can use a separate minimization algorithm.
 #
+# <img src="img/minimizing_the_network_1.png">
+#
+# <img src="img/minimizing_the_network_2.png">
+#
 # Note: There have been some simplifications in our presentation
 #
 # * The epsilon transition back to the beginning that produces compound words is nasty:
 #   * Full determinization may actually bloat the size of the network.
 #   * Consider, for instance, if we had the stem “koulu” that can get an “a” appended for partitive (“koulua”), but in addition, “a” could be the beginning of a second stem, such as “aamiainen” (“kouluaamiainen”).
 #   * Then, we would need one node in the network that is the starting point for all stems starting in “a” as the first stem in a word and another node with all the stems starting in “a” plus the endings starting in “a”.
+#
+# <img src="img/full_determinization.png">
 #
 # * One might actually choose not to do a full determinization, but keep the epsilon transitions, for instance.
 #
