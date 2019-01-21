@@ -1,5 +1,12 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 5
 #
+# * (1.) Big picture
+# * (2.) Guessers and stemmers
+# * (3.) Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese
+# * (4.) Regular expressions in xfst
+# * (5.) Pronunciation lexicon for a Language with Irregular Orthography: English
+# * (6.) Sound Change in Indo-European languages
+#
 # ## 1. Big picture
 #
 # ### lexc
@@ -135,7 +142,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 #
 # <img src="img/porters_stemmer.png">
 
-# ## Section 3: Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese
+# ## 3. Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese
 #
 # ### Transducing between orthographic and pronounced forms of words
 #
@@ -222,7 +229,7 @@ braços
 #
 # <img src="img/alternative_for_portuguese.png">
 
-# ## Regular expressions in xfst
+# ## 4. Regular expressions in xfst
 #
 # ### Kleene (1956): Formal language theory
 #
@@ -325,7 +332,7 @@ start_xfst()
 
 start_xfst()
 
-# ## Section 5: Pronunciation lexicon for a Language with Irregular Orthography: English
+# ## 5. Pronunciation lexicon for a Language with Irregular Orthography: English
 #
 # ### Symbol set for English pronunciation
 #
@@ -356,7 +363,7 @@ start_xfst()
 #
 # <img src="img/noun_stems_and_inflections_composed.png">
 
-# ## Section 6: Sound Change in Indo-European languages
+# ## 6. Sound Change in Indo-European languages
 #
 # ### Research initiative
 #

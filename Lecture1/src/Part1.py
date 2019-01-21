@@ -1,5 +1,13 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 1
 #
+# * (1.) Prerequisites
+# * (2.) Course material
+# * (3.) Course overview
+# * (4.) Hockett's models of morphology
+# * (5.) Morphological generators and analyzers
+# * (6.) A Finite-State Transducer that implements a morphological generator
+# * (7.) Lexc code that represents this transducer
+#
 # ## HFST - Helsinki Finite-State Technology
 #
 # The HFST toolkit is intended for processing natural language
@@ -45,11 +53,10 @@ print(hfst_dev.__version__)
 #
 # | Lecture | Topics |
 # | - | - |
-# | 1 | Lexc, xfst, replace rules |
-# | 2 | Weighted finite state machines |
-# | (3) | (unsupervised morphology) |
-# | 4 | Regular expressions, pronunciation lexicons |
-# | 5 | Guessers, stemmers |
+# | 1 | Theories of morphology, generators and analyzers, lexc |
+# | 2 | Finite-state basics, xfst rules |
+# | 3 | Disambiguation, probabilities, finite-state networks summarized |
+# | 5 | Guessers, stemmers, regular expressions in xfst |
 # | 6 | Twolc, two-level rules |
 # | 7 | Flag diacritics, non-concatenative morphology |
 # | 8 | Optimization of finite-state networks |
@@ -311,7 +318,7 @@ help(hfst_dev.start_xfst)
 #
 # Note that `END` signifies the end of lexc file. It must be included at the end of each lexc file.
 #
-# Finally, let's compile the lexc script into a transducer:
+# ### 7.7. Finally, let's compile the lexc script into a transducer:
 
 from hfst_dev import compile_lexc_script
 

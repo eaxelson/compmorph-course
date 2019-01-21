@@ -1,5 +1,8 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 7
 #
+# * (1.) Flag diacritics
+# * (2.) Non-concatenative morphotactics
+#
 # ## 1. Flag diacritics
 #
 # Inflection of Arabic "kitaab" (= book):

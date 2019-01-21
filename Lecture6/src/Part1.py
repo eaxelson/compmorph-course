@@ -1,5 +1,10 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 6
 #
+# * (1.) Two-level rules
+# * (2.) Example: English adjectives
+# * (3.) Twol rule operators
+# * (4.) Example: consonant gradation in English
+#
 # ## 1. Two-level rules
 #
 # Recall the finite-state transducer for I&P English noun inflection (from lecture 1):

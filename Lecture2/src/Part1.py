@@ -1,5 +1,10 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 2
 #
+# * (1.) Finite-State Basics
+# * (2.) Set Theory for Finite-State Networks
+# * (3.) Item & Process Morphology Using xfst Rules
+# * (4.) Example: English Adjectives
+#
 # ## 1. Finite-State Basics
 #
 # Recall the finite-state transducer (FST) for purely concatenative I&A (Item and Arrangement)

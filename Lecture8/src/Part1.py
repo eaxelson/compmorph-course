@@ -1,5 +1,8 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 8
 #
+# * (1.) Optimizing unweighted finite-state networks
+# * (2.) Optimizing weighted finite-state networks
+#
 # ## 1. Optimizing unweighted finite-state networks
 #
 # Let’s first create a noun lexicon and add word stems to it.
@@ -98,7 +101,7 @@
 #   * For instance: http://www.cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html (todo: check)
 #
 
-## 2. Optimizing unweighted finite-state networks
+# ## 2. Optimizing weighted finite-state networks
 #
 # Optimizing weighted finite-state networks is basically the same as unweighted networks, but the weights may mess up things.
 # We would like the optimized weighted network to produce the same weights as the unoptimized network.
@@ -126,21 +129,21 @@
 #
 # However, usually weights are not probabilities as such.
 #
-# ### Semirings
+# ### 2.0. Semirings
 #
 # * Let’s replace the probabilities with some generic weights and replace the operators × and + with the generic semiring operators ⊗ and ⊕
 #   * `Weight(tuoksua as a noun) = Weight(Noun) ⊗ Weight(tuoksu | Noun) ⊗ Weight(Noun ending -a for partitive case)`
 #   * `Weight(tuoksua as a verb) = Weight(Verb) ⊗ Weight(tuoksu | Verb) ⊗ Weight(Verb ending -a for infinitive)`
 #   * `Weight(tuoksua as a noun or verb) = Weight(tuoksua as a noun) ⊕ Weight(tuoksua as a verb)`
 #
-# ### 1. Probability semiring
+# ### 2.1. Probability semiring
 #
 # * The weights should be interpreted as probabilties
 # * The operator ⊗ should be interpreted as multiplication ×
 # * The operator ⊕ should be interpreted as addition +
 # * This is exactly what we have seen in our example already
 #
-# ### 2. Log semiring
+# ### 2.2. Log semiring
 #
 # * The weights should be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)
 # * The operator ⊗ should be interpreted as addition +
@@ -151,7 +154,7 @@
 #
 # <img src="img/network_with_logprob_weights.png">
 #
-# ### 3. Tropical semiring
+# ### 2.3. Tropical semiring
 #
 # * The weights can still be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)
 # * The operator ⊗ should still be interpreted as addition +
@@ -173,7 +176,7 @@
 #
 # <img src="img/speech_recognition.png">
 #
-# ### Further reading
+# ### 2.4. Further reading
 #
 # * To learn more, you can read the full article by Mohri et al. at: http://www.cs.nyu.edu/~mohri/pub/csl01.pdf
 # * There are more similar articles, such as the version that was actually published in Computer Speech and Language in 2002.

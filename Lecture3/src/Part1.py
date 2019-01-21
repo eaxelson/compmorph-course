@@ -1,5 +1,12 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 3
 #
+# * (1.) Disambiguation
+# * (2.) Probabilities, basics
+# * (3.) Back to disambiguation
+# * (4.) Spelling correction
+# * (5.) Logprobs
+# * (6.) Summary of types of finite-state automata and transducers
+#
 # ## 1. Disambiguation
 #
 # Some Finnish noun examples:
