@@ -8,7 +8,59 @@
 # Let’s first create a noun lexicon and add word stems to it.
 #
 # <img src="img/noun_lexicon.png">
-#
+
+from hfst_dev import HfstIterableTransducer, EPSILON
+noun_lexicon = HfstIterableTransducer()
+add = noun_lexicon.add_transition
+
+# set start and end state numbers
+start_state = 1
+end_state = 8
+
+# Add 'kisko'
+state = 2
+add(start_state, state, EPSILON, EPSILON, 0.0)
+for symbol in list('kisko'):
+    add(state, state+1, symbol, symbol, 0.0)
+    state += 1
+# equivalent to:
+# add(2, 3, 'k', 'k', 0.0)
+# add(3, 4, 'i', 'i', 0.0)
+# add(4, 5, 's', 's', 0.0)
+# add(5, 6, 'k', 'k', 0.0)
+# add(6, 7, 'o', 'o', 0.0)
+
+add(state, end_state, EPSILON, EPSILON, 0.0)
+
+# skip end state
+assert(state == 7)
+state += 2
+
+# Test the result:
+print(noun_lexicon)
+
+# Add rest of the lexemes
+for lexeme in ('kissa','koira','kori','koulu','taulu','tori','tuoksu'):
+    add(start_state, state, EPSILON, EPSILON, 0.0)
+    for symbol in list(lexeme):
+        add(state, state+1, symbol, symbol, 0.0)
+        state += 1
+    add(state, end_state, EPSILON, EPSILON, 0.0)
+    state += 1
+
+# Does it look right:
+print(noun_lexicon)
+
+test_lexicon = HfstIterableTransducer(noun_lexicon)
+test_lexicon.add_transition(0, 1, EPSILON, EPSILON, 0.0)
+test_lexicon.set_final_weight(8, 0.0)
+
+from hfst_dev import HfstTransducer, regex
+tr = HfstTransducer(test_lexicon)
+tr.minimize()
+result = regex('{kisko}|{kissa}|{koira}|{kori}|{koulu}|{taulu}|{tori}|{tuoksu}')
+assert(result.compare(tr))
+
 # Then let’s create a continuation lexicon with case endings and start populating it.
 #
 # <img src="img/continuation_lexicon.png">
@@ -61,7 +113,9 @@
 # * 4. And the symbol “i” takes us to the states 4, 11, and 71, so we keep merging states and updating the transitions.
 #
 # <img src="img/determinizing_the_network_3.png">
-#
+
+
+
 # Furthermore, there is another disadvantage with the original network
 #
 # * The network is unnecessarily large
