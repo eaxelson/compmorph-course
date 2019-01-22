@@ -293,6 +293,8 @@ print(succeeds.lookup('bialkitaabi'))
 #
 # <img src="img/n_foo_blah.png">
 #
+# <i>Image from Beesley & Karttunen: Finite State Morphology (2003).</i>
+#
 # * `@P.FEAT.M@` `@D.FEAT.M@` will fail.
 # * `@N.FEAT.M@` `@D.FEAT.Q@` will fail.
 # * `@R.FEAT@` will succeed if `FEAT` is currently set to some other value than neutral.
@@ -338,6 +340,8 @@ print(xfst.lookup('buku+Noun+Plural'))
 # ### Arabic “morphemes”
 #
 # <img src="img/arabic_morphemes.png">
+#
+# <i>Image from Beesley & Karttunen: Finite State Morphology (2003).</i>
 #
 # ### Arabic morphotactics using merge and compile-replace
 #

@@ -27,7 +27,7 @@
 #
 # If you want a book:
 #
-# * Kenneth R. Beesley and Lauri Karttunen: [Finite State Morphology](http://press.uchicago.edu/ucp/books/book/distributed/F/bo3613750.html), CSLI Publications, 2003.
+# * Kenneth R. Beesley and Lauri Karttunen: [Finite State Morphology](http://press.uchicago.edu/ucp/books/book/distributed/F/bo3613750.html), CSLI Publications, 2003
 # * Daniel Jurafsky and James H. Martin, Speech and Language Processing, Prentice Hall, second edition, 2009
 #
 # Links:
@@ -56,6 +56,7 @@ print(hfst_dev.__version__)
 # | 1 | Theories of morphology, generators and analyzers, lexc |
 # | 2 | Finite-state basics, xfst rules |
 # | 3 | Disambiguation, probabilities, finite-state networks summarized |
+# | (4) | (Machine learning) | 
 # | 5 | Guessers, stemmers, regular expressions in xfst |
 # | 6 | Twolc, two-level rules |
 # | 7 | Flag diacritics, non-concatenative morphology |

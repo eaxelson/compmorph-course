@@ -161,11 +161,15 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 #
 # <img src="img/phonetic_symbols_for_portuguese.png">
 #
+# <i>Table from Beesley & Karttunen (2003).</i>
+#
 # ### Some example words
 #
 # * What applications that you can think of need a mapping between orthographic and pronounced forms?
 #
 # <img src="img/test_data_for_portuguese.png">
+#
+# <i>Table from Beesley & Karttunen (2003).</i>
 #
 # ### Conversion from orthography to pronunciation for Brazilian Portuguese
 #
@@ -230,6 +234,8 @@ braços
 # <img src="img/alternative_for_portuguese.png">
 
 # ## 4. Regular expressions in xfst
+#
+# <i>Figures and tables taken from Beesley & Karttunen (2003).</i>
 #
 # ### Kleene (1956): Formal language theory
 #
@@ -333,6 +339,8 @@ start_xfst()
 start_xfst()
 
 # ## 5. Pronunciation lexicon for a Language with Irregular Orthography: English
+#
+# <i>Figures taken fron Jurafsky & Martin: Speech and Language Processing, Prentice Hall, 1999.</i>
 #
 # ### Symbol set for English pronunciation
 #

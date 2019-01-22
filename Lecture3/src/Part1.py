@@ -129,6 +129,8 @@
 #
 # <img src="img/continuous_probability_distribution.png">
 #
+# <i>Image from Wikipedia.</i>
+#
 # * The variables are here real-valued ("floats") rather than discrete categories ("ints").
 # * We get a smooth curve for the probability distribution, such as this Gaussian curve, the so-called normal distribution.
 #

@@ -40,6 +40,8 @@
 #
 # ## 2. Set Theory for Finite-State Networks
 #
+# <i>Images from Beesley & Karttunen (2003): Finite State Morphology.</i>
+#
 # ### Examples of sets:
 #
 # <img src="img/two_sets.png">
@@ -81,7 +83,6 @@
 # `{"clear", "clever", "ear", "ever", "fat", "father"}`.
 
 from hfst_dev import fst, disjunct
-
 set1 = fst(('clear','clever','ear','ever'))
 set2 = fst(('fat','father'))
 union_set = disjunct((set1, set2))
@@ -98,7 +99,6 @@ print(union_set.extract_paths())
 # For instance, the intersection of sets `{"clear", "clever", "ear"}` and `{"ear", "ever"}` is `{"ear"}`.
 
 from hfst_dev import intersect
-
 set1 = fst(('clear','clever','ear'))
 set2 = fst(('ear','ever'))
 intersection_set = intersect((set1, set2))
@@ -228,6 +228,8 @@ print(CleanUp.lookup("ski^es'"))
 # ### Cascade equivalent to single FST
 #
 # <img src="img/cascade.png">
+#
+# <i>Image from Beesley & Karttunen (2003): Finite State Morphology.</i>
 
 from hfst_dev import compile_lexc_file
 lexicon = compile_lexc_file('en_ia_morphology.lexc')
@@ -271,6 +273,8 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 #
 # <img src="img/xfst_notation_explained_5.png">
 #
+# <i>Images from Beesley & Karttunen (2003): Finite State Morphology.</i>
+
 # ## 4. Example: English adjectives
 #
 # ### Lexicon (lexc) of some English adjectives

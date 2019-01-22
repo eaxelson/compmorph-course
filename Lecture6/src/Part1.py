@@ -21,6 +21,8 @@
 # and  produce one single FST that “jumps” from the lexical-form input straight to
 # the final output in one go, without producing the intermediate steps.
 #
+# # <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
+#
 # <img src="img/cascade.png">
 #
 # ```
@@ -124,15 +126,17 @@ assert(twolc.compare(xfst))
 
 # ## 3. Twol rule operators
 #
-# twolc rule operators
+# # <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
+#
+# ### twolc rule operators
 #
 # <img src="img/twolc_rule_operators.png">
 #
-# Examples of twolc operators in context
+# ### Examples of twolc operators in context
 #
 # <img src="img/twolc_rule_operator_examples.png">
 #
-# Resolving conflicting rules
+# ### Resolving conflicting rules
 #
 # <img src="img/resolving_conflicting_rules.png">
 
@@ -150,7 +154,7 @@ print(twolc.lookup('lar'))
 
 # ## 4. Example: consonant gradation in English
 #
-# Examples taken from From: Karttunen & Beesley (1992): Two-Level Rule Compiler. http://www.cis.upenn.edu/~cis639/docs/twolc.html.
+# <i>Examples taken from from: Karttunen & Beesley's "Two-Level Rule Compiler".</i>
 #
 # Consonant gradation in Finnish
 #
