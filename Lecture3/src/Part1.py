@@ -9,7 +9,7 @@
 #
 # ## 1. Disambiguation
 #
-# Some Finnish noun examples:
+# ### 1.1. Some Finnish noun examples:
 #
 # * nainen
 # * lautasilla
@@ -17,7 +17,7 @@
 # * poikasilla
 # * poikasilta
 #
-# The Finnish noun examples with analyses:
+# ### 1.2. The Finnish noun examples with analyses:
 #
 # * nainen 🡒 nainen +N +Sg +Nom (“woman”)
 # * lautasilla 🡒 lautanen +N +Pl +Ade (“on plates”)
@@ -25,7 +25,7 @@
 # * poikasilla 🡒 poikanen +N +Pl +Ade (“with cubs”)
 # * poikasilta 🡒 poikanen +N +Pl +Abl (“from cubs”)
 #
-# The Finnish noun examples with more analyses:
+# ### 1.3. The Finnish noun examples with more analyses:
 #
 # * nainen 🡒 naida +V +Pot +Pres +Sg1 (“it seems I’ll marry”)
 # * lautasilla 🡒 lauta#silla +N +Sg +Ade (“board rayon”)
@@ -37,14 +37,14 @@
 #   - 🡒 poika#silta +N +Sg +Nom (“boy bridge”)
 #   - 🡒 poikas#ilta +N +Sg +Nom (“cub evening”)
 #
-# How disambiguate?
+# ### 1.4. How disambiguate?
 #
 # * We could disambiguate (= find one unambiguous analysis) by looking at the word in context.
-# * However, if we don’t have any context, we may still have a sense of which analyses are more likely _a priori_.
+# * However, if we don’t have any context, we may still have a sense of which analyses are more likely <i>a priori</i>.
 # * A priori = in general, without further information.
-# * _A posteriori_, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.
+# * <i>A posteriori</i>, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.
 #
-# A priori assumptions:
+# #### A priori assumptions:
 #
 # * "Nainen +N" is more common than "naida +V".
 # * Singular (+Sg) is more common than Plural (+Pl).
@@ -52,20 +52,20 @@
 # * Adessive (+Ade) is slightly more common than Ablative case (+Abl).
 # * Single-stem words are more common than compound words.
 #
-# Model with probabilities
+# #### Model with probabilities
 #
 # <img src="img/model_with_probabilities.png">
-#
+
 # ## 2. Probabilities, basics
 #
-# What is probability?
+# ### 2.1. What is probability?
 #
 # * Probability is the measure of the likelihood that an event will occur.
 # * Probability is quantified as a number between 0 and 1
 #   * 0 indicates impossibility
 #   * 1 indicates certainty
 #
-# Objective probability
+# ### 2.2. Objective probability
 #
 # * The most popular version of objective probability is frequentist probability.
 # * Claims that the probability denotes the relative frequency of occurrence of an experiment's outcome.
@@ -75,7 +75,7 @@
 #   * throwing a dice (1, 2, 3, 4, 5, 6)
 #   * throwing a coin ("heads or tails")
 #
-# Discrete probability distribution of outcome from throwing an unbiased six-sided die
+# #### Discrete probability distribution of outcome from throwing an unbiased six-sided die
 #
 # <img src="img/one_six_sided_die.png">
 #
@@ -101,7 +101,7 @@
 # 1
 # ```
 #
-# Discrete probability distribution of outcome from throwing two unbiased six-sided dice
+# #### Discrete probability distribution of outcome from throwing two unbiased six-sided dice
 #
 # <img src="img/two_six_sided_dice.png">
 #
@@ -125,7 +125,7 @@
 # 1/18
 # ```
 #
-# For comparison: A continuous probability distribution
+# #### For comparison: A continuous probability distribution
 #
 # <img src="img/continuous_probability_distribution.png">
 #
@@ -134,7 +134,7 @@
 # * The variables are here real-valued ("floats") rather than discrete categories ("ints").
 # * We get a smooth curve for the probability distribution, such as this Gaussian curve, the so-called normal distribution.
 #
-# Subjective probability
+# ### 2.3. Subjective probability
 #
 # * The most popular version of subjective probability is Bayesian probability.
 # * Rather than relative frequency in a series of experiments, subjectivists think of probabilities as degrees of belief.
@@ -145,7 +145,7 @@
 #   * Will it snow in Helsinki tomorrow?
 #   * Given specific symptoms, does a patient have cancer?
 #
-# Prior and posterior probabilities
+# #### Prior and posterior probabilities
 #
 # * In Bayesian statistics, there are prior probabilities and posterior probabilities
 #   * also called a priori and a posteriori probabilities
@@ -153,7 +153,7 @@
 #   * P("It snows in Helsinki in January")
 # * The posterior probability is a product of two probabilities: the prior probability and a conditional probability, such as:
 #   * P("It snows in Helsinki on 23 Jan 2018" | "It snows in Helsinki in January") * P("It snows in Helsinki in January")
-#
+
 # ## 3. Back to disambiguation
 #
 # The "poikasilla" ambiguity: 1) poikanen +N +Pl +Ade
@@ -218,16 +218,16 @@
 # +Ade:ll^A           # "weight: 0.05" ;
 # ...
 # ```
-#
+
 # ## 4. Spelling correction
 #
-# ### Virtual keyboard of a mobile device
+# ### 4.1. Virtual keyboard of a mobile device
 #
 # The D key was "pressed" (that is, touched).
 #
 # <img src="img/d_pressed.png">
 #
-# ### Noisy virtual keyboard of a mobile device
+# ### 4.2. Noisy virtual keyboard of a mobile device
 #
 # The D key was "pressed" (that is, touched), but the intended key was actually F!
 #
@@ -262,7 +262,7 @@
 # ... etc
 # ```
 #
-# xfst script snippet for a spell checker
+# #### xfst script snippet for a spell checker
 #
 # ```
 # ! Use the .l operator to project only lower level (= surface forms) of the
@@ -287,10 +287,10 @@
 # ```
 #
 # Again, the syntax is correct, but there is something left to fix with the weights...
-#
+
 # ## 5. Logprobs
 #
-# Back to the probabilities
+# ### 5.1. Back to the probabilities
 #
 # We had the probability:
 #
@@ -331,7 +331,7 @@
 #   * That is, there is no penalty if there is only one certain outcome.
 #   * This makes sense.
 #
-# ### Weights in HFST
+# ### 5.2. Weights in HFST
 #
 # * HFST does not really support probabilities as such.
 # * HFST supports additive weights, such as logprobs.
@@ -350,7 +350,7 @@
 # [ f (->) g::1.000 ] .o. [ f (->) r::1.602 ]
 # ```
 #
-# ### Lexc with weights revisited
+# ### 5.3. Lexc with weights revisited
 #
 # <img src="img/lexc_with_weights_revisited.png">
 
@@ -393,7 +393,7 @@ print(tr.lookup('poika^S^Ill^A'))
 print(tr.lookup('poika^Sil^Ta'))
 print(tr.lookup('po^J^Kasil^Ta'))
 
-# ### Revisited xfst script for a spell checker
+# ### 5.4. Revisited xfst script for a spell checker
 #
 # <img src="img/xfst_with_weights_revisited.png">
 
@@ -434,7 +434,7 @@ apply up for
 
 # ## 6. Summary of types of finite-state automata and transducers
 #
-# ### Finite-state automaton (FSA)
+# ### 6.1. Finite-state automaton (FSA)
 #
 # A finite-state automaton (FSA) - or finite automaton - is a network consisting of nodes,
 # which represent states, and directed arcs connecting the states,
@@ -444,12 +444,13 @@ apply up for
 # these transitions are called epsilon transitions.
 #
 # <img src="img/fsa.png">
-
+#
 # TODO: use graphviz package
-
+#
 # HfstIterableTransducer is a special class for generating transducers
 # from scratch or iterating them state by state and transition by transition.
 # It does not support most of the ordinary transducer functions.
+
 from hfst_dev import HfstIterableTransducer, EPSILON
 
 tr = HfstIterableTransducer()
@@ -466,7 +467,7 @@ tr.set_final_weight(4, 0)
 # Print the transducer in AT&T format:
 print(tr)
 
-# ### Weighted finite-state automaton (WFSA)
+# ### 6.2. Weighted finite-state automaton (WFSA)
 #
 # A weighted finite-state automaton (WFSA) is an FSA with weights on the arcs.
 # Weights make it possible to find the best way “through" an automaton for the given input;
@@ -493,7 +494,7 @@ print(tr)
 # Then, you translate those probabilities into weights for your finite state machine.
 # Then, when you’re deciding between "to" and "two," you pick the sentence with lower weight ("to").
 #
-# ### Finite-state transducer (FST)
+# ### 6.3. Finite-state transducer (FST)
 #
 # A finite-state transducer (FST) is a finite automaton for which
 # each transition has an input label and an output label.
@@ -512,7 +513,7 @@ tr.add_transition(2, 3, 'a', 'a', 0)
 tr.set_final_weight(3, 0)
 print(tr)
 
-# ### Weighted finite-state transducer (WFST)
+# ### 6.4. Weighted finite-state transducer (WFST)
 #
 # A weighted finite-state transducer (WFST) is a finite automaton for which
 # each transition has an input label, an output label, and a weight.

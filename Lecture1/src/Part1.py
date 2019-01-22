@@ -64,7 +64,7 @@ print(hfst_dev.__version__)
 
 # ## 4. Hockett's models of morphology
 #
-# ### Word and Paradigm (W&P), Example: Finnish nouns
+# ### 4.1. Word and Paradigm (W&P), Example: Finnish nouns
 #
 # | Numbers/Cases | Singular | Plural |
 # | - | - | - |
@@ -83,7 +83,7 @@ print(hfst_dev.__version__)
 # | *Abessive* | sudetta | susitta |
 # | *Comitative* | - | susine(en) |
 #
-# ### Item and Arrangement (I&A)
+# ### 4.2. Item and Arrangement (I&A)
 #
 # * Morphemes and allomorphs
 #   - "SUSI": susi, sude-, sute-, sut-, sus-
@@ -98,7 +98,7 @@ print(hfst_dev.__version__)
 #   - E.g., sus- in all plural forms except nominative
 #   - No allomorph is more "basic" than any other.
 #
-# ### Item and Process (I&P)
+# ### 4.3. Item and Process (I&P)
 #
 # We have roots or bases of morphemes and different processes apply to them.
 #
@@ -106,7 +106,7 @@ print(hfst_dev.__version__)
 #   - Genitive: add suffix '+n'; soften 't' to 'd' in closed syllable 🡒 "suden"
 #   - Etc.
 #
-# ### Corresponding HFST tools
+# ### 4.4. Corresponding HFST tools
 #
 # | Model/Tool | [twolc](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_twolc_file-inputfilename-outputfilename-kwargs) | [lexc](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_lexc_file-filename-kwargs) | [xfst](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_xfst_file-filename-kwargs) |
 # | - | - | - | - |
@@ -132,7 +132,7 @@ help(hfst_dev.start_xfst)
 
 # ## 5. Morphological generators and analyzers
 #
-# ### Morphological generator
+# ### 5.1. Morphological generator
 #
 # * Input (also called lexical form): `cat+N+Sg+Poss`
 # * Output (also called surface form): `cat's`
@@ -145,7 +145,7 @@ help(hfst_dev.start_xfst)
 #   - Right way: Model the inner regular morphological structure of words.
 #     * This makes it possible to add a new lemma, such as `dog`, and the model knows how to inflect this word by analogy to the word `cat`.
 #
-# ### Morphological analyzer
+# ### 5.2. Morphological analyzer
 #
 # * Input (surface form): `cat's`
 # * Output (lexical form): `cat+N+Sg+Poss`
@@ -156,7 +156,7 @@ help(hfst_dev.start_xfst)
 #   - when we want to parse natural language text syntactically
 #   - when we want to _normalize_ text, such that we only care about the base form (lemma) of every word in the text; this is used, for instance, in _information_ _retrieval_.
 #
-# ### Some simple noun paradigms in English
+# ### 5.3. Some simple noun paradigms in English
 #
 # Paradigm: N  
 # __cat__ +Sg (singular)  
@@ -319,7 +319,9 @@ help(hfst_dev.start_xfst)
 #
 # Note that `END` signifies the end of lexc file. It must be included at the end of each lexc file.
 #
-# ### 7.7. Finally, let's compile the lexc script into a transducer:
+# ### 7.7. Compiling the lexc script into a transducer
+#
+# Finally, let's compile the lexc script into a transducer:
 
 from hfst_dev import compile_lexc_script
 

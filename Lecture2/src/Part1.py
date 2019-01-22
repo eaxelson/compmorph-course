@@ -7,6 +7,8 @@
 #
 # ## 1. Finite-State Basics
 #
+# ### 1.1. Finite-State networks
+#
 # Recall the finite-state transducer (FST) for purely concatenative I&A (Item and Arrangement)
 # English noun inflection from Lecture 1:
 #
@@ -28,7 +30,7 @@
 # * The sequences of symbols that the automaton will accept are _words_ like: `canto, mesa`.
 # * The entire set of words that the automaton accepts or recognizes is its _language_: `{ canto, mesa, tigre }`.
 #
-# ### Sharing structure in minimal networks:
+# ### 1.2. Sharing structure in minimal networks:
 #
 # <img src="img/fat_father.png">
 #
@@ -42,25 +44,25 @@
 #
 # <i>Images from Beesley & Karttunen (2003): Finite State Morphology.</i>
 #
-# ### Examples of sets:
+# ### 2.1. Examples of sets:
 #
 # <img src="img/two_sets.png">
 #
 # <img src="img/empty_set.png">
 #
-# ### Some sets viewed as networks:
+# ### 2.2. Some sets viewed as networks:
 #
 # <img src="img/empty_network.png">
 #
 # <img src="img/empty_string_network.png">
 #
-# ### Some infinite sets:
+# ### 2.3. Some infinite sets:
 #
 # <img src="img/zero_or_more_a.png">
 #
 # <img src="img/universal_language.png">
 #
-# ### Relations:
+# ### 2.4. Relations:
 #
 # <img src="img/lowercase2uppercase.png">
 #
@@ -75,7 +77,7 @@
 #
 # ```
 #
-# ### Union of sets
+# ### 2.5. Union of sets
 #
 # <img src="img/union_of_sets.png">
 #
@@ -92,7 +94,7 @@ print(union_set.extract_paths())
 #
 # <img src="img/union_of_sets_as_network.png">
 #
-# ### Intersection of sets
+# ### 2.6. Intersection of sets
 #
 # <img src="img/intersection_of_sets.png">
 #
@@ -104,7 +106,7 @@ set2 = fst(('ear','ever'))
 intersection_set = intersect((set1, set2))
 print(intersection_set.extract_paths())
 
-# ### Subtraction of one set from another
+# ### 2.7. Subtraction of one set from another
 #
 # <img src="img/subtraction_of_sets.png">
 #
@@ -116,7 +118,7 @@ set2 = fst(('clever','ear'))
 subtraction_set = subtract((set1, set2))
 print(subtraction_set.extract_paths())
 
-# ### Concatenation of sets
+# ### 2.8. Concatenation of sets
 #
 # <img src="img/concatenation_of_sets.png">
 #
@@ -128,7 +130,7 @@ set2 = fst(('s','ing','ed'))
 concatenation_set = concatenate((set1, set2))
 print(concatenation_set.extract_paths())
 
-# ### Composition of transducers
+# ### 2.9. Composition of transducers
 #
 # <img src="img/composition.png">
 #
@@ -140,7 +142,7 @@ set2 = fst({'chat':'Katze'})
 composition_set = compose((set1, set2))
 print(composition_set.extract_paths()) # TODO: @_EPSILON_SYMBOL_@ is printed
 
-# ### Projection
+# ### 2.10. Projection
 #
 # * Projection is extracting one side of a relation.
 # * The upper/input projection of `<"cat", "CHAT">` is "cat".
@@ -159,7 +161,7 @@ CHAT.minimize() # get rid of epsilons
 print(CHAT.extract_paths())
 
 
-# ### Set operations expressed in the xfst language
+# ### 2.11. Set operations expressed in the xfst language
 #
 # ```
 # [ A | B ] denotes the union of the two languages or relations A and B ("or"-operation).
@@ -170,7 +172,7 @@ print(CHAT.extract_paths())
 # A.u denotes the upper (i.e. input) projection.
 # A.l denotes the lower (o.e. output) projection.
 # ```
-#
+
 # ## 3. Item & Process morphology using xfst rules
 #
 # Recall the finite-state transducer for purely concatenative I&A English
@@ -182,7 +184,7 @@ print(CHAT.extract_paths())
 #
 # <img src="img/noun_inflection_compact.png">
 #
-# ### Cascade of transducers: Rule 1
+# ### 3.1. Cascade of transducers: Rule 1
 #
 # Insert 'e' after the end of the stem in front of 's', if the stem ends in
 # 's', 'x', 'ch', 'sh' or 'y'.
@@ -198,7 +200,7 @@ from hfst_dev import regex, HfstTransducer
 InsertE = regex("[. .] -> e || [ s | x | c h | s h | y ] %^ _ s")
 print(InsertE.lookup("sky^s'"))
 
-# ### Cascade of transducers: Rule 2
+# ### 3.2. Cascade of transducers: Rule 2
 #
 # Rewrite 'y' as 'i' when followed by the end of the stem, which is
 # further followed by 'e'.
@@ -212,7 +214,7 @@ print(InsertE.lookup("sky^s'"))
 YToI = regex("y -> i || _ %^ e")
 print(YToI.lookup("sky^es'"))
 
-# ### Cascade of transducers: Rule 3
+# ### 3.3. Cascade of transducers: Rule 3
 #
 # Remove the end of stem marker
 #
@@ -225,7 +227,7 @@ print(CleanUp.lookup("ski^es'"))
 
 # <img src="img/CleanUp.png">
 #
-# ### Cascade equivalent to single FST
+# ### 3.4. Cascade equivalent to single FST
 #
 # <img src="img/cascade.png">
 #
@@ -253,7 +255,7 @@ cascade = compose((lexicon, InsertE, YToI, CleanUp))
 
 print(cascade.lookup("sky+N+Pl+Poss"))
 
-# ### The order of the rules matters!
+# ### 3.5. The order of the rules matters!
 #
 # What would happen if we reordered the rules (below) used in our simple
 # English noun morphology?
@@ -261,7 +263,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 cascade = compose((lexicon,YToI, InsertE, CleanUp))
 print(cascade.lookup("sky+N+Pl+Poss"))
 
-# ### xfst notation explained in context
+# ### 3.6. xfst notation explained in context
 #
 # <img src="img/xfst_notation_explained_1.png">
 #
@@ -277,7 +279,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 
 # ## 4. Example: English adjectives
 #
-# ### Lexicon (lexc) of some English adjectives
+# ### 4.1. Lexicon (lexc) of some English adjectives
 #
 # The file `en_ip_adjectives_lexicon.lexc`
 #
@@ -318,7 +320,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 # END 
 # ```
 #
-# ### Suggested xfst script for English adjectives
+# ### 4.2. Suggested xfst script for English adjectives
 #
 
 from hfst_dev import compile_xfst_script
@@ -361,7 +363,7 @@ lower-words
 # warm        warmer      warmest
 # ```
 #
-# ### Corrected xfst script for English adjectives
+# ### 4.3. Corrected xfst script for English adjectives
 #
 
 adj_lexicon = compile_xfst_script("""
@@ -412,8 +414,7 @@ lower-words
 # warm       warmer      warmest
 # ```
 #
-# More information
+# ## More information
 #
 # * Chapter 1 of the Beesley & Karttunen book: "A Gentle Introduction"
 # * Chapter 3 of the Beesley & Karttunen book: "The xfst Interface"
-#
