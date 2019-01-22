@@ -12,34 +12,32 @@
 # <img src="img/noun_lexicon.png">
 
 from hfst_dev import HfstIterableTransducer, EPSILON
-noun_lexicon = HfstIterableTransducer()
-add = noun_lexicon.add_transition
-
-# set start and end state numbers
+# This will be the entire lexicon
+lexicon = HfstIterableTransducer()
+add = lexicon.add_transition # shorter notation for adding transition
+# define sublexicon start and end states
 start_state = 1
 end_state = 8
-
-# Add 'kisko'
+# and use consecutive numbering for states that will be added
+# (remember to skip end state)
 state = 2
-add(start_state, state, EPSILON, EPSILON, 0.0)
+
+# we could add lexemes manually, e.g.
+#   add(2, 3, 'k', 'k', 0.0)
+#   add(3, 4, 'i', 'i', 0.0)
+#   add(4, 5, 's', 's', 0.0)
+#   add(5, 6, 'k', 'k', 0.0)
+#   add(6, 7, 'o', 'o', 0.0)
+# but it is easier this way:
+add(start_state, state, EPSILON, EPSILON, 0.0) # from start state to beginning of lexeme
 for symbol in list('kisko'):
     add(state, state+1, symbol, symbol, 0.0)
     state += 1
-# equivalent to:
-# add(2, 3, 'k', 'k', 0.0)
-# add(3, 4, 'i', 'i', 0.0)
-# add(4, 5, 's', 's', 0.0)
-# add(5, 6, 'k', 'k', 0.0)
-# add(6, 7, 'o', 'o', 0.0)
-
-add(state, end_state, EPSILON, EPSILON, 0.0)
+add(state, end_state, EPSILON, EPSILON, 0.0) # from end of lexeme to end state
 
 # skip end state
 assert(state == 7)
 state += 2
-
-# Test the result:
-print(noun_lexicon)
 
 # Add rest of the lexemes
 for lexeme in ('kissa','koira','kori','koulu','taulu','tori','tuoksu'):
@@ -50,10 +48,8 @@ for lexeme in ('kissa','koira','kori','koulu','taulu','tori','tuoksu'):
     add(state, end_state, EPSILON, EPSILON, 0.0)
     state += 1
 
-# Does it look right:
-print(noun_lexicon)
-
-test_lexicon = HfstIterableTransducer(noun_lexicon)
+# test that the result is as intended
+test_lexicon = HfstIterableTransducer(lexicon)
 test_lexicon.add_transition(0, 1, EPSILON, EPSILON, 0.0)
 test_lexicon.set_final_weight(8, 0.0)
 
@@ -66,27 +62,118 @@ assert(result.compare(tr))
 # Then let’s create a continuation lexicon with case endings and start populating it.
 #
 # <img src="img/continuation_lexicon.png">
-#
+
+assert(state == 50)
+state += 1
+start_state = 50
+end_state = 53
+
+# Add case endings
+for ending in ('a','lla','lle','lta','n'):
+    # skip end state
+    if state == end_state:
+        state += 1
+    add(start_state, state, EPSILON, EPSILON, 0.0)
+    for symbol in list(ending):
+        add(state, state+1, symbol, symbol, 0.0)
+        state += 1
+    add(state, end_state, EPSILON, EPSILON, 0.0)
+    state += 1
+# make case ending optional
+add(50, 53, EPSILON, EPSILON, 0.0)
+
+assert(state == 68)
+
 # Then we tie the lexicons together and also add an epsilon transition from the end of the stem lexicon to its beginning in order to allow compound words
 #
 # <img src="img/compound_lexicon.png"> 
-#
+
+add(8, 50, EPSILON, EPSILON, 0.0)
+add(8, 1, EPSILON, EPSILON, 0.0)
+
+# test that the result is as intended
+test_lexicon = HfstIterableTransducer(lexicon)
+test_lexicon.add_transition(0, 1, EPSILON, EPSILON, 0.0)
+test_lexicon.set_final_weight(53, 0.0)
+
+tr = HfstTransducer(test_lexicon)
+tr.minimize()
+result = regex('[{kisko}|{kissa}|{koira}|{kori}|{koulu}|{taulu}|{tori}|{tuoksu}]+ ({a}|{lla}|{lle}|{lta}|{n})')
+assert(result.compare(tr))
+
 # Next let’s add a lexicon for verb stems.
 #
 # <img src="img/lexicon_verb_stems.png">
-#
+
+assert(state == 68)
+start_state = 68
+end_state = 75
+state += 1
+
+# Add verb stem endings
+for stem in ('kisko','tuoksu'):
+    # skip end state
+    if state == end_state:
+        state += 1
+    add(start_state, state, EPSILON, EPSILON, 0.0)
+    for symbol in list(stem):
+        add(state, state+1, symbol, symbol, 0.0)
+        state += 1
+    add(state, end_state, EPSILON, EPSILON, 0.0)
+    state += 1
+
 # ... and a continuation lexicon for present-tense person endings (mainly)
 #
 # <img src="img/lexicon_person_endings.png">
-#
+
+assert(state == 83)
+start_state = 83
+end_state = 86
+state +=1
+
+# Add person endings
+for ending in ('a','mme','n','t','tte','vat'):
+    # skip end state
+    if state == end_state:
+        state += 1
+    add(start_state, state, EPSILON, EPSILON, 0.0)
+    for symbol in list(ending):
+        add(state, state+1, symbol, symbol, 0.0)
+        state += 1
+    add(state, end_state, EPSILON, EPSILON, 0.0)
+    state += 1
+
+# make person ending optional
+add(83, 86, EPSILON, EPSILON, 0.0)
+
+assert(state == 103)
+
 # Let’s tie the verb stem lexicon together with the endings lexicon.
 #
 # <img src="img/lexicon_verbs_and_endings.png">
-#
+
+add(75, 83, EPSILON, EPSILON, 0.0)
+
 # ... and let’s tie the whole network together with a start state and end state
 #
 # <img src="img/lexicon_tied_together.png">
-#
+
+add(0, 1, EPSILON, EPSILON, 0.0)
+add(0, 68, EPSILON, EPSILON, 0.0)
+add(53, 103, EPSILON, EPSILON, 0.0)
+add(86, 103, EPSILON, EPSILON, 0.0)
+lexicon.set_final_weight(103, 0.0)
+
+# test that the result is as intended
+tr = HfstTransducer(lexicon)
+tr.minimize()
+result = regex("""
+[ [{kisko}|{kissa}|{koira}|{kori}|{koulu}|{taulu}|{tori}|{tuoksu}]+ ({a}|{lla}|{lle}|{lta}|{n}) ]
+| 
+[ [{kisko}|{tuoksu}] ({a}|{mme}|{n}|{t}|{tte}|{vat}) ]
+""")
+assert(result.compare(tr))
+
 # ### 1.2. The resulting network
 #
 # The network is now ready. It has some advantages
@@ -98,7 +185,7 @@ assert(result.compare(tr))
 #
 # * The automaton is non-deterministic and contains epsilon transitions
 #   * This means that from a specific state, some symbol s can take you to more than one another state.
-#   * For instance, from the initial state 103, the symbol “k” could take you to state 3, 10, 16, 22, 27, or 70.
+#   * For instance, from the initial state 0, the symbol “k” could take you to state 3, 10, 16, 22, 27, or 70.
 #   * Imagine a scenario with a more realistic, larger vocabulary: using the network would be very slow, because of all the paths that have to be investigated.
 #
 # <img src="img/lexicon_epsilon_transitions.png">
@@ -119,7 +206,10 @@ assert(result.compare(tr))
 # * 4. And the symbol “i” takes us to the states 4, 11, and 71, so we keep merging states and updating the transitions.
 #
 # <img src="img/determinizing_the_network_3.png">
-#
+
+tr = HfstTransducer(lexicon)
+tr.determinize()
+
 # ### 1.4. Minimization of the network
 #
 # Furthermore, there is another disadvantage with the original network
@@ -132,7 +222,10 @@ assert(result.compare(tr))
 # <img src="img/minimizing_the_network_1.png">
 #
 # <img src="img/minimizing_the_network_2.png">
-#
+
+tr = HfstTransducer(lexicon)
+tr.minimize()
+
 # ### 1.5. Further issues
 #
 # * The epsilon transition back to the beginning that produces compound words is nasty:
@@ -224,15 +317,17 @@ assert(result.compare(tr))
 #
 # <img src="img/network_with_tropical_weights.png">
 #
-# Another example of weighted determinization in the tropical semiring:
+# #### Another example of weighted determinization in the tropical semiring
 #
 # <img src="img/weighted_determinization_example.png">
 #
-# Weight pushing and minimization:
+# Weights must be pushed before minimization can take place:
 #
 # <img src="img/weight_pushing_and_minimization.png">
 #
-# Mehryar Mohri did not work on morphology,but on automatic speech recognition:
+# #### Other uses
+#
+# Mehryar Mohri did not work on morphology, but on automatic speech recognition:
 #
 # <img src="img/speech_recognition.png">
 #
