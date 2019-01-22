@@ -7,6 +7,8 @@
 #
 # ## 1. Two-level rules
 #
+# ### 1.1. Xfst rules revisited
+#
 # Recall the finite-state transducer for I&P English noun inflection (from lecture 1):
 #
 # <img src="img/noun_inflection.png">
@@ -21,7 +23,7 @@
 # and  produce one single FST that “jumps” from the lexical-form input straight to
 # the final output in one go, without producing the intermediate steps.
 #
-# # <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
+# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
 #
 # <img src="img/cascade.png">
 #
@@ -36,6 +38,8 @@
 # The single FST will give directly: sky+N+Pl+Poss 🡒 skies.
 # 
 # The order of the rules matters!
+#
+# ### 1.2. Two-level approach
 #
 # Two-level morphology is different
 #
@@ -53,6 +57,8 @@
 # <img src="img/twol_notation_explained.png">
 
 # ## 2. Example: English adjectives
+#
+# ### 2.1. The lexicon
 #
 # Recall the lexicon (lexc) of some English adjectives from lecture 2:
 #
@@ -93,6 +99,8 @@
 # END
 # ```
 #
+# ### 1.2. xfst vs. twolc
+#
 # Also recall the corrected script (xfst) from Lecture 2 that is shown below with an equivalent script implemented with twolc:
 #
 # <img src="img/xfst_and_twolc_scripts.png">
@@ -126,17 +134,17 @@ assert(twolc.compare(xfst))
 
 # ## 3. Twol rule operators
 #
-# # <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
+# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
 #
-# ### twolc rule operators
+# ### 3.1. twolc rule operators
 #
 # <img src="img/twolc_rule_operators.png">
 #
-# ### Examples of twolc operators in context
+# ### 3.2. Examples of twolc operators in context
 #
 # <img src="img/twolc_rule_operator_examples.png">
 #
-# ### Resolving conflicting rules
+# ### 3.3. Resolving conflicting rules
 #
 # <img src="img/resolving_conflicting_rules.png">
 
@@ -152,19 +160,19 @@ print(twolc.lookup('lar'))
 # lar: (('lcr', 0.0),)
 # ```
 
-# ## 4. Example: consonant gradation in English
+# ## 4. Example: consonant gradation in Finnish
 #
 # <i>Examples taken from from: Karttunen & Beesley's "Two-Level Rule Compiler".</i>
 #
-# Consonant gradation in Finnish
+# ### 4.1. Consonant gradation in Finnish
 #
 # <img src="img/consonant_gradation_in_finnish.png"> 
 #
-# Two-level grammar for consonant gradation
+# ### 4.2. Two-level grammar for consonant gradation
 #
 # <img src="img/consonant_gradation_twolc.png">
 #
-# More information
+# ## More information
 #
 # * Unpublished chapter of Beesley & Karttunen (2003): “Two-Level Rule Compiler”: http://web.stanford.edu/~laurik/.book2software/twolc.pdf
 # * Karttunen & Beesley (1992): Two-Level Rule Compiler. Technical Report. ISTL-92-2. Xerox Palo Alto Research Center, California. http://www.cis.upenn.edu/~cis639/docs/twolc.html

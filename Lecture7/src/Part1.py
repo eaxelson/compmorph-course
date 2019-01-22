@@ -5,6 +5,8 @@
 #
 # ## 1. Flag diacritics
 #
+# ### 1.1. The approach without flag diacritics
+#
 # Inflection of Arabic "kitaab" (= book):
 #
 # <img src="img/inflection_of_kitaab.png">
@@ -48,6 +50,8 @@
 # <img src="img/fst_of_kitaab.png">
 #
 # The long-distance dependency is encoded by the path taken for the stems.
+#
+# ### 1.2. Using flag diacritics
 #
 # Lexc file for “kitaab” using flag diacritics for the definite form:
 #
@@ -114,6 +118,8 @@ print(tr.lookup('alkitaab+Def+Gen'))
 tr.invert()
 print(tr.lookup('alkitaabi'))
 
+# #### Adding the genitive case
+#
 # Lexc with “bi” article that governs the genitive case:
 #
 # ```
@@ -203,11 +209,11 @@ print(tr.lookup('bikitaab+Def+Gen'))
 tr.invert()
 print(tr.lookup('bikitaabi'))
 
-# Tricky lexc syntax when upper and lower forms are different:
+# #### Tricky lexc syntax when upper and lower forms are different:
 #
 # <img src="img/tricky_lexc_syntax.png">
 
-# ### Full range of flag-diacritic operators
+# ### 1.3. Full range of flag-diacritic operators
 #
 # * General format:
 #   - `@operator.feature.value@`
@@ -217,7 +223,7 @@ print(tr.lookup('bikitaabi'))
 #
 # <img src="img/flag_diacritic_operators.png">
 #
-# ### P flag: positive (re)setting
+# #### P flag: positive (re)setting
 #
 # * Example:
 #   - `@P.CASE.GEN@`
@@ -225,7 +231,7 @@ print(tr.lookup('bikitaabi'))
 #   - It does not matter what `CASE` was before, or if it was set at all
 #   - Never fails
 #
-# ### N flag: negative (re)setting
+# #### N flag: negative (re)setting
 #
 # * Example: `@N.CASE.GEN@`
 #   - Set the value of `CASE` to something else than `GEN`
@@ -233,7 +239,7 @@ print(tr.lookup('bikitaabi'))
 #   - It does not matter what `CASE` was before, or if it was set at all
 #   - Never fails
 #
-# ### C flag: clear feature
+# #### C flag: clear feature
 #
 # * Example: `@C.CASE@`
 #   - Unset the value of `CASE`
@@ -241,7 +247,7 @@ print(tr.lookup('bikitaabi'))
 #   - It does not matter what `CASE` was before, or if it was set at all
 #   - Never fails
 #
-# ### R flag: require test
+# #### R flag: require test
 #
 # * Examples:
 #   - `@R.CASE.GEN@`
@@ -253,7 +259,7 @@ print(tr.lookup('bikitaabi'))
 #     - Otherwise fails and blocks this path
 #     - Does not set or modify the value of `CASE`
 #
-# ### D flag: disallow test
+# #### D flag: disallow test
 #
 # * Examples:
 #   - `@D.CASE.GEN@`
@@ -265,7 +271,7 @@ print(tr.lookup('bikitaabi'))
 #     - Otherwise fails and blocks this path
 #     - Does not set or modify the value of `CASE`
 #
-# ### U flag: unification test
+# #### U flag: unification test
 #
 # * Examples:
 #   - `@U.CASE.GEN@`
@@ -289,7 +295,7 @@ print(fails.lookup('alkitaabuN'))
 succeeds = regex('bi"@P.CASE.GEN@"al"@U.ART.PRESENT@"kitaabi"@U.CASE.GEN@"')
 print(succeeds.lookup('bialkitaabi'))
 
-# ### More examples with the same flag-diacritic operators
+# ### 1.4. More examples with the same flag-diacritic operators
 #
 # <img src="img/n_foo_blah.png">
 #
@@ -303,19 +309,19 @@ print(succeeds.lookup('bialkitaabi'))
 
 # ## 2. Non-concatenative morphotactics
 #
-# ### Limited reduplication in Tagalog verbs
+# ### 2.1. Limited reduplication in Tagalog verbs
 #
 # <img src="img/tagalog_verbs.png">
 #
-# ### Full-stem reduplication in Malay nouns
+# ### 2.2. Full-stem reduplication in Malay nouns
 #
 # <img src="img/malay_nouns.png">
 #
-# ### Arabic word forms based on roots d-r-s and k-t-b
+# ### 2.3. Arabic word forms based on roots d-r-s and k-t-b
 #
 # <img src="img/arabic_word_forms.png">
 #
-# ### Tagalog limited reduplication: easy with two-level morphology!
+# ### 2.4. Tagalog limited reduplication: easy with two-level morphology!
 #
 # <img src="img/tagalog_reduplication.png">
 
@@ -327,7 +333,7 @@ twolc = intersect(twolc_rules)
 tagalog = compose((lexc, twolc))
 print(tagalog.lookup('RE+pili'))
 
-# ### Malay full-stem reduplication with compile-replace
+# ### 2.5. Malay full-stem reduplication with compile-replace
 #
 # <img src="img/malay_reduplication.png">
 
@@ -337,13 +343,13 @@ compile_xfst_file('malay.xfst')
 xfst = HfstTransducer.read_from_file('malay.xfst.hfst')
 print(xfst.lookup('buku+Noun+Plural'))
 
-# ### Arabic “morphemes”
+# ### 2.6. Arabic “morphemes”
 #
 # <img src="img/arabic_morphemes.png">
 #
 # <i>Image from Beesley & Karttunen: Finite State Morphology (2003).</i>
 #
-# ### Arabic morphotactics using merge and compile-replace
+# #### Arabic morphotactics using merge and compile-replace
 #
 # * xfst operator for merge to the right: `.m>.`
 # * xfst operator for merge to the left: `.<m.`
@@ -352,7 +358,7 @@ print(xfst.lookup('buku+Noun+Plural'))
 #   - Surface form: `^[{ktb}.m>.{CVCVC}.<m.[u*i]^]at`
 # * The compile-replace algorithm executes the merge commands in the regular expression and produces the final surface form: `kutibat`
 #
-# ### Arabic morphotactics with Twol regular expression center rules
+# #### Arabic morphotactics with Twol regular expression center rules
 #
 # <img src="img/arabic_morphotactics.png">
 
@@ -364,7 +370,7 @@ twolc = intersect(twolc_rules)
 arabic = compose((lexc, twolc))
 print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))
 
-# ### More information
+# ## More information
 #
 # * Chapter 7 of the Beesley & Karttunen book: “Flag Diacritics”
 # * Chapter 8 of the Beesley & Karttunen book: “Non-Concatenative Morphotactics”
