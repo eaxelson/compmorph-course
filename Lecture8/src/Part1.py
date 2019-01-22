@@ -5,6 +5,8 @@
 #
 # ## 1. Optimizing unweighted finite-state networks
 #
+# ### 1.1. Example lexicon
+#
 # Let’s first create a noun lexicon and add word stems to it.
 #
 # <img src="img/noun_lexicon.png">
@@ -85,6 +87,8 @@ assert(result.compare(tr))
 #
 # <img src="img/lexicon_tied_together.png">
 #
+# ### 1.2. The resulting network
+#
 # The network is now ready. It has some advantages
 #
 # * The structure is logical
@@ -98,6 +102,8 @@ assert(result.compare(tr))
 #   * Imagine a scenario with a more realistic, larger vocabulary: using the network would be very slow, because of all the paths that have to be investigated.
 #
 # <img src="img/lexicon_epsilon_transitions.png">
+#
+# ### 1.3. Determinization of the network
 #
 # To start determinizing the network...
 #
@@ -113,9 +119,9 @@ assert(result.compare(tr))
 # * 4. And the symbol “i” takes us to the states 4, 11, and 71, so we keep merging states and updating the transitions.
 #
 # <img src="img/determinizing_the_network_3.png">
-
-
-
+#
+# ### 1.4. Minimization of the network
+#
 # Furthermore, there is another disadvantage with the original network
 #
 # * The network is unnecessarily large
@@ -127,7 +133,7 @@ assert(result.compare(tr))
 #
 # <img src="img/minimizing_the_network_2.png">
 #
-# Note: There have been some simplifications in our presentation
+# ### 1.5. Further issues
 #
 # * The epsilon transition back to the beginning that produces compound words is nasty:
 #   * Full determinization may actually bloat the size of the network.
@@ -138,7 +144,7 @@ assert(result.compare(tr))
 #
 # * One might actually choose not to do a full determinization, but keep the epsilon transitions, for instance.
 #
-# Acceptors vs. transducers?
+# #### Acceptors vs. transducers?
 #
 # * In the examples above, we have shown acceptors, with only an input symbol on the arcs
 #   * Such as: a b c d
@@ -147,7 +153,7 @@ assert(result.compare(tr))
 # * Determinization and minimization work the same in both cases.
 #   * We just need to interpret the pairs of symbols as one single symbol, so a:a is another symbol than a:b.
 #
-# Algorithms
+# #### Algorithms
 #
 # * Determinization
 #   * For instance: https://www.tutorialspoint.com/automata_theory/ndfa_to_dfa_conversion.htm
@@ -183,21 +189,21 @@ assert(result.compare(tr))
 #
 # However, usually weights are not probabilities as such.
 #
-# ### 2.0. Semirings
+# ### 2.1. Semirings
 #
 # * Let’s replace the probabilities with some generic weights and replace the operators × and + with the generic semiring operators ⊗ and ⊕
 #   * `Weight(tuoksua as a noun) = Weight(Noun) ⊗ Weight(tuoksu | Noun) ⊗ Weight(Noun ending -a for partitive case)`
 #   * `Weight(tuoksua as a verb) = Weight(Verb) ⊗ Weight(tuoksu | Verb) ⊗ Weight(Verb ending -a for infinitive)`
 #   * `Weight(tuoksua as a noun or verb) = Weight(tuoksua as a noun) ⊕ Weight(tuoksua as a verb)`
 #
-# ### 2.1. Probability semiring
+# ### 2.2. Probability semiring
 #
 # * The weights should be interpreted as probabilties
 # * The operator ⊗ should be interpreted as multiplication ×
 # * The operator ⊕ should be interpreted as addition +
 # * This is exactly what we have seen in our example already
 #
-# ### 2.2. Log semiring
+# ### 2.3. Log semiring
 #
 # * The weights should be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)
 # * The operator ⊗ should be interpreted as addition +
@@ -208,7 +214,7 @@ assert(result.compare(tr))
 #
 # <img src="img/network_with_logprob_weights.png">
 #
-# ### 2.3. Tropical semiring
+# ### 2.4. Tropical semiring
 #
 # * The weights can still be interpreted as negative logprobs: for instance, –log(Prob(tuoksu | Noun))
 # * The operator ⊗ should still be interpreted as addition +
@@ -230,7 +236,7 @@ assert(result.compare(tr))
 #
 # <img src="img/speech_recognition.png">
 #
-# ### 2.4. Further reading
+# ## Further reading
 #
 # * To learn more, you can read the full article by Mohri et al. at: http://www.cs.nyu.edu/~mohri/pub/csl01.pdf
 # * There are more similar articles, such as the version that was actually published in Computer Speech and Language in 2002.
