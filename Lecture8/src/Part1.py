@@ -169,7 +169,7 @@ assert(result.compare(tr))
 # Prob(Noun ending -a for partitive case) = 0.1
 # Prob(tuoksu | Verb) = 0.001
 # Prob(Verb ending -a for infinitive) = 0.05
-# ´´´
+# ```
 #
 # Then we get the following probabilities for the full word forms “tuoksua”:
 #
@@ -201,8 +201,8 @@ assert(result.compare(tr))
 #
 # * The weights should be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)
 # * The operator ⊗ should be interpreted as addition +
-# * The operator ⊕ should be interpreted as the rather complex operation: w1 ⊕ w2 = – log (10-w1 + 10-w2)  (if we use 10 as our base; it can be something else, too)
-# * Why? Because if w1 = – log10 p1 and w2 = – log10 p2 and p1 and p2 are probabilities, then w1 ⊕ w2 = – log10 (10– log10 p1 + 10– log10 p2) =  – log10 (p1 + p2) (This is the logprob of the sum of two probabilities)
+# * The operator ⊕ should be interpreted as the rather complex operation: w1 ⊕ w2 = – log (10<sup>-w1</sup> + 10<sup>-w2</sup>)  (if we use 10 as our base; it can be something else, too)
+# * Why? Because if w1 = – log<sub>10</sub> p1 and w2 = – log<sub>10</sub> p2 and p1 and p2 are probabilities, then w1 ⊕ w2 = – log<sub>10</sub>(10<sup>– log<sub>10</sub> p1</sup> + 10<sup>– log<sub>10</sub> p2</sup>) =  – log<sub>10</sub>(p1 + p2) (This is the logprob of the sum of two probabilities)
 #
 # Shown as a network with logprob weights in the log semiring
 #
@@ -210,7 +210,7 @@ assert(result.compare(tr))
 #
 # ### 2.3. Tropical semiring
 #
-# * The weights can still be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)
+# * The weights can still be interpreted as negative logprobs: for instance, –log(Prob(tuoksu | Noun))
 # * The operator ⊗ should still be interpreted as addition +
 # * The operator ⊕ is simplified and picks the minimum, that is, the path with lower overall weight: w1 ⊕ w2 = min(w1, w2) = { w1 if w1 < w2; w2 otherwise }
 #
