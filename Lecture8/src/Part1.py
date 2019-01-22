@@ -240,11 +240,11 @@ tr.minimize()
 # #### Acceptors vs. transducers?
 #
 # * In the examples above, we have shown acceptors, with only an input symbol on the arcs
-#   * Such as: a b c d
-# * If we had a transducer, we would have pairs of symbols (input:output)
-#   * Such as: a:a a:b b:b c:e
+#   * Such as: `a b c d`
+# * If we had a transducer, we would have pairs of symbols (`input:output`)
+#   * Such as: `a:a a:b b:b c:e`
 # * Determinization and minimization work the same in both cases.
-#   * We just need to interpret the pairs of symbols as one single symbol, so a:a is another symbol than a:b.
+#   * We just need to interpret the pairs of symbols as one single symbol, so `a:a` is another symbol than `a:b`.
 #
 # #### Algorithms
 #
@@ -320,11 +320,37 @@ tr.minimize()
 # #### Another example of weighted determinization in the tropical semiring
 #
 # <img src="img/weighted_determinization_example.png">
-#
+
+from hfst_dev import read_att_string
+tr = read_att_string(
+"""0 1 a a 0
+0 1 b b 1
+0 1 c c 4
+0 2 a a 3
+0 2 b b 4
+0 2 c c 7
+0 2 d d 0
+0 2 e e 1
+1 3 f f 1
+1 3 e e 0
+1 3 e e 2
+2 3 e e 10
+2 3 f f 11
+2 3 f f 13
+3 0
+""")
+print(tr)
+
+tr.determinize()
+print(tr)
+
 # Weights must be pushed before minimization can take place:
 #
 # <img src="img/weight_pushing_and_minimization.png">
-#
+
+tr.minimize()
+print(tr)
+
 # #### Other uses
 #
 # Mehryar Mohri did not work on morphology, but on automatic speech recognition:
