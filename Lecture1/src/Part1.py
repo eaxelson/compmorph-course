@@ -85,26 +85,40 @@ print(hfst_dev.__version__)
 #
 # ### 4.2. Item and Arrangement (I&A)
 #
-# * Morphemes and allomorphs
-#   - "SUSI": susi, sude-, sute-, sut-, sus-
-#   - Number:
-#     * Singular: ∅ (or no morpheme at all: unmarked)
-#     * Plural: -t, -i-, -j-
-#   - Case:
-#     * Genitive: -n, -en, -den, -tten
-#     * Partitive: -a, -ä, -ta, -tä
-#     * Etc.
-# * The allomorphs occur in a specific distribution:
-#   - E.g., sus- in all plural forms except nominative
-#   - No allomorph is more "basic" than any other.
+# #### Morphemes and allomorphs
+#
+# <ul>
+#  <li>"SUSI": susi, sude-, sute-, sut-, sus-</li>
+#  <li>Number:</li>
+#   <ul>
+#    <li>Singular: ∅ (or no morpheme at all: unmarked)</li>
+#    <li>Plural: -t, -i-, -j-</li>
+#   </ul>
+#  <li>Case:</li>
+#   <ul>
+#     <li>Genitive: -n, -en, -den, -tten</li>
+#     <li>Partitive: -a, -ä, -ta, -tä</li>
+#     <li>Etc.</li>
+#   </ul>
+# </ul>
+#
+# #### The allomorphs occur in a specific distribution
+#
+# <ul>
+#  <li>E.g., sus- in all plural forms except nominative.</li>
+#  <li>No allomorph is more "basic" than any other.</li>
+# </ul>
 #
 # ### 4.3. Item and Process (I&P)
 #
 # We have roots or bases of morphemes and different processes apply to them.
 #
-# * Nominative: word final 'e' becomes 'i'; 't' in front of 'i' becomes 's' 🡒 "susi"
-#   - Genitive: add suffix '+n'; soften 't' to 'd' in closed syllable 🡒 "suden"
-#   - Etc.
+# #### Nominative: word final 'e' becomes 'i'; 't' in front of 'i' becomes 's' 🡒 "susi"
+#
+# <ul>
+#  <li>Genitive: add suffix '+n'; soften 't' to 'd' in closed syllable 🡒 "suden"</li>
+#  <li>Etc.</li>
+# </ul>
 #
 # ### 4.4. Corresponding HFST tools
 #
@@ -154,7 +168,7 @@ help(hfst_dev.start_xfst)
 #   - The output of the analyzer is the input of the generator.
 # * An analyzer is very useful, for instance:
 #   - when we want to parse natural language text syntactically
-#   - when we want to _normalize_ text, such that we only care about the base form (lemma) of every word in the text; this is used, for instance, in _information_ _retrieval_.
+#   - when we want to <i>normalize</i> text, such that we only care about the base form (lemma) of every word in the text; this is used, for instance, in <i>information retrieval</i>.
 #
 # ### 5.3. Some simple noun paradigms in English
 #
@@ -163,14 +177,14 @@ help(hfst_dev.start_xfst)
 # __cat|s__ +Pl (plural)  
 # __cat|'s__ +Sg +Poss (singular possessive)  
 # __cat|s'__ +Pl +Poss (plural possessive)  
-# _Similarly:_ dog, pet, book, hill, fan
+# <i>Similarly:</i> dog, pet, book, hill, fan
 #
 # Paradigm: N_s  
 # __kiss__ +Sg (singular)  
 # __kiss|es__ +Pl (plural)  
 # __kiss|'s__ +Sg +Poss (singular possessive)  
 # __kiss|es|'__ +Pl +Poss (plural possessive)  
-# _Similarly:_ wish, mess, church, search, waitress
+# <i>Similarly:</i> wish, mess, church, search, waitress
 #
 # Let's create a morphological generator and analyzer for this data.
 
@@ -179,10 +193,10 @@ help(hfst_dev.start_xfst)
 # Below is a finite-state transducer (FST) for purely concatenative I&A English noun inflection
 # for our simple example data.
 # The yellow circles represent _states_ and the arrows represent _transitions_ between the states.
-# State named _"Root"_ is the initial state and state named_"\#"_ the final one.
+# State named <i>Root</i> is the initial state and state named <i>\#</i> the final one.
 # Above each transition, there is the input
-# that the transition _consumes_ and the output that it _produces_, separated with a colon ":".
-# The "ε:ε" signifies the _epsilon_ transition which is possible without consuming
+# that the transition <i>consumes</i> and the output that it <i>produces</i>, separated with a colon ":".
+# The "ε:ε" signifies the <i>epsilon</i> transition which is possible without consuming
 # any input or producing any output.
 # We will return to finite-state transducers in more detail in the next part.
 #
@@ -394,7 +408,7 @@ END
 """, verbosity=2
 )
 
-# We could also write the script to a file and then call `compile_lexc_file`. Note that we set the keyword argument _verbosity_ to _2_.
+# We could also write the script to a file and then call `compile_lexc_file`. Note that we set the keyword argument `verbosity` to `2`.
 # Then we will get more information about the compilation process.
 # You can test the above command also with `verbosity=1` and `verbosity=0` (or just leaving the argument out).
 #
