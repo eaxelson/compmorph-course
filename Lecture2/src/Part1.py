@@ -1,9 +1,11 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 2
 #
-# * (1.) Finite-State Basics
-# * (2.) Set Theory for Finite-State Networks
-# * (3.) Item & Process Morphology Using xfst Rules
-# * (4.) Example: English Adjectives
+# <ul>
+# <li>1. Finite-State Basics</li>
+# <li>2. Set Theory for Finite-State Networks</li>
+# <li>3. Item & Process Morphology Using xfst Rules</li>
+# <li>4. Example: English Adjectives</li>
+# </ul>
 #
 # ## 1. Finite-State Basics
 #
@@ -25,10 +27,12 @@
 #
 # <img src="img/three_word_language.png">
 #
-# * Inputs to the automaton are _symbols_ like: `m, e, c`.
-# * The set of valid symbols that the automaton will accept is its _alphabet_: `{ a, c, e, g, i, m, n, o, r, s, t }`.
-# * The sequences of symbols that the automaton will accept are _words_ like: `canto, mesa`.
-# * The entire set of words that the automaton accepts or recognizes is its _language_: `{ canto, mesa, tigre }`.
+# <ul>
+# <li>Inputs to the automaton are <i>symbols</i> like: <pre>m, e, c.</pre></li>
+# <li>The set of valid symbols that the automaton will accept is its <i>alphabet</i>: <pre>{ a, c, e, g, i, m, n, o, r, s, t }</pre>.</li>
+# <li>The sequences of symbols that the automaton will accept are <i>words</i> like: <pre>canto, mesa</pre>.</li>
+# <li>The entire set of words that the automaton accepts or recognizes is its <i>language</i>: <pre>{ canto, mesa, tigre }</pre>.</li>
+# </ul>
 #
 # ### 1.2. Sharing structure in minimal networks:
 #
@@ -67,22 +71,21 @@
 # <img src="img/lowercase2uppercase.png">
 #
 # The example above shows an infinite relation containing pairs, such as
-# `{<"dog","DOG">,<"cat","CAT">,<"mouse","MOUSE">,...}`
+# <code>{<"dog","DOG">,<"cat","CAT">,<"mouse","MOUSE">,...}</code>
 #
 # We can also have relations between lexical forms and surface forms, such as:
-# ```
+# <pre>
 # {<"cantar+Verb+PresInd+1P+Sg", "canto">,
 #  <"cantar+Verb+PresInd+1P+Pl","cantamos">,
 #  <"canto+Noun+Masc+Sg","canto">, ...}
-#
-# ```
+# </pre>
 #
 # ### 2.5. Union of sets
 #
 # <img src="img/union_of_sets.png">
 #
-# For instance, the union of the sets `{"clear", "clever", "ear", "ever"}` and `{"fat", "father"}` is
-# `{"clear", "clever", "ear", "ever", "fat", "father"}`.
+# For instance, the union of the sets <code>{"clear", "clever", "ear", "ever"}</code> and <code>{"fat", "father"}</code> is
+# <code>{"clear", "clever", "ear", "ever", "fat", "father"}</code>.
 
 from hfst_dev import fst, disjunct
 set1 = fst(('clear','clever','ear','ever'))
@@ -98,7 +101,7 @@ print(union_set.extract_paths())
 #
 # <img src="img/intersection_of_sets.png">
 #
-# For instance, the intersection of sets `{"clear", "clever", "ear"}` and `{"ear", "ever"}` is `{"ear"}`.
+# For instance, the intersection of sets <code>{"clear", "clever", "ear"}</code> and <code>{"ear", "ever"}</code> is <code>{"ear"}</code>.
 
 from hfst_dev import intersect
 set1 = fst(('clear','clever','ear'))
@@ -110,7 +113,7 @@ print(intersection_set.extract_paths())
 #
 # <img src="img/subtraction_of_sets.png">
 #
-# For instance, the subtraction of sets `{"clear", "clever", "ear"}` and `{"clever", "ear"}` is `{"clear"}`.
+# For instance, the subtraction of sets <code>{"clear", "clever", "ear"}</code> and <code>{"clever", "ear"}</code> is <code>{"clear"}</code>.
 
 from hfst_dev import subtract
 set1 = fst(('clear','clever','ear'))
@@ -122,7 +125,7 @@ print(subtraction_set.extract_paths())
 #
 # <img src="img/concatenation_of_sets.png">
 #
-# The concatenation is `{"works", "working", "worked"}`
+# The concatenation is <code>{"works", "working", "worked"}</code>.
 
 from hfst_dev import concatenate
 set1 = fst(('work'))
@@ -134,7 +137,7 @@ print(concatenation_set.extract_paths())
 #
 # <img src="img/composition.png">
 #
-# The composition is `{<"cat","Katze">}`.
+# The composition is <code>{<"cat","Katze">}</code>.
 
 from hfst_dev import compose
 set1 = fst({'cat':'chat'})
@@ -144,9 +147,11 @@ print(composition_set.extract_paths()) # TODO: @_EPSILON_SYMBOL_@ is printed
 
 # ### 2.10. Projection
 #
-# * Projection is extracting one side of a relation.
-# * The upper/input projection of `<"cat", "CHAT">` is "cat".
-# * The lower/output projection of `<"cat", "CHAT">` is "CHAT".
+# <ul>
+# <li>Projection is extracting one side of a relation.</li>
+# <li>The upper/input projection of <code><"cat", "CHAT"></code> is "cat".</li>
+# <li>The lower/output projection of <code><"cat", "CHAT"></code> is "CHAT".</li>
+# </ul>
 #
 # <img src="img/projection.png">
 
@@ -163,7 +168,7 @@ print(CHAT.extract_paths())
 
 # ### 2.11. Set operations expressed in the xfst language
 #
-# ```
+# <pre>
 # [ A | B ] denotes the union of the two languages or relations A and B ("or"-operation).
 # [ A & B ] denotes the intersection ("and"-operation).
 # [ A - B ] denotes the subtraction of B from A.
@@ -171,7 +176,7 @@ print(CHAT.extract_paths())
 # [ A .o. B ] denotes the composition of the relations.
 # A.u denotes the upper (i.e. input) projection.
 # A.l denotes the lower (o.e. output) projection.
-# ```
+# </pre>
 
 # ## 3. Item & Process morphology using xfst rules
 #
@@ -191,7 +196,7 @@ print(CHAT.extract_paths())
 #
 # Expressed as an xfst rule:
 #
-# `define InsertE   [. .] -> e || [ s | x | c h | s h | y ] %^ _ s ;`
+# <code>define InsertE   [. .] -> e || [ s | x | c h | s h | y ] %^ _ s ;</code>
 #
 # <img src="img/InsertE.png">
 
@@ -207,7 +212,7 @@ print(InsertE.lookup("sky^s'"))
 #
 # Expressed as an xfst rule:
 #
-# `define YToI    y -> i || _ %^ e ;`
+# <code>define YToI    y -> i || _ %^ e ;</code>
 #
 # <img src="img/YToI.png">
 
@@ -220,7 +225,7 @@ print(YToI.lookup("sky^es'"))
 #
 # Expressed as an xfst rule:
 #
-# `define CleanUp    %^ -> 0 ;`
+# <code>define CleanUp    %^ -> 0 ;</code>
 
 CleanUp = regex("%^ -> 0")
 print(CleanUp.lookup("ski^es'"))
@@ -243,13 +248,13 @@ cascade = compose((lexicon, InsertE, YToI, CleanUp))
 # single FST and 'jump' from the lexical-form input straight to the final
 # output in one go, without producing the intermediate steps.
 #
-# ```
+# <pre>
 # Example input:  sky+N+Pl+Poss
 # Lexicon output: sky^s'
 # Rule 1 output:  sky^es
 # Rule 2 output:  ski^es
 # Rule 3 output:  skies
-# ```
+# </pre>
 #
 # The single FST will give directly: sky+N+Pl+Poss 🡒 skies.
 
@@ -283,7 +288,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 #
 # The file `en_ip_adjectives_lexicon.lexc`
 #
-# ```
+# <pre>
 # Multichar_Symbols
 # +A       ! Adjective tag
 # +Pos     ! Positive
@@ -318,7 +323,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 # +Sup:est  # ;
 # 
 # END 
-# ```
+# </pre>
 #
 # ### 4.2. Suggested xfst script for English adjectives
 #
@@ -346,7 +351,7 @@ lower-words
 
 # There are issues with some word forms...
 #
-# ```
+# <pre>
 # big         biger       bigest
 # cool        cooler      coolest
 # crazy       crazier     craziest
@@ -361,7 +366,7 @@ lower-words
 # slow        slower      slowest
 # small       smaller     smallest
 # warm        warmer      warmest
-# ```
+# </pre>
 #
 # ### 4.3. Corrected xfst script for English adjectives
 #
@@ -397,7 +402,7 @@ lower-words
 
 # Now it works!
 #
-# ```
+# <pre>
 # big        bigger      biggest
 # cool       cooler      coolest
 # crazy      crazier     craziest
@@ -412,9 +417,11 @@ lower-words
 # slow       slower      slowest
 # small      smaller     smallest
 # warm       warmer      warmest
-# ```
+# </pre>
 #
 # ## More information
 #
-# * Chapter 1 of the Beesley & Karttunen book: "A Gentle Introduction"
-# * Chapter 3 of the Beesley & Karttunen book: "The xfst Interface"
+# <ul>
+# <li>Chapter 1 of the Beesley & Karttunen book: "A Gentle Introduction"</li>
+# <li>Chapter 3 of the Beesley & Karttunen book: "The xfst Interface"</li>
+# </ul>

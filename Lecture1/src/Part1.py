@@ -1,12 +1,14 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 1
 #
-# * (1.) Prerequisites
-# * (2.) Course material
-# * (3.) Course overview
-# * (4.) Hockett's models of morphology
-# * (5.) Morphological generators and analyzers
-# * (6.) A Finite-State Transducer that implements a morphological generator
-# * (7.) Lexc code that represents this transducer
+# <ul>
+# <li>1. Prerequisites</li>
+# <li>2. Course material</li>
+# <li>3. Course overview</li>
+# <li>4. Hockett's models of morphology</li>
+# <li>5. Morphological generators and analyzers</li>
+# <li>6. A Finite-State Transducer that implements a morphological generator</li>
+# <li>7. Lexc code that represents this transducer</li>
+# </ul>
 #
 # ## HFST - Helsinki Finite-State Technology
 #
@@ -18,23 +20,29 @@
 #
 # ## 1. Prerequisites
 #
-# * Foundations of general linguistics
-# * Basic knowledge on how to use a computer
-# * Some programming experience is desirable
-# * Knowledge of Natural Language Processing (NLP) is also a plus
+# <ul>
+# <li>Foundations of general linguistics</li>
+# <li>Basic knowledge on how to use a computer</li>
+# <li>Some programming experience is desirable</li>
+# <li>Knowledge of Natural Language Processing (NLP) is also a plus</li>
+# </ul>
 #
 # ## 2. Course material
 #
 # If you want a book:
 #
-# * Kenneth R. Beesley and Lauri Karttunen: [Finite State Morphology](http://press.uchicago.edu/ucp/books/book/distributed/F/bo3613750.html), CSLI Publications, 2003
-# * Daniel Jurafsky and James H. Martin, Speech and Language Processing, Prentice Hall, second edition, 2009
+# <ul>
+# <li>Kenneth R. Beesley and Lauri Karttunen: <a href="http://press.uchicago.edu/ucp/books/book/distributed/F/bo3613750.html">Finite State Morphology</a>, CSLI Publications, 2003</li>
+# <li>Daniel Jurafsky and James H. Martin, Speech and Language Processing, Prentice Hall, second edition, 2009</li>
+# </ul>
 #
 # Links:
 #
-# * HFST [main page](https://hfst.github.io).
-# * For installation of the HFST package for Python, see our [PyPI pages](https://pypi.org/project/hfst_dev/).
-# * For more information about the interface, see our [Github wiki pages](https://github.com/hfst/python-hfst-4.0/wiki).
+# <ul>
+# <li>HFST <a href="https://hfst.github.io">main page</a>.</li>
+# <li>For installation of the HFST package for Python, see our <a href="https://pypi.org/project/hfst_dev/">PyPI pages</a>.</li>
+# <li>For more information about the interface, see our <a href="https://github.com/hfst/python-hfst-4.0/wiki">Github wiki pages</a>.</li>
+# </ul>
 #
 # First, import the package and list its contents with `help`.
 
