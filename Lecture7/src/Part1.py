@@ -239,7 +239,7 @@ print(tr.lookup('bikitaabi'))
 #   <li>Set the value of <code>CASE</code> to <code>GEN</code></li>
 #   <li>It does not matter what <code>CASE</code> was before, or if it was set at all</li>
 #   <li>Never fails</li>
-#  <ul>
+#  </ul>
 # </ul>
 #
 # #### N flag: negative (re)setting
@@ -251,7 +251,7 @@ print(tr.lookup('bikitaabi'))
 #   <li>The value of <code>CASE</code> is not well defined after this, but there is some value and we know it is not <code>GEN</code></li>
 #   <li>It does not matter what <code>CASE</code> was before, or if it was set at all</li>
 #   <li>Never fails</li>
-#  <ul>
+#  </ul>
 # </ul>
 #
 # #### C flag: clear feature
@@ -263,7 +263,7 @@ print(tr.lookup('bikitaabi'))
 #   <li><code>CASE</code> has no value after this (also called neutral)</li>
 #   <li>It does not matter what <code>CASE</code> was before, or if it was set at all</li>
 #   <li>Never fails</li>
-#  <ul>
+#  </ul>
 # </ul>
 #
 # #### R flag: require test
@@ -399,12 +399,12 @@ print(xfst.lookup('buku+Noun+Plural'))
 # #### Arabic morphotactics using merge and compile-replace
 #
 # <ul>
-#  <li>xfst operator for merge to the right: <code>.m>.</code></li>
-#  <li>xfst operator for merge to the left: <code>.<m.</code></li>
+#  <li>xfst operator for merge to the right: <code>.m&gt;.</code></li>
+#  <li>xfst operator for merge to the left: <code>.&lt;m.</code></li>
 #  <li>For instance,</li>
 #   <ul>
 #    <li>Lexical form: <code>[ ktb     +FormI     +Pass] +3P+Fem+Sg</code></li>
-#    <li>Surface form: <code>^[{ktb}.m>.{CVCVC}.<m.[u*i]^]at</code></li>
+#    <li>Surface form: <code>^[{ktb}.m&gt;.{CVCVC}.&lt;m.[u*i]^]at</code></li>
 #   </ul>
 #  <li>The compile-replace algorithm executes the merge commands in the regular expression and produces the final surface form: <code>kutibat</code></li>
 # </ul>
