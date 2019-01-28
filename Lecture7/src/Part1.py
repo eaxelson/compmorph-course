@@ -1,7 +1,9 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 7
 #
-# * (1.) Flag diacritics
-# * (2.) Non-concatenative morphotactics
+# <ul>
+#  <li>1. Flag diacritics</li>
+#  <li>2. Non-concatenative morphotactics</li>
+# </ul>
 #
 # ## 1. Flag diacritics
 #
@@ -117,6 +119,7 @@ LEXICON IndefCase
 print(tr.lookup('alkitaab+Def+Gen'))
 tr.invert()
 print(tr.lookup('alkitaabi'))
+exit(0)
 
 # #### Adding the genitive case
 #
@@ -215,77 +218,119 @@ print(tr.lookup('bikitaabi'))
 
 # ### 1.3. Full range of flag-diacritic operators
 #
-# * General format:
-#   - `@operator.feature.value@`
-#   - `@operator.feature@` (operates on the “neutral” = unset value)
-# * The features and values can be (almost) any string you like; the strings are case sensitive, e.g., “DEFINITE” is not the same as “definite”.
-# * The operator must be one of: `P`, `N`, `C`, `R`, `D`, `U`:
+# <ul>
+# <li>General format:</li>
+#   <ul>
+#    <li><code>@operator.feature.value@</code></li>
+#    <li><code>@operator.feature@</code> (operates on the “neutral” = unset value)</li>
+#   </ul>
+#  <li>The features and values can be (almost) any string you like; the strings are case sensitive, e.g., “DEFINITE” is not the same as “definite”.</li>
+#  <li>The operator must be one of: <code>{P, N, C, R, D, U}</code></li>
+# </ul>
 #
 # <img src="img/flag_diacritic_operators.png">
 #
 # #### P flag: positive (re)setting
 #
-# * Example:
-#   - `@P.CASE.GEN@`
-#   - Set the value of `CASE` to `GEN`
-#   - It does not matter what `CASE` was before, or if it was set at all
-#   - Never fails
+# <ul>
+# <li>Example:</li>
+#  <ul>
+#   <li><code>@P.CASE.GEN@</code></li>
+#   <li>Set the value of <code>CASE</code> to <code>GEN</code></li>
+#   <li>It does not matter what <code>CASE</code> was before, or if it was set at all</li>
+#   <li>Never fails</li>
+#  <ul>
+# </ul>
 #
 # #### N flag: negative (re)setting
 #
-# * Example: `@N.CASE.GEN@`
-#   - Set the value of `CASE` to something else than `GEN`
-#   - The value of `CASE` is not well defined after this, but there is some value and we know it is not `GEN`
-#   - It does not matter what `CASE` was before, or if it was set at all
-#   - Never fails
+# <ul>
+# <li>Example: <code>@N.CASE.GEN@</code></li>
+#  <ul>
+#   <li>Set the value of <code>CASE</code> to something else than <code>GEN</code></li>
+#   <li>The value of <code>CASE</code> is not well defined after this, but there is some value and we know it is not <code>GEN</code></li>
+#   <li>It does not matter what <code>CASE</code> was before, or if it was set at all</li>
+#   <li>Never fails</li>
+#  <ul>
+# </ul>
 #
 # #### C flag: clear feature
 #
-# * Example: `@C.CASE@`
-#   - Unset the value of `CASE`
-#   - `CASE` has no value after this (also called neutral)
-#   - It does not matter what `CASE` was before, or if it was set at all
-#   - Never fails
+# <ul>
+# <li>Example: <code>@C.CASE@</code></li>
+#  <ul>
+#   <li>Unset the value of <code>CASE</code></li>
+#   <li><code>CASE</code> has no value after this (also called neutral)</li>
+#   <li>It does not matter what <code>CASE</code> was before, or if it was set at all</li>
+#   <li>Never fails</li>
+#  <ul>
+# </ul>
 #
 # #### R flag: require test
 #
-# * Examples:
-#   - `@R.CASE.GEN@`
-#     - Succeeds if `CASE` has the value `GEN`
-#     - Otherwise fails and blocks this path
-#     - Does not set or modify the value of `CASE`
-#   - `@R.CASE@`
-#     - Succeeds if `CASE` is set to some value (not neutral)
-#     - Otherwise fails and blocks this path
-#     - Does not set or modify the value of `CASE`
+# <ul>
+# <li>Examples:</li>
+#  <ul>
+#   <li><code>@R.CASE.GEN@</code></li>
+#     <ul>
+#      <li>Succeeds if <code>CASE</code> has the value <code>GEN</code></li>
+#      <li>Otherwise fails and blocks this path</li>
+#      <li>Does not set or modify the value of <code>CASE</code></li>
+#     </ul>
+#   <li><code>@R.CASE@</code></li>
+#    <ul>
+#     <li>Succeeds if <code>CASE</code> is set to some value (not neutral)</li>
+#     <li>Otherwise fails and blocks this path</li>
+#     <li>Does not set or modify the value of <code>CASE</code></li>
+#    </ul>
+#  </ul>
+# </ul>
 #
 # #### D flag: disallow test
 #
-# * Examples:
-#   - `@D.CASE.GEN@`
-#     - Succeeds if `CASE` does not have the value `GEN`
-#     - Otherwise fails and blocks this path
-#     - Does not set or modify the value of `CASE`
-#   - `@D.CASE@`
-#     - Succeeds if `CASE` is not set to any value (neutral)
-#     - Otherwise fails and blocks this path
-#     - Does not set or modify the value of `CASE`
+# <ul>
+# <li>Examples:</li>
+#  <ul>
+#   <li><code>@D.CASE.GEN@</code>
+#    <ul>
+#     <li>Succeeds if <code>CASE</code> does not have the value <code>GEN</code></li>
+#     <li>Otherwise fails and blocks this path</li>
+#     <li>Does not set or modify the value of <code>CASE</code></li>
+#    </ul>
+#   <li><code>@D.CASE@</code>
+#    <ul>
+#     <li>Succeeds if <code>CASE</code> is not set to any value (neutral)</li>
+#     <li>Otherwise fails and blocks this path</li>
+#     <li>Does not set or modify the value of <code>CASE</code></li>
+#   </ul>
+#  </ul>
+# </ul>
 #
 # #### U flag: unification test
 #
-# * Examples:
-#   - `@U.CASE.GEN@`
-#     - Succeeds if `CASE` has the value `GEN`
-#     - Also succeeds if `CASE` is unset (neutral); in this case, `CASE` is set to `GEN` after this operation
-#     - Otherwise fails and blocks this path
-#   - `al@U.ART.PRESENT@kitaab@U.ART.ABSENT@uN@U.CASE.NOM@`
-#     - Fails
-#   - `bi@P.CASE.GEN@al@U.ART.PRESENT@kitaabi@U.CASE.GEN@`
-#     - Succeeds
+# <ul>
+# <li>Examples:</li>
+#  <ul>
+#   <li><code>@U.CASE.GEN@</code></li>
+#    <ul>
+#     <li>Succeeds if <code>CASE</code> has the value <code>GEN</code></li>
+#     <li>Also succeeds if <code>CASE</code> is unset (neutral); in this case, <code>CASE</code> is set to <code>GEN</code> after this operation</li>
+#     <li>Otherwise fails and blocks this path</li>
+#    </ul>
+#   <li><code>al@U.ART.PRESENT@kitaab@U.ART.ABSENT@uN@U.CASE.NOM@</code></li>
+#    <ul>
+#     <li>Fails</li>
+#    </ul>
+#   <li><code>bi@P.CASE.GEN@al@U.ART.PRESENT@kitaabi@U.CASE.GEN@</code></li>
+#    <ul>
+#     <li>Succeeds</li>
+#   </ul>
+#  </ul>
+# </ul>
 
 from hfst_dev import regex
 
-failing = regex('@U.ART.PRESENT@', use_c_streams=True)
+failing = regex('@U.ART.PRESENT@')
 print(failing)
 
 # note that at signs must be inside double quotes to be interpreted literally
@@ -301,11 +346,13 @@ print(succeeds.lookup('bialkitaabi'))
 #
 # <i>Image from Beesley & Karttunen: Finite State Morphology (2003).</i>
 #
-# * `@P.FEAT.M@` `@D.FEAT.M@` will fail.
-# * `@N.FEAT.M@` `@D.FEAT.Q@` will fail.
-# * `@R.FEAT@` will succeed if `FEAT` is currently set to some other value than neutral.
-# * `@U.FEAT.M@` succeeds if `FEAT` is currently set to `M` or neutral; the value is reset to `M` after this operation.
-# * `@N.FEAT.M@` `@U.FEAT.Q@` succeeds, leaving `FEAT=Q` in memory.
+# <ul>
+#  <li><code>@P.FEAT.M@</code> <code>@D.FEAT.M@</code> will fail.</li>
+#  <li><code>@N.FEAT.M@</code> <code>@D.FEAT.Q@</code> will fail.</li>
+#  <li><code>@R.FEAT@</code> will succeed if <code>FEAT</code> is currently set to some other value than neutral.</li>
+#  <li><code>@U.FEAT.M@</code> succeeds if <code>FEAT</code> is currently set to <code>M</code> or neutral; the value is reset to <code>M</code> after this operation.</li>
+#  <li><code>@N.FEAT.M@</code> <code>@U.FEAT.Q@</code> succeeds, leaving <code>FEAT=Q</code> in memory.</li>
+# </ul>
 
 # ## 2. Non-concatenative morphotactics
 #
@@ -351,12 +398,16 @@ print(xfst.lookup('buku+Noun+Plural'))
 #
 # #### Arabic morphotactics using merge and compile-replace
 #
-# * xfst operator for merge to the right: `.m>.`
-# * xfst operator for merge to the left: `.<m.`
-# * For instance,
-#   - Lexical form: `[ ktb     +FormI     +Pass] +3P+Fem+Sg`
-#   - Surface form: `^[{ktb}.m>.{CVCVC}.<m.[u*i]^]at`
-# * The compile-replace algorithm executes the merge commands in the regular expression and produces the final surface form: `kutibat`
+# <ul>
+#  <li>xfst operator for merge to the right: <code>.m>.</code></li>
+#  <li>xfst operator for merge to the left: <code>.<m.</code></li>
+#  <li>For instance,</li>
+#   <ul>
+#    <li>Lexical form: <code>[ ktb     +FormI     +Pass] +3P+Fem+Sg</code></li>
+#    <li>Surface form: <code>^[{ktb}.m>.{CVCVC}.<m.[u*i]^]at</code></li>
+#   </ul>
+#  <li>The compile-replace algorithm executes the merge commands in the regular expression and produces the final surface form: <code>kutibat</code></li>
+# </ul>
 #
 # #### Arabic morphotactics with Twol regular expression center rules
 #
@@ -372,6 +423,8 @@ print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))
 
 # ## More information
 #
-# * Chapter 7 of the Beesley & Karttunen book: “Flag Diacritics”
-# * Chapter 8 of the Beesley & Karttunen book: “Non-Concatenative Morphotactics”
-# * HFST: hfst-twolc − A Two-Level Grammar Compiler: TODO
+# <ul>
+#  <li>Chapter 7 of the Beesley & Karttunen book: “Flag Diacritics”</li>
+#  <li>Chapter 8 of the Beesley & Karttunen book: “Non-Concatenative Morphotactics”</li>
+#  <li>HFST: hfst-twolc − A Two-Level Grammar Compiler: TODO</li>
+# </ul>

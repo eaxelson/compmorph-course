@@ -1,9 +1,11 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 6
 #
-# * (1.) Two-level rules
-# * (2.) Example: English adjectives
-# * (3.) Twol rule operators
-# * (4.) Example: consonant gradation in English
+# <ul>
+#  <li>1. Two-level rules</li>
+#  <li>2. Example: English adjectives</li>
+#  <li>3. Twol rule operators</li>
+#  <li>4. Example: consonant gradation in English</li>
+# </ul>
 #
 # ## 1. Two-level rules
 #
@@ -45,8 +47,10 @@
 #
 # <img src="img/series.png">
 #
-# * The order of the rules does not matter
-# * The rule transducers are combined by intersection rather than composition
+# <ul>
+#  <li>The order of the rules does not matter</li>
+#  <li>The rule transducers are combined by intersection rather than composition</li>
+# </ul>
 #
 # Compare rule declarations for xfst vs. twol:
 #
@@ -174,7 +178,9 @@ print(twolc.lookup('lar'))
 #
 # ## More information
 #
-# * Unpublished chapter of Beesley & Karttunen (2003): “Two-Level Rule Compiler”: http://web.stanford.edu/~laurik/.book2software/twolc.pdf
-# * Karttunen & Beesley (1992): Two-Level Rule Compiler. Technical Report. ISTL-92-2. Xerox Palo Alto Research Center, California. http://www.cis.upenn.edu/~cis639/docs/twolc.html
-# * HFST: Tutorial hfst-lexc and hfst-twolc: TODO
+# <ul>
+#  <li>Unpublished chapter of Beesley & Karttunen (2003): “Two-Level Rule Compiler”: http://web.stanford.edu/~laurik/.book2software/twolc.pdf</li>
+#  <li>Karttunen & Beesley (1992): Two-Level Rule Compiler. Technical Report. ISTL-92-2. Xerox Palo Alto Research Center, California. http://www.cis.upenn.edu/~cis639/docs/twolc.html</li>
+#  <li>HFST: Tutorial hfst-lexc and hfst-twolc: TODO</li>
+# </ul>
 #
