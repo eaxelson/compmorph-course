@@ -3,59 +3,63 @@
 # * (1.) Optimizing unweighted finite-state networks
 # * (2.) Optimizing weighted finite-state networks
 #
+# In this lecture we show how finite-state networks can be optimized,
+# i.e. how the number of states and transitions can be made smaller.
+# The networks that we use as examples will be created from scratch.
+# So this lecture also shows how networks can be constructed state by state
+# and transition by transition as opposed to more high-level ways such as
+# regular expressions or lexc formalism.
+#
 # ## 1. Optimizing unweighted finite-state networks
 #
 # ### 1.1. Example lexicon
 #
-# Let’s first create a noun lexicon and add word stems to it.
+# Let’s first create a noun lexicon from scratch and add word stems to it.
+# We use HfstIterableTransducer for this purpose.
 #
 # <img src="img/noun_lexicon.png">
 
 from hfst_dev import HfstIterableTransducer, EPSILON
-# This will be the entire lexicon
+# This will be the entire lexicon. The constructor creates a network
+# with one state, numbered as zero, which is an initial state.
 lexicon = HfstIterableTransducer()
-add = lexicon.add_transition # shorter notation for adding transition
-# define sublexicon start and end states
+add_transition = lexicon.add_transition
+add_state = lexicon.add_state
+
+# Define a function for adding a path between states state1 and state2:
+def add_path(path, state1, state2):
+    # This is done mainly to get the number for a new state.
+    # States don't need to be explicitly added, because 'add_transition'
+    # creates the start and target states of a given transition if they
+    # don't already exist.
+    state = add_state()
+    # Make sure state1 and state2 are skipped
+    if state == state1 or state == state2:
+        state += 1
+    if state == state1 or state == state2:
+        state += 1
+    add_transition(state1, state, EPSILON, EPSILON, 0.0) # from start state to beginning of path
+    for symbol in list(path):
+        add_transition(state, state+1, symbol, symbol, 0.0)
+        state += 1
+    add_transition(state, state2, EPSILON, EPSILON, 0.0) # from end of path to end state
+
+# Control sublexicon start and end state numbering
 start_state = 1
 end_state = 8
-# and use consecutive numbering for states that will be added
-# (remember to skip end state)
-state = 2
+    
+# Add the lexemes
+for lexeme in ('kisko', 'kissa','koira','kori','koulu','taulu','tori','tuoksu'):
+    add_path(lexeme, start_state, end_state)
 
-# we could add lexemes manually, e.g.
-#   add(2, 3, 'k', 'k', 0.0)
-#   add(3, 4, 'i', 'i', 0.0)
-#   add(4, 5, 's', 's', 0.0)
-#   add(5, 6, 'k', 'k', 0.0)
-#   add(6, 7, 'o', 'o', 0.0)
-# but it is easier this way:
-add(start_state, state, EPSILON, EPSILON, 0.0) # from start state to beginning of lexeme
-for symbol in list('kisko'):
-    add(state, state+1, symbol, symbol, 0.0)
-    state += 1
-add(state, end_state, EPSILON, EPSILON, 0.0) # from end of lexeme to end state
-
-# skip end state
-assert(state == 7)
-state += 2
-
-# Add rest of the lexemes
-for lexeme in ('kissa','koira','kori','koulu','taulu','tori','tuoksu'):
-    add(start_state, state, EPSILON, EPSILON, 0.0)
-    for symbol in list(lexeme):
-        add(state, state+1, symbol, symbol, 0.0)
-        state += 1
-    add(state, end_state, EPSILON, EPSILON, 0.0)
-    state += 1
-
-# test that the result is as intended
+# Test that the result is as intended:
 test_lexicon = HfstIterableTransducer(lexicon)
 test_lexicon.add_transition(0, 1, EPSILON, EPSILON, 0.0)
 test_lexicon.set_final_weight(8, 0.0)
-
 from hfst_dev import HfstTransducer, regex
 tr = HfstTransducer(test_lexicon)
 tr.minimize()
+
 result = regex('{kisko}|{kissa}|{koira}|{kori}|{koulu}|{taulu}|{tori}|{tuoksu}')
 assert(result.compare(tr))
 
@@ -63,38 +67,27 @@ assert(result.compare(tr))
 #
 # <img src="img/continuation_lexicon.png">
 
-assert(state == 50)
-state += 1
-start_state = 50
+start_state = add_state()
+assert(start_state == 50)
 end_state = 53
 
 # Add case endings
 for ending in ('a','lla','lle','lta','n'):
-    # skip end state
-    if state == end_state:
-        state += 1
-    add(start_state, state, EPSILON, EPSILON, 0.0)
-    for symbol in list(ending):
-        add(state, state+1, symbol, symbol, 0.0)
-        state += 1
-    add(state, end_state, EPSILON, EPSILON, 0.0)
-    state += 1
+    add_path(ending, start_state, end_state)
 # make case ending optional
-add(50, 53, EPSILON, EPSILON, 0.0)
-
-assert(state == 68)
+add_transition(start_state, end_state, EPSILON, EPSILON, 0.0)
 
 # Then we tie the lexicons together and also add an epsilon transition from the end of the stem lexicon to its beginning in order to allow compound words
 #
 # <img src="img/compound_lexicon.png"> 
 
-add(8, 50, EPSILON, EPSILON, 0.0)
-add(8, 1, EPSILON, EPSILON, 0.0)
+add_transition(8, start_state, EPSILON, EPSILON, 0.0)
+add_transition(8, 1, EPSILON, EPSILON, 0.0)
 
 # test that the result is as intended
 test_lexicon = HfstIterableTransducer(lexicon)
 test_lexicon.add_transition(0, 1, EPSILON, EPSILON, 0.0)
-test_lexicon.set_final_weight(53, 0.0)
+test_lexicon.set_final_weight(end_state, 0.0)
 
 tr = HfstTransducer(test_lexicon)
 tr.minimize()
@@ -105,63 +98,43 @@ assert(result.compare(tr))
 #
 # <img src="img/lexicon_verb_stems.png">
 
-assert(state == 68)
-start_state = 68
+start_state = add_state()
+assert(start_state == 68)
 end_state = 75
-state += 1
 
 # Add verb stem endings
 for stem in ('kisko','tuoksu'):
-    # skip end state
-    if state == end_state:
-        state += 1
-    add(start_state, state, EPSILON, EPSILON, 0.0)
-    for symbol in list(stem):
-        add(state, state+1, symbol, symbol, 0.0)
-        state += 1
-    add(state, end_state, EPSILON, EPSILON, 0.0)
-    state += 1
+    add_path(stem, start_state, end_state)
 
 # ... and a continuation lexicon for present-tense person endings (mainly)
 #
 # <img src="img/lexicon_person_endings.png">
 
-assert(state == 83)
-start_state = 83
+start_state = add_state()
+assert(start_state == 83)
 end_state = 86
-state +=1
 
 # Add person endings
 for ending in ('a','mme','n','t','tte','vat'):
-    # skip end state
-    if state == end_state:
-        state += 1
-    add(start_state, state, EPSILON, EPSILON, 0.0)
-    for symbol in list(ending):
-        add(state, state+1, symbol, symbol, 0.0)
-        state += 1
-    add(state, end_state, EPSILON, EPSILON, 0.0)
-    state += 1
+    add_path(ending, start_state, end_state)
 
 # make person ending optional
-add(83, 86, EPSILON, EPSILON, 0.0)
-
-assert(state == 103)
+add_transition(start_state, end_state, EPSILON, EPSILON, 0.0)
 
 # Let’s tie the verb stem lexicon together with the endings lexicon.
 #
 # <img src="img/lexicon_verbs_and_endings.png">
 
-add(75, 83, EPSILON, EPSILON, 0.0)
+add_transition(75, 83, EPSILON, EPSILON, 0.0)
 
 # ... and let’s tie the whole network together with a start state and end state
 #
 # <img src="img/lexicon_tied_together.png">
 
-add(0, 1, EPSILON, EPSILON, 0.0)
-add(0, 68, EPSILON, EPSILON, 0.0)
-add(53, 103, EPSILON, EPSILON, 0.0)
-add(86, 103, EPSILON, EPSILON, 0.0)
+add_transition(0, 1, EPSILON, EPSILON, 0.0)
+add_transition(0, 68, EPSILON, EPSILON, 0.0)
+add_transition(53, 103, EPSILON, EPSILON, 0.0)
+add_transition(86, 103, EPSILON, EPSILON, 0.0)
 lexicon.set_final_weight(103, 0.0)
 
 # test that the result is as intended
@@ -321,6 +294,7 @@ tr.minimize()
 #
 # <img src="img/weighted_determinization_example.png">
 
+# Create the network from ATT format:
 from hfst_dev import read_att_string
 tr = read_att_string(
 """0 1 a a 0
