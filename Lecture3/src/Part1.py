@@ -1,56 +1,72 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 3
 #
-# * (1.) Disambiguation
-# * (2.) Probabilities, basics
-# * (3.) Back to disambiguation
-# * (4.) Spelling correction
-# * (5.) Logprobs
-# * (6.) Summary of types of finite-state automata and transducers
+# <ul>
+#  <li>1. Disambiguation</li>
+#  <li>2. Probabilities, basics</li>
+#  <li>3. Back to disambiguation</li>
+#  <li>4. Spelling correction</li>
+#  <li>5. Logprobs</li>
+#  <li>6. Summary of types of finite-state automata and transducers</li>
+# </ul>
 #
 # ## 1. Disambiguation
 #
 # ### 1.1. Some Finnish noun examples:
 #
-# * nainen
-# * lautasilla
-# * lautasilta
-# * poikasilla
-# * poikasilta
+# <ul>
+#  <li>nainen</li>
+#  <li>lautasilla</li>
+#  <li>lautasilta</li>
+#  <li>poikasilla</li>
+#  <li>poikasilta</li>
+# </ul>
 #
 # ### 1.2. The Finnish noun examples with analyses:
 #
-# * nainen 🡒 nainen +N +Sg +Nom (“woman”)
-# * lautasilla 🡒 lautanen +N +Pl +Ade (“on plates”)
-# * lautasilta 🡒 lautanen +N +Pl +Abl (“from plates”)
-# * poikasilla 🡒 poikanen +N +Pl +Ade (“with cubs”)
-# * poikasilta 🡒 poikanen +N +Pl +Abl (“from cubs”)
+# <ul>
+#  <li>nainen 🡒 nainen +N +Sg +Nom (“woman”)</li>
+#  <li>lautasilla 🡒 lautanen +N +Pl +Ade (“on plates”)</li>
+#  <li>lautasilta 🡒 lautanen +N +Pl +Abl (“from plates”)</li>
+#  <li>poikasilla 🡒 poikanen +N +Pl +Ade (“with cubs”)</li>
+#  <li>poikasilta 🡒 poikanen +N +Pl +Abl (“from cubs”)</li>
+# </ul>
 #
 # ### 1.3. The Finnish noun examples with more analyses:
 #
-# * nainen 🡒 naida +V +Pot +Pres +Sg1 (“it seems I’ll marry”)
-# * lautasilla 🡒 lauta#silla +N +Sg +Ade (“board rayon”)
-# * lautasilta:
-#   - 🡒 lauta#silta +N +Sg +Nom (“board bridge”)
-#   - 🡒 lautas#ilta +N +Sg +Nom (“plate evening”)
-# *  poikasilla 🡒 poika#silla +N +Sg +Ade (“boy rayon”)
-# *  poikasilta:
-#   - 🡒 poika#silta +N +Sg +Nom (“boy bridge”)
-#   - 🡒 poikas#ilta +N +Sg +Nom (“cub evening”)
+# <ul>
+#  <li>nainen 🡒 naida +V +Pot +Pres +Sg1 (“it seems I’ll marry”)</li>
+#  <li>lautasilla 🡒 lauta#silla +N +Sg +Ade (“board rayon”)</li>
+#  <li>lautasilta:</li>
+#  <ul>
+#   <li> 🡒 lauta#silta +N +Sg +Nom (“board bridge”)</li>
+#   <li> 🡒 lautas#ilta +N +Sg +Nom (“plate evening”)</li>
+#  </ul>
+#  <li>poikasilla 🡒 poika#silla +N +Sg +Ade (“boy rayon”)</li>
+#  <li>poikasilta:</li>
+#  <ul>
+#   <li> 🡒 poika#silta +N +Sg +Nom (“boy bridge”)</li>
+#   <li> 🡒 poikas#ilta +N +Sg +Nom (“cub evening”)</li>
+#  </ul>
+# </ul>
 #
 # ### 1.4. How disambiguate?
 #
-# * We could disambiguate (= find one unambiguous analysis) by looking at the word in context.
-# * However, if we don’t have any context, we may still have a sense of which analyses are more likely <i>a priori</i>.
-# * A priori = in general, without further information.
-# * <i>A posteriori</i>, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.
+# <ul>
+#  <li>We could disambiguate (= find one unambiguous analysis) by looking at the word in context.</li>
+#  <li>However, if we don’t have any context, we may still have a sense of which analyses are more likely <i>a priori</i>.</li>
+#  <li>A priori = in general, without further information.</li>
+#  <li><i>A posteriori</i>, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.</li>
+# </ul>
 #
 # #### A priori assumptions:
 #
-# * "Nainen +N" is more common than "naida +V".
-# * Singular (+Sg) is more common than Plural (+Pl).
-# * Nominative (+Nom) is more common than the other cases.
-# * Adessive (+Ade) is slightly more common than Ablative case (+Abl).
-# * Single-stem words are more common than compound words.
+# <ul>
+#  <li> "Nainen +N" is more common than "naida +V".</li>
+#  <li> Singular (+Sg) is more common than Plural (+Pl).</li>
+#  <li> Nominative (+Nom) is more common than the other cases.</li>
+#  <li> Adessive (+Ade) is slightly more common than Ablative case (+Abl).</li>
+#  <li> Single-stem words are more common than compound words.</li>
+# </ul>
 #
 # #### Model with probabilities
 #
@@ -60,20 +76,28 @@
 #
 # ### 2.1. What is probability?
 #
-# * Probability is the measure of the likelihood that an event will occur.
-# * Probability is quantified as a number between 0 and 1
-#   * 0 indicates impossibility
-#   * 1 indicates certainty
+# <ul>
+# <li>Probability is the measure of the likelihood that an event will occur.</li>
+# <li>Probability is quantified as a number between 0 and 1</li>
+#  <ul>
+#   <li>0 indicates impossibility</li>
+#   <li>1 indicates certainty</li>
+#  </ul>
+# </ul>
 #
 # ### 2.2. Objective probability
 #
-# * The most popular version of objective probability is frequentist probability.
-# * Claims that the probability denotes the relative frequency of occurrence of an experiment's outcome.
-# * The experiment is repeated many times.
-# * This interpretation considers probability to be the relative frequency "in the long run" of outcomes.
-# * Typical examples:
-#   * throwing a dice (1, 2, 3, 4, 5, 6)
-#   * throwing a coin ("heads or tails")
+# <ul>
+# <li>The most popular version of objective probability is frequentist probability.</li>
+# <li>Claims that the probability denotes the relative frequency of occurrence of an experiment's outcome.</li>
+# <li>The experiment is repeated many times.</li>
+# <li>This interpretation considers probability to be the relative frequency "in the long run" of outcomes.</li>
+# <li>Typical examples:</li>
+#  <ul>
+#   <li>throwing a dice (1, 2, 3, 4, 5, 6)</li>
+#   <li>throwing a coin ("heads or tails")</li>
+#  </ul>
+# </ul>
 #
 # #### Discrete probability distribution of outcome from throwing an unbiased six-sided die
 #
@@ -81,17 +105,17 @@
 #
 # Probability of mutually exclusive events 🡒 ADD probabilities together
 #
-# ```
+# <pre>
 # P(S = 1 or S = 2) =
 # P(S = 1) + P (S = 2) =
 # 1/6 + 1/6 =
 # 2/6 =
 # 1/3
-# ```
+# </pre>
 #
 # Probability of all possible events combined 🡒 The sum must be 1!
 #
-# ```
+# <pre>
 # P(S = 1 or S = 2  or S = 3 or
 #   S = 4  or S = 5  or S = 6) =
 # P(S = 1) + P (S = 2) + P (S = 3) +
@@ -99,7 +123,7 @@
 # 1/6 + 1/6 + 1/6 + 1/6 + 1/6 + 1/6 =
 # 6/6 =
 # 1
-# ```
+# </pre>
 #
 # #### Discrete probability distribution of outcome from throwing two unbiased six-sided dice
 #
@@ -107,23 +131,23 @@
 #
 # Probability of independent events that co-occur 🡒 MULTIPLY probabilities together
 #
-# ```
+# <pre>
 # P(Sblack = 1 and Swhite = 1) =
 # P(Sblack = 1) * P(Swhite = 1) =
 # 1/6 * 1/6 =
 # 1/36
-# ```
+# </pre>
 # 
 # Probability of mutually exclusive events 🡒 Involves both addition and multiplication
 #
-# ```
+# <pre>
 # P((Sblack = 5 and Swhite = 6) or (Sblack = 6 and Swhite = 5)) =
 # P(Sblack = 5) * P(Swhite = 6) + P(Sblack = 6) * P(Swhite = 5) =
 # 1/6 * 1/6 + 1/6 * 1/6 =
 # 1/36 + 1/ 36 =
 # 2/36 =
 # 1/18
-# ```
+# </pre>
 #
 # #### For comparison: A continuous probability distribution
 #
@@ -136,23 +160,35 @@
 #
 # ### 2.3. Subjective probability
 #
-# * The most popular version of subjective probability is Bayesian probability.
-# * Rather than relative frequency in a series of experiments, subjectivists think of probabilities as degrees of belief.
-# * "The price at which you would buy or sell a bet that pays 1 unit of utility (such as money) if an event occurs, and 0 if the event does not occur."
-# * Examples:
-#   * Is there life on Mars?
-#   * Will Trump win the presidential election in the USA? (Now, we know he did.)
-#   * Will it snow in Helsinki tomorrow?
-#   * Given specific symptoms, does a patient have cancer?
+# <ul>
+# <li>The most popular version of subjective probability is Bayesian probability.</li>
+# <li>Rather than relative frequency in a series of experiments, subjectivists think of probabilities as degrees of belief.</li>
+# <li>"The price at which you would buy or sell a bet that pays 1 unit of utility (such as money) if an event occurs, and 0 if the event does not occur."</li>
+# <li>Examples:</li>
+#  <ul>
+#   <li>Is there life on Mars?</li>
+#   <li>Will Trump win the presidential election in the USA? (Now, we know he did.)</li>
+#   <li>Will it snow in Helsinki tomorrow?</li>
+#   <li>Given specific symptoms, does a patient have cancer?</li>
+#  </ul>
+# </ul>
 #
 # #### Prior and posterior probabilities
 #
-# * In Bayesian statistics, there are prior probabilities and posterior probabilities
-#   * also called a priori and a posteriori probabilities
-# * The prior probability states the general assumptions made in the model, such as:
-#   * P("It snows in Helsinki in January")
-# * The posterior probability is a product of two probabilities: the prior probability and a conditional probability, such as:
-#   * P("It snows in Helsinki on 23 Jan 2018" | "It snows in Helsinki in January") * P("It snows in Helsinki in January")
+# <ul>
+# <li>In Bayesian statistics, there are prior probabilities and posterior probabilities</li>
+#  <ul>
+#   <li>also called a priori and a posteriori probabilities</li>
+#  </ul>
+# <li>The prior probability states the general assumptions made in the model, such as:</li>
+#  <ul>
+#   <li>P("It snows in Helsinki in January")</li>
+#  </ul>
+# <li>The posterior probability is a product of two probabilities: the prior probability and a conditional probability, such as:</li>
+#  <ul>
+#   <li>P("It snows in Helsinki on 23 Jan 2018" | "It snows in Helsinki in January") * P("It snows in Helsinki in January")</li>
+#  </ul>
+# </ul>
 
 # ## 3. Back to disambiguation
 #
@@ -162,13 +198,13 @@
 #
 # Do the calculations
 #
-# ```
+# <pre>
 # Prob(poikanen +N +Pl +Ade)
 # = Prob(+N) * Prob("poikanen") * Prob(+Pl) * Prob(+Ade)
 # = 0.5 * 0.0001 * 0.3 * 0.05
 # = 0.00000075
 # = 7.5 * 10^-7
-# ```
+# </pre>
 #
 # The "poikasilla" ambiguity: 2) poika#silla +N +Sg +Nom
 #
@@ -176,20 +212,20 @@
 #
 # Do the calculations:
 #
-# ```
+# <pre>
 # Prob(poika#silla +N +Sg +Nom)
 # = Prob(+N) * Prob(“poika”) * Prob(Compound word) * Prob(“silla”) * Prob(+Sg) * Prob(+Nom)
 # = 0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55
 # = 0.0000000000165
 # = 1.65 * 10^-11
-# ```
+# </pre>
 #
 # Compare and pick the more likely alternative 🡒 The analysis `poikanen +N +Pl +Ade` is almost 50000 times more likely
 # than `poika#silla +N +Sg +Nom` (in this invented model).
 #
 # Formulated in lexc format with weights (The syntax is correct, but don't do it exactly like this yet):
 #
-# ```
+# <code>
 # Multichar_Symbols +N +Sg +Pl +Nom +Ade +Abl ^A ^I ^J ^K ^S ^T
 # 
 # LEXICON Root
@@ -217,7 +253,7 @@
 # +Nom:0              # "weight: 0.55" ;
 # +Ade:ll^A           # "weight: 0.05" ;
 # ...
-# ```
+# </code>
 
 # ## 4. Spelling correction
 #
@@ -235,7 +271,7 @@
 #
 # Assume probabilities:
 #
-# ```
+# <pre>
 # P(p = F | i = F) = 0.7
 # P(p = D | i = F) = 0.1
 # P(p = G | i = F) = 0.1
@@ -244,7 +280,7 @@
 # P(p = C | i = F) = 0.025
 # P(p = X | i = F) = 0.0125
 # P(p = V | i = F) = 0.0125
-# ```
+# </pre>
 #
 # For instance, read the last line as: "The Probability that V was
 # pressed when actually F was the intended key  is 0.0125."
@@ -253,18 +289,18 @@
 #
 # <img src="img/spell_checker_model.png">
 #
-# ```
+# <pre>
 # Noisy surface 1:  poikasilla   (no error)
 # Noisy surface 2:  loikasilla   (substitution)
 # Noisy surface 3:  poikaslla    (deletion)
 # Noisy surface 4:  ppoikasilla  (insertion)
 # Noisy surface 5:  opikasilla   (transposition)
 # ... etc
-# ```
+# </pre>
 #
 # #### xfst script snippet for a spell checker
 #
-# ```
+# <code>
 # ! Use the .l operator to project only lower level (= surface forms) of the
 # ! transducer; we are not interested in the upper level (= lexical forms)
 # define Vocabulary [ Lexicon .o. AlternationRules ].l ;
@@ -284,7 +320,7 @@
 # ! The spell checker is ready to use
 # regex SpellChecker ;
 # 
-# ```
+# </code>
 #
 # Again, the syntax is correct, but there is something left to fix with the weights...
 
@@ -294,61 +330,62 @@
 #
 # We had the probability:
 #
-# ```
+# <pre>
 # Prob(poika#silla +N +Sg +Nom)
 # = Prob(+N) * Prob("poika") * Prob(Compound word) * Prob("silla") * Prob(+Sg) * Prob(+Nom)
 # = 0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55
 # = 0.0000000000165
 # = 1.65 * 10^-11    
-# ```
+# </pre>
 #
 # This product of probabilities can be written as:
 #
-# ```
+# <pre>
 # This product of probabilities can be written as:
 # (5 * 10^-1) * 10^-3 * 10^-1 * 10^-6 * (6 * 10^-1) * (5.5 * 10^-1)
 # = 10^-0.301 * 10^-3 * 10^-1 * 10^-6 * 10^-0.222 * 10^-0.260
 # = 10^-(0.301 + 3 + 1 + 6 + 0.222 + 0.260) =
 # = 10^-10.783
 # = 0.0000000000165
-# ```
+# </pre>
 #
 # If we agree on some base, such as 10, then instead of multiplying actual probabilities
 # of co-occuring indendent events, we can add the (negative) exponents of the probabilities,
 # which is faster and more manageable.
 #
-# Instead of `0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55 = 0.0000000000165`,
-# we get: `0.301 + 3 + 1 + 6 + 0.222 + 0.260 = 10.783`
+# Instead of <code>0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55 = 0.0000000000165</code>,
+# we get: <code>0.301 + 3 + 1 + 6 + 0.222 + 0.260 = 10.783</code>
 #
 # What we are doing is taking the negative logarithm of the probabilities:
-# `10^-10.783 = 0.0000000000165` 🡒 `-log10 0.0000000000165 = 10.783`
+# <code>10^-10.783 = 0.0000000000165` 🡒 `-log10 0.0000000000165 = 10.783</code>
 #
-# * A negative logarithm of a probability is called a _logprob_.
-# * A logprob can be seen as a penalty term or a cost: "if you do this operation you'll have to pay this much."
-# * Logprobs add up from operations performed in a sequence. 
-# * If the probability of some operation is 1, that is, there is only one possible outcome:
-#   * The logprob is `-log10 1 = 0`
-#   * That is, there is no penalty if there is only one certain outcome.
-#   * This makes sense.
+# <ul>
+# <li>A negative logarithm of a probability is called a <i>logprob</i>.</li>
+# <li>A logprob can be seen as a penalty term or a cost: "if you do this operation you'll have to pay this much."</li>
+# <li>Logprobs add up from operations performed in a sequence.</li>
+# <li>If the probability of some operation is 1, that is, there is only one possible outcome:</li>
+#  <ul>
+#   <li>The logprob is <code>-log10 1 = 0</code></li>
+#   <li>That is, there is no penalty if there is only one certain outcome.</li>
+#   <li>This makes sense.</li>
+#  </ul>
+# </ul>
 #
 # ### 5.2. Weights in HFST
 #
-# * HFST does not really support probabilities as such.
-# * HFST supports additive weights, such as logprobs.
-# * Weights in lexc could look like:
-#
-# ```
+# <ul>
+# <li>HFST does not really support probabilities as such.</li>
+# <li>HFST supports additive weights, such as logprobs.</li>
+# <li>Weights in lexc could look like:
+# <pre>
 # LEXICON Nouns
 # ilta:il^Ta          Number "weight: 3.69897" ;
 # lauta:lau^Ta        Number "weight: 5.00000" ;
 # ...
-# ```
-#
-# * Weights in xfst rules could look like:
-#
-# ```
-# [ f (->) g::1.000 ] .o. [ f (->) r::1.602 ]
-# ```
+# </pre></li>
+# <li>Weights in xfst rules could look like:
+# <code>[ f (->) g::1.000 ] .o. [ f (->) r::1.602 ]</code></li>
+# </ul>
 #
 # ### 5.3. Lexc with weights revisited
 #
@@ -540,6 +577,8 @@ print(TR.lookup('ac'))
 
 # ## More information
 #
-# * The Beesley & Karttunen book does not cover weighted finite-state machines. Weights were fairly new at about the time when the book was published in 2003.
-# * HFST: [Using weights](https://github.com/hfst/python-hfst-4.0/wiki/Weights)
-# * HFST [ospell](https://github.com/hfst/hfst-ospell/wiki)
+# <ul>
+#  <li>The Beesley & Karttunen book does not cover weighted finite-state machines. Weights were fairly new at about the time when the book was published in 2003.</li>
+#  <li>HFST: <a href="https://github.com/hfst/python-hfst-4.0/wiki/Weights">Using weights</a></li>
+#  <li>HFST <a href="https://github.com/hfst/hfst-ospell/wiki">ospell</a></li>
+# </ul>
