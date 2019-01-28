@@ -1,11 +1,13 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 5
 #
-# * (1.) Big picture
-# * (2.) Guessers and stemmers
-# * (3.) Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese
-# * (4.) Regular expressions in xfst
-# * (5.) Pronunciation lexicon for a Language with Irregular Orthography: English
-# * (6.) Sound Change in Indo-European languages
+# <ul>
+#  <li>1. Big picture</li>
+#  <li>2. Guessers and stemmers</li>
+#  <li>3. Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese</li>
+#  <li>4. Regular expressions in xfst</li>
+#  <li>5. Pronunciation lexicon for a Language with Irregular Orthography: English</li>
+#  <li>6. Sound Change in Indo-European languages</li>
+# </ul>
 #
 # ## 1. Big picture
 #
@@ -31,21 +33,29 @@
 #
 # ### 2.1. Increased coverage with guessers 
 #
-# * Section 9.5.4 in the Beesley & Karttunen book
-# * A finite-state morphological analyzer only recognizes the words that are included in its lexc lexicon.
-# * It may take several person-months (or even years) of work to build up a lexicon with the tens of thousands of stems necessary for broad coverage of real text.
-# * As an alternative, or a complement, one can use
-#   * guessers
-#   * stemmers
-#   * unsupervised morphology
+# <ul>
+# <li>Section 9.5.4 in the Beesley & Karttunen book</li>
+# <li>A finite-state morphological analyzer only recognizes the words that are included in its lexc lexicon.</li>
+# <li>It may take several person-months (or even years) of work to build up a lexicon with the tens of thousands of stems necessary for broad coverage of real text.</li>
+# <li>As an alternative, or a complement, one can use</li>
+# <ul>
+#   <li>guessers</li>
+#   <li>stemmers</li>
+#   <li>unsupervised morphology</li>
+# </ul>
+# </ul>
 #
 # ### 2.2. Definition of a guesser
 #
-# * A guesser is designed to analyze words that are based on any phonologically possible stem.
-# * The set of phonologically possible stems is definable, more or less precisely, using regular expressions and scripts.
-# * Useful
-#   * as a general backup when normal morphological analysis fails
-#   * for suggesting new stems that need to be added to the lexicon
+# <ul>
+# <li>A guesser is designed to analyze words that are based on any phonologically possible stem.</li>
+# <li>The set of phonologically possible stems is definable, more or less precisely, using regular expressions and scripts.</li>
+# <li>Useful</li>
+# <ul>
+#   <li>as a general backup when normal morphological analysis fails</li>
+#   <li>for suggesting new stems that need to be added to the lexicon</li>
+# </ul>
+# </ul>
 #
 # ### 2.3. Case study: Esperanto verb guesser lexicon
 #
@@ -120,25 +130,37 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 
 # ### 2.6. Stemming
 #
-# * A term used particularly in information retrieval to describe the process of reducing inflected (or sometimes derived) words to their word stem, base or root form —generally a written word form.
-#   * The stem is “fish” for “fishing”, “fished”, and “fisher”.
-#   * The stem is “argu” for “argue”, “argued”, “argues”, “arguing”, and “argus”...(!)
-# * The stem does not need to be identical to the morphological root of the word.
-#   * It is sufficient that related words map to the same stem, even if this stem is not in itself a valid root, such as the stem “argu” above, or the stem “citi” for “city” and “cities”.
-# * Algorithms for stemming have been studied in computer science since the 1960s.
-# * Many search engines treat words with the same stem as synonyms, as a kind of query expansion, a process called conflation.
+# <ul>
+#  <li>A term used particularly in information retrieval to describe the process of reducing inflected (or sometimes derived) words to their word stem, base or root form —generally a written word form.</li>
+#  <ul>
+#   <li>The stem is “fish” for “fishing”, “fished”, and “fisher”.</li>
+#   <li>The stem is “argu” for “argue”, “argued”, “argues”, “arguing”, and “argus”...(!)</li>
+#  </ul>
+#  <li>The stem does not need to be identical to the morphological root of the word.</li>
+#  <ul>
+#   <li>It is sufficient that related words map to the same stem, even if this stem is not in itself a valid root, such as the stem “argu” above, or the stem “citi” for “city” and “cities”.</li>
+#  </ul>
+#  <li>Algorithms for stemming have been studied in computer science since the 1960s.</li>
+#  <li>Many search engines treat words with the same stem as synonyms, as a kind of query expansion, a process called conflation.</li>
+# </ul>
 #
 # #### Porter’s stemmer (1979-1980)
 #
-# * Idea:
-#   * Remove what looks like suffixes of English words
-#   * Tidy up a bit
-# * Feasible for English with such “simple morphology”
-# * The full algorithm is described here: http://tartarus.org/martin/PorterStemmer/def.txt
-# * There are other English stemmers:
-#   * Snowball
-#   * Lancaster
-#   * They are more “aggressive” than the Porter stemmer; they remove more “suffixes”.
+# <ul>
+#  <li>Idea:</li>
+#  <ul>
+#   <li>Remove what looks like suffixes of English words</li>
+#   <li>Tidy up a bit</li>
+#  </ul>
+#  <li>Feasible for English with such “simple morphology”</li>
+#  <li>The full algorithm is described here: http://tartarus.org/martin/PorterStemmer/def.txt</li>
+#  <li>There are other English stemmers:</li>
+#  <ul>
+#   <li>Snowball</li>
+#   <li>Lancaster</li>
+#   <li>They are more “aggressive” than the Porter stemmer; they remove more “suffixes”.</li>
+#  </ul>
+# </ul>
 #
 # <img src="img/porters_stemmer.png">
 
@@ -146,16 +168,20 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 #
 # ### 3.1. Transducing between orthographic and pronounced forms of words
 #
-# * Section 3.5.4 in the Beesley & Karttunen book
-# * Exercise on Portuguese Brazilian
-# * The task is to create a cascade of rules that maps from orthographical strings in Portuguese (this will be the lexical side) down to strings that represent their pronunciation (this will be the surface side).
-#   * There will not be a lexicon.
-#   * A sample mapping of written “caso” to spoken “kazu” looks like this:
-#
-# ```
+# <ul>
+#  <li>Section 3.5.4 in the Beesley & Karttunen book</li>
+#  <li>Exercise on Portuguese Brazilian</li>
+#  <li>The task is to create a cascade of rules that maps from orthographical strings in Portuguese (this will be the lexical side) down to strings that represent their pronunciation (this will be the surface side).</li>
+#  <ul>
+#   <li>There will not be a lexicon.</li>
+#   <li>A sample mapping of written “caso” to spoken “kazu” looks like this:
+# <pre>
 # Lexical: caso
 # Surface: kazu
-# ```
+# </pre></li>
+#  </ul>
+# </ul>
+#
 #
 # ### 3.2. Phonetic symbols for Portuguese
 #
@@ -165,7 +191,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 #
 # ### 3.3. Some example words
 #
-# * What applications that you can think of need a mapping between orthographic and pronounced forms?
+# <li>What applications that you can think of need a mapping between orthographic and pronounced forms?
 #
 # <img src="img/test_data_for_portuguese.png">
 #
@@ -337,6 +363,7 @@ start_xfst()
 # ```
 #
 # You can write a sequence of symbols, such as t a l o, together, if you enclose it in curly brackets: {talo}.
+# NOTE: exit the previous session started with start_xfst before starting a new one!
 
 start_xfst()
 
@@ -352,12 +379,16 @@ start_xfst()
 #
 # ### 5.2. "Two levels times two"
 #
-# * We do not transduce between the orthographic form and the pronounced form.
-# * We transduce between the morphological lexical form and surface form (as earlier on this course).
-# * Every input and output symbol consists of two parts:
-# *   orthographic form
-# *   pronounced form
-# *   For instance: o|aa
+# <ul>
+#  <li>We do not transduce between the orthographic form and the pronounced form.</li>
+#  <li>We transduce between the morphological lexical form and surface form (as earlier on this course).</li>
+#  <li>Every input and output symbol consists of two parts:</li>
+#  <ul>
+#   <li>orthographic form</li>
+#   <li>pronounced form</li>
+#   <li>For instance: o|aa</li>
+#  </ul>
+# </ul>
 #
 # <img src="img/two_levels_times_two.png">
 #
@@ -377,12 +408,16 @@ start_xfst()
 #
 # ### 6.1. Research initiative
 #
-# * Creation of an interactive lexicon available on the Internet
-# * Using finite-state alternation rules to model sound change from Proto-Indo-European (PIE) to descendant languages
-# * HFST Foma engine (similar to HFST xfst)
-# * People
-#   * Jouna Pyysalo
-#   * Måns Huldén
+# <ul>
+#  <li>Creation of an interactive lexicon available on the Internet</li>
+#  <li>Using finite-state alternation rules to model sound change from Proto-Indo-European (PIE) to descendant languages</li>
+#  <li>HFST Foma engine (similar to HFST xfst)</li>
+#  <li>People</li>
+#  <ul>
+#   <li>Jouna Pyysalo</li>
+#   <li>Måns Huldén</li>
+#  </ul>
+# </ul>
 #
 # <img src="img/pie_lexicon.png">
 #
@@ -396,4 +431,6 @@ start_xfst()
 
 # ## More information
 #
-# * Selected parts of Chapter 2 and 3 of the Beesley & Karttunen book: “A Systematic Introduction” and “The xfst Interface”
+# <ul>
+#  <li>Selected parts of Chapter 2 and 3 of the Beesley & Karttunen book: “A Systematic Introduction” and “The xfst Interface”</li>
+# </ul>
