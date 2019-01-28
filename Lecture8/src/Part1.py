@@ -1,7 +1,9 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 8
 #
-# * (1.) Optimizing unweighted finite-state networks
-# * (2.) Optimizing weighted finite-state networks
+# <ul>
+#  <li>1. Optimizing unweighted finite-state networks</li>
+#  <li>2. Optimizing weighted finite-state networks</li>
+# </ul>
 #
 # In this lecture we show how finite-state networks can be optimized,
 # i.e. how the number of states and transitions can be made smaller.
@@ -151,15 +153,21 @@ assert(result.compare(tr))
 #
 # The network is now ready. It has some advantages
 #
-# * The structure is logical
-# * Building the network by adding words and endings to it (through the union operation) is simple and fast
+# <ul>
+#  <li>The structure is logical</li>
+#  <li>Building the network by adding words and endings to it (through the union operation) is simple and fast</li>
+# </ul>
 #
 # However, there are also some disadvantages
 #
-# * The automaton is non-deterministic and contains epsilon transitions
-#   * This means that from a specific state, some symbol s can take you to more than one another state.
-#   * For instance, from the initial state 0, the symbol “k” could take you to state 3, 10, 16, 22, 27, or 70.
-#   * Imagine a scenario with a more realistic, larger vocabulary: using the network would be very slow, because of all the paths that have to be investigated.
+# <ul>
+# <li>The automaton is non-deterministic and contains epsilon transitions</li>
+#  <ul>
+#   <li>This means that from a specific state, some symbol s can take you to more than one another state.</li>
+#   <li>For instance, from the initial state 0, the symbol “k” could take you to state 3, 10, 16, 22, 27, or 70.</li>
+#   <li>Imagine a scenario with a more realistic, larger vocabulary: using the network would be very slow, because of all the paths that have to be investigated.</li>
+#  </ul>
+# </ul>
 #
 # <img src="img/lexicon_epsilon_transitions.png">
 #
@@ -167,16 +175,22 @@ assert(result.compare(tr))
 #
 # To start determinizing the network...
 #
-# * 1. We would merge the states 3, 10, 16, 22, 27, and 70 into one single, new state.
-# * 2. We would create one transition with the symbol “k” from the initial state to our new state. (Not shown in the picture on the next page.)
+# <ul>
+#  <li>1. We would merge the states 3, 10, 16, 22, 27, and 70 into one single, new state.</li>
+#  <li>2. We would create one transition with the symbol “k” from the initial state to our new state. (Not shown in the picture on the next page.)</li>
+# </ul>
 #
 # <img src="img/determinizing_the_network_1.png">
 #
-# * 3. Then, from the new state, the symbol “o” takes us to the states 17, 23 or 28, so we would merge these states into one new state, too.
+# <ul>
+#  <li>3. Then, from the new state, the symbol “o” takes us to the states 17, 23 or 28, so we would merge these states into one new state, too.</li>
+# </ul>
 #
 # <img src="img/determinizing_the_network_2.png">
 #
-# * 4. And the symbol “i” takes us to the states 4, 11, and 71, so we keep merging states and updating the transitions.
+# <ul>
+#  <li>4. And the symbol “i” takes us to the states 4, 11, and 71, so we keep merging states and updating the transitions.</li>
+# </ul>
 #
 # <img src="img/determinizing_the_network_3.png">
 
@@ -187,10 +201,14 @@ tr.determinize()
 #
 # Furthermore, there is another disadvantage with the original network
 #
-# * The network is unnecessarily large
-#   * There are some “tails” that occur in many places that could be merged.
-#   * For instance, the ends of the stems “kori” and “tori” are identical, as are the ends of the stems “koulu” and “taulu”.
-#   * Determinization will not fix these issues, so we can use a separate minimization algorithm.
+# <ul>
+# <li>The network is unnecessarily large</li>
+#  <ul>
+#   <li>There are some “tails” that occur in many places that could be merged.</li>
+#   <li>For instance, the ends of the stems “kori” and “tori” are identical, as are the ends of the stems “koulu” and “taulu”.</li>
+#   <li>Determinization will not fix these issues, so we can use a separate minimization algorithm.</li>
+#  </ul>
+# </ul>
 #
 # <img src="img/minimizing_the_network_1.png">
 #
@@ -201,30 +219,50 @@ tr.minimize()
 
 # ### 1.5. Further issues
 #
-# * The epsilon transition back to the beginning that produces compound words is nasty:
-#   * Full determinization may actually bloat the size of the network.
-#   * Consider, for instance, if we had the stem “koulu” that can get an “a” appended for partitive (“koulua”), but in addition, “a” could be the beginning of a second stem, such as “aamiainen” (“kouluaamiainen”).
-#   * Then, we would need one node in the network that is the starting point for all stems starting in “a” as the first stem in a word and another node with all the stems starting in “a” plus the endings starting in “a”.
+# <ul>
+# <li>The epsilon transition back to the beginning that produces compound words is nasty:</li>
+#  <ul>
+#   <li>Full determinization may actually bloat the size of the network.</li>
+#   <li>Consider, for instance, if we had the stem “koulu” that can get an “a” appended for partitive (“koulua”), but in addition, “a” could be the beginning of a second stem, such as “aamiainen” (“kouluaamiainen”).</li>
+#   <li>Then, we would need one node in the network that is the starting point for all stems starting in “a” as the first stem in a word and another node with all the stems starting in “a” plus the endings starting in “a”.</li>
+#  </ul>
+# </ul>
 #
 # <img src="img/full_determinization.png">
 #
-# * One might actually choose not to do a full determinization, but keep the epsilon transitions, for instance.
+# <ul>
+#  <li>One might actually choose not to do a full determinization, but keep the epsilon transitions, for instance.</li>
+# </ul>
 #
 # #### Acceptors vs. transducers?
 #
-# * In the examples above, we have shown acceptors, with only an input symbol on the arcs
-#   * Such as: `a b c d`
-# * If we had a transducer, we would have pairs of symbols (`input:output`)
-#   * Such as: `a:a a:b b:b c:e`
-# * Determinization and minimization work the same in both cases.
-#   * We just need to interpret the pairs of symbols as one single symbol, so `a:a` is another symbol than `a:b`.
+# <ul>
+# <li>In the examples above, we have shown acceptors, with only an input symbol on the arcs</li>
+#  <ul>
+#   <li>Such as: <code>a b c d</code></li>
+#  </ul>
+# <li>If we had a transducer, we would have pairs of symbols (<code>input:output</code>)</li>
+#  <ul>
+#   <li>Such as: <code>a:a a:b b:b c:e</code></li>
+#  </ul>
+# <li>Determinization and minimization work the same in both cases.</li>
+#  <ul>
+#   <li>We just need to interpret the pairs of symbols as one single symbol, so <code>a:a</code> is another symbol than <code>a:b</code>.</li>
+#  </ul>
+# </ul>
 #
 # #### Algorithms
 #
-# * Determinization
-#   * For instance: https://www.tutorialspoint.com/automata_theory/ndfa_to_dfa_conversion.htm
-# * Minimization
-#   * For instance: http://www.cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html (todo: check)
+# <ul>
+# <li>Determinization</li>
+#  <ul>
+#   <li>For instance: https://www.tutorialspoint.com/automata_theory/ndfa_to_dfa_conversion.htm</li>
+#  </ul>
+# <li>Minimization</li>
+#  <ul>
+#   <li>For instance: http://www.cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html (todo: check)</li>
+#  </ul>
+# </ul>
 #
 
 # ## 2. Optimizing weighted finite-state networks
@@ -245,9 +283,11 @@ tr.minimize()
 #
 # Then we get the following probabilities for the full word forms “tuoksua”:
 #
-# * `Prob(tuoksua as a noun) = Prob(Noun) × Prob(tuoksu | Noun) × Prob(Noun ending -a for partitive case) = 0.5 × 0.0001 × 0.1 = 0.000005`
-# * `Prob(tuoksua as a verb) = Prob(Verb) × Prob(tuoksu | Verb) × Prob(Verb ending -a for infinitive) = 0.3 × 0.001 × 0.05 = 0.000015`
-# * `Prob(tuoksua as a noun or verb) = Prob(tuoksua as a noun) + Prob(tuoksua as a verb) =  0.000005 + 0.000015 = 0.00002`
+# <ul>
+#  <li><code>Prob(tuoksua as a noun) = Prob(Noun) × Prob(tuoksu | Noun) × Prob(Noun ending -a for partitive case) = 0.5 × 0.0001 × 0.1 = 0.000005</code></li>
+#  <li><code>Prob(tuoksua as a verb) = Prob(Verb) × Prob(tuoksu | Verb) × Prob(Verb ending -a for infinitive) = 0.3 × 0.001 × 0.05 = 0.000015</code></li>
+#  <li><code>Prob(tuoksua as a noun or verb) = Prob(tuoksua as a noun) + Prob(tuoksua as a verb) =  0.000005 + 0.000015 = 0.00002</code></li>
+# </ul>
 #
 # Shown as a network with probability weights:
 #
@@ -257,24 +297,32 @@ tr.minimize()
 #
 # ### 2.1. Semirings
 #
-# * Let’s replace the probabilities with some generic weights and replace the operators × and + with the generic semiring operators ⊗ and ⊕
-#   * `Weight(tuoksua as a noun) = Weight(Noun) ⊗ Weight(tuoksu | Noun) ⊗ Weight(Noun ending -a for partitive case)`
-#   * `Weight(tuoksua as a verb) = Weight(Verb) ⊗ Weight(tuoksu | Verb) ⊗ Weight(Verb ending -a for infinitive)`
-#   * `Weight(tuoksua as a noun or verb) = Weight(tuoksua as a noun) ⊕ Weight(tuoksua as a verb)`
+# <ul>
+# <li>Let’s replace the probabilities with some generic weights and replace the operators × and + with the generic semiring operators ⊗ and ⊕</li>
+#  <ul>
+#   <li><code>Weight(tuoksua as a noun) = Weight(Noun) ⊗ Weight(tuoksu | Noun) ⊗ Weight(Noun ending -a for partitive case)</code></li>
+#   <li><code>Weight(tuoksua as a verb) = Weight(Verb) ⊗ Weight(tuoksu | Verb) ⊗ Weight(Verb ending -a for infinitive)</code></li>
+#   <li><code>Weight(tuoksua as a noun or verb) = Weight(tuoksua as a noun) ⊕ Weight(tuoksua as a verb)</code></li>
+#  </ul>
+# </ul>
 #
 # ### 2.2. Probability semiring
 #
-# * The weights should be interpreted as probabilties
-# * The operator ⊗ should be interpreted as multiplication ×
-# * The operator ⊕ should be interpreted as addition +
-# * This is exactly what we have seen in our example already
+# <ul>
+#  <li>The weights should be interpreted as probabilties</li>
+#  <li>The operator ⊗ should be interpreted as multiplication ×</li>
+#  <li>The operator ⊕ should be interpreted as addition +</li>
+#  <li>This is exactly what we have seen in our example already</li>
+# </ul>
 #
 # ### 2.3. Log semiring
 #
-# * The weights should be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)
-# * The operator ⊗ should be interpreted as addition +
-# * The operator ⊕ should be interpreted as the rather complex operation: w1 ⊕ w2 = – log (10<sup>-w1</sup> + 10<sup>-w2</sup>)  (if we use 10 as our base; it can be something else, too)
-# * Why? Because if w1 = – log<sub>10</sub> p1 and w2 = – log<sub>10</sub> p2 and p1 and p2 are probabilities, then w1 ⊕ w2 = – log<sub>10</sub>(10<sup>– log<sub>10</sub> p1</sup> + 10<sup>– log<sub>10</sub> p2</sup>) =  – log<sub>10</sub>(p1 + p2) (This is the logprob of the sum of two probabilities)
+# <ul>
+#  <li>The weights should be interpreted as negative logprobs: for instance, – log Prob(tuoksu | Noun)</li>
+#  <li>The operator ⊗ should be interpreted as addition +</li>
+#  <li>The operator ⊕ should be interpreted as the rather complex operation: w1 ⊕ w2 = – log (10<sup>-w1</sup> + 10<sup>-w2</sup>)  (if we use 10 as our base; it can be something else, too)</li>
+#  <li>Why? Because if w1 = – log<sub>10</sub> p1 and w2 = – log<sub>10</sub> p2 and p1 and p2 are probabilities, then w1 ⊕ w2 = – log<sub>10</sub>(10<sup>– log<sub>10</sub> p1</sup> + 10<sup>– log<sub>10</sub> p2</sup>) =  – log<sub>10</sub>(p1 + p2) (This is the logprob of the sum of two probabilities)</li>
+# </ul>
 #
 # Shown as a network with logprob weights in the log semiring
 #
@@ -282,9 +330,11 @@ tr.minimize()
 #
 # ### 2.4. Tropical semiring
 #
-# * The weights can still be interpreted as negative logprobs: for instance, –log(Prob(tuoksu | Noun))
-# * The operator ⊗ should still be interpreted as addition +
-# * The operator ⊕ is simplified and picks the minimum, that is, the path with lower overall weight: w1 ⊕ w2 = min(w1, w2) = { w1 if w1 < w2; w2 otherwise }
+# <ul>
+#  <li>The weights can still be interpreted as negative logprobs: for instance, –log(Prob(tuoksu | Noun))</li>
+#  <li>The operator ⊗ should still be interpreted as addition +</li>
+#  <li>The operator ⊕ is simplified and picks the minimum, that is, the path with lower overall weight: w1 ⊕ w2 = min(w1, w2) = { w1 if w1 < w2; w2 otherwise }</li>
+# </ul>
 #
 # Shown as a network with logprob weights in the tropical semiring:
 #
@@ -333,6 +383,8 @@ print(tr)
 #
 # ## Further reading
 #
-# * To learn more, you can read the full article by Mohri et al. at: http://www.cs.nyu.edu/~mohri/pub/csl01.pdf
-# * There are more similar articles, such as the version that was actually published in Computer Speech and Language in 2002.
-# * Or look at the OpenFST library: http://www.cs.columbia.edu/~mohri/
+# <ul>
+#  <li>To learn more, you can read the full article by Mohri et al. at: http://www.cs.nyu.edu/~mohri/pub/csl01.pdf</li>
+#  <li>There are more similar articles, such as the version that was actually published in Computer Speech and Language in 2002.</li>
+#  <li>Or look at the OpenFST library: http://www.cs.columbia.edu/~mohri/</li>
+# </ul>
