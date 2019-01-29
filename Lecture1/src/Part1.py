@@ -121,9 +121,8 @@ print(hfst_dev.__version__)
 #
 # We have roots or bases of morphemes and different processes apply to them.
 #
-# #### Nominative: word final 'e' becomes 'i'; 't' in front of 'i' becomes 's' 🡒 "susi"
-#
 # <ul>
+#  <li>Nominative: word final 'e' becomes 'i'; 't' in front of 'i' becomes 's' 🡒 "susi"</li>
 #  <li>Genitive: add suffix '+n'; soften 't' to 'd' in closed syllable 🡒 "suden"</li>
 #  <li>Etc.</li>
 # </ul>
@@ -204,7 +203,9 @@ help(hfst_dev.start_xfst)
 # State named <i>Root</i> is the initial state and state named <i>\#</i> the final one.
 # Above each transition, there is the input
 # that the transition <i>consumes</i> and the output that it <i>produces</i>, separated with a colon ":".
-# The "ε:ε" signifies the <i>epsilon</i> transition which is possible without consuming
+# The symbol ε is the <i>epsilon</i>, i.e. the empty symbol. On input side it means that no symbol is consumed
+# and on output side that no symbol is produced.
+# The "ε:ε" signifies the <i>epsilon transition</i> which is possible without consuming
 # any input or producing any output.
 # We will return to finite-state transducers in more detail in the next part.
 #
@@ -429,10 +430,16 @@ print(generator.lookup('sky+N+Pl'))
 # Next, _invert_ the transducer to get an analyzer:
 
 from hfst_dev import HfstTransducer
-analyzer = HfstTransducer(generator)
+analyzer = HfstTransducer(generator) # create a copy
 analyzer.invert()
 analyzer.minimize()
 
 print(analyzer.lookup('skies'))
 
 # and expect the result `(('sky+N+Pl', 0.0),)`, i.e. "the noun sky in plural with a zero weight".
+#
+# Let's check that inverting the analyzer produces a transducer equivalent to the generator:
+
+analyzer.invert()
+analyzer.minimize()
+assert(analyzer.compare(generator))

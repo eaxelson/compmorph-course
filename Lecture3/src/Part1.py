@@ -94,7 +94,7 @@
 # <li>This interpretation considers probability to be the relative frequency "in the long run" of outcomes.</li>
 # <li>Typical examples:</li>
 #  <ul>
-#   <li>throwing a dice (1, 2, 3, 4, 5, 6)</li>
+#   <li>throwing dice (1, 2, 3, 4, 5, 6)</li>
 #   <li>throwing a coin ("heads or tails")</li>
 #  </ul>
 # </ul>
@@ -182,17 +182,17 @@
 #  </ul>
 # <li>The prior probability states the general assumptions made in the model, such as:</li>
 #  <ul>
-#   <li>P("It snows in Helsinki in January")</li>
+#   <li><code>P("It snows in Helsinki in January")</code></li>
 #  </ul>
 # <li>The posterior probability is a product of two probabilities: the prior probability and a conditional probability, such as:</li>
 #  <ul>
-#   <li>P("It snows in Helsinki on 23 Jan 2018" | "It snows in Helsinki in January") * P("It snows in Helsinki in January")</li>
+#   <li><code>P("It snows in Helsinki on 23 Jan 2018" | "It snows in Helsinki in January") * P("It snows in Helsinki in January")</code></li>
 #  </ul>
 # </ul>
 
 # ## 3. Back to disambiguation
 #
-# The "poikasilla" ambiguity: 1) poikanen +N +Pl +Ade
+# ### 3.1. The "poikasilla" ambiguity: poikanen +N +Pl +Ade
 #
 # <img src="img/poikanen_n_pl_ade.png">
 #
@@ -206,7 +206,7 @@
 # = 7.5 * 10^-7
 # </pre>
 #
-# The "poikasilla" ambiguity: 2) poika#silla +N +Sg +Nom
+# ### 3.2. The "poikasilla" ambiguity: poika#silla +N +Sg +Nom
 #
 # <img src="img/poika_silla_n_sg_nom.png">
 #
@@ -220,12 +220,14 @@
 # = 1.65 * 10^-11
 # </pre>
 #
+# ### 3.3. Formulate a model with probabilities
+#
 # Compare and pick the more likely alternative 🡒 The analysis `poikanen +N +Pl +Ade` is almost 50000 times more likely
 # than `poika#silla +N +Sg +Nom` (in this invented model).
 #
 # Formulated in lexc format with weights (The syntax is correct, but don't do it exactly like this yet):
 #
-# <code>
+# <pre>
 # Multichar_Symbols +N +Sg +Pl +Nom +Ade +Abl ^A ^I ^J ^K ^S ^T
 # 
 # LEXICON Root
@@ -247,13 +249,13 @@
 # LEXICON Number
 # +Sg:0               Case "weight: 0.6" ;
 # +Pl:^I              Case "weight: 0.3" ;
-# #:0  Nouns "weight: 0.1" ; ! Back to collect more stems
+# \#:0  Nouns "weight: 0.1" ; ! Back to collect more stems
 # 
 # LEXICON Case
 # +Nom:0              # "weight: 0.55" ;
 # +Ade:ll^A           # "weight: 0.05" ;
 # ...
-# </code>
+# </pre>
 
 # ## 4. Spelling correction
 #
@@ -300,7 +302,7 @@
 #
 # #### xfst script snippet for a spell checker
 #
-# <code>
+# <pre>
 # ! Use the .l operator to project only lower level (= surface forms) of the
 # ! transducer; we are not interested in the upper level (= lexical forms)
 # define Vocabulary [ Lexicon .o. AlternationRules ].l ;
@@ -320,7 +322,7 @@
 # ! The spell checker is ready to use
 # regex SpellChecker ;
 # 
-# </code>
+# </pre>
 #
 # Again, the syntax is correct, but there is something left to fix with the weights...
 
@@ -341,7 +343,6 @@
 # This product of probabilities can be written as:
 #
 # <pre>
-# This product of probabilities can be written as:
 # (5 * 10^-1) * 10^-3 * 10^-1 * 10^-6 * (6 * 10^-1) * (5.5 * 10^-1)
 # = 10^-0.301 * 10^-3 * 10^-1 * 10^-6 * 10^-0.222 * 10^-0.260
 # = 10^-(0.301 + 3 + 1 + 6 + 0.222 + 0.260) =
@@ -357,7 +358,7 @@
 # we get: <code>0.301 + 3 + 1 + 6 + 0.222 + 0.260 = 10.783</code>
 #
 # What we are doing is taking the negative logarithm of the probabilities:
-# <code>10^-10.783 = 0.0000000000165` 🡒 `-log10 0.0000000000165 = 10.783</code>
+# <code>10^-10.783 = 0.0000000000165 🡒 -log10 0.0000000000165 = 10.783</code>
 #
 # <ul>
 # <li>A negative logarithm of a probability is called a <i>logprob</i>.</li>
@@ -482,9 +483,7 @@ apply up for
 #
 # <img src="img/fsa.png">
 #
-# TODO: use graphviz package
-#
-# HfstIterableTransducer is a special class for generating transducers
+# <code>HfstIterableTransducer</code> is a special class for generating transducers
 # from scratch or iterating them state by state and transition by transition.
 # It does not support most of the ordinary transducer functions.
 
@@ -501,7 +500,7 @@ tr.add_transition(3, 4, EPSILON, EPSILON, 0)
 tr.add_transition(3, 4, 'c', 'c', 0)
 tr.set_final_weight(4, 0)
 
-# Print the transducer in AT&T format:
+# Print the transducer in AT&T format (TODO: use graphviz package instead):
 print(tr)
 
 # ### 6.2. Weighted finite-state automaton (WFSA)
@@ -527,7 +526,7 @@ print(tr)
 # For example, you’re running a speech recognition system and the user says "I have to go."
 # How do you know the user didn’t say, "I have two go"?
 # First, you come up with a probability of words occurring next to each other
-# (for example, P("to go") and P("two go")) - a language model.
+# (for example, <code>P("to go")</code> and <code>P("two go")</code>) - a language model.
 # Then, you translate those probabilities into weights for your finite state machine.
 # Then, when you’re deciding between "to" and "two," you pick the sentence with lower weight ("to").
 #
@@ -559,7 +558,7 @@ print(tr)
 #
 # The initial state is labeled 0. The final state is 2 with final weight of 3.5.
 # Any state with non-infinite final weight is a final state. There is a transition
-# from state 0 to 1 with input label a, output label x, and weight 0.5.
+# from state 0 to 1 with input label "a", output label "x", and weight 0.5.
 # This machine transduces, for instance, the string "ac" to "xz" with weight 6.5
 # (the sum of the arc and final weights).
 
