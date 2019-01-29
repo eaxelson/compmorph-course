@@ -47,7 +47,7 @@
 #
 # Any problems?
 #
-# Finite-state transducer of the “kitaab” lexc file:
+# #### Finite-state transducer of the “kitaab” lexc file:
 #
 # <img src="img/fst_of_kitaab.png">
 #
@@ -83,7 +83,7 @@
 # +Indef+Gen:iN   # ;                                             
 # ```
 #
-# Finite-state transducer of the “kitaab” lexc file using flag diacritics for the definite form:
+# #### Finite-state transducer of the “kitaab” lexc file using flag diacritics for the definite form:
 #
 # <img src="img/fst_of_kitaab_with_flags.png">
 #
@@ -119,7 +119,7 @@ LEXICON IndefCase
 print(tr.lookup('alkitaab+Def+Gen'))
 tr.invert()
 print(tr.lookup('alkitaabi'))
-exit(0)
+
 
 # #### Adding the genitive case
 #
@@ -165,7 +165,7 @@ exit(0)
 # @U.CASE.GEN@    # ;
 # ```
 #
-# Transducer with “bi” article governing the genitive case:
+# #### Transducer with “bi” article governing the genitive case:
 #
 # <img src="img/fst_of_kitaab_genitive.png">
 

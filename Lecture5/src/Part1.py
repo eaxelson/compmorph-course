@@ -64,9 +64,9 @@
 # ### 2.4. Case study: Esperanto verb guesser xfst script
 #
 
-from hfst_dev import compile_xfst_script
-compile_xfst_script(
-"""
+from hfst_dev import XfstCompiler
+comp = XfstCompiler()
+script ="""
 clear stack
 
 ! We limit ourselves here to lower case letters and ignore some Esperanto letters not found in the
@@ -88,16 +88,19 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
                  ! Make verb vocabulary ready to use
                  define AllPossibleVerbs ;
                  regex AllPossibleVerbs ;
-""")
+"""
+comp.parse_line(script)
 
 # ### 2.5. Case study: Esperanto verb guesser example output
 #
-# Try the following commands by adding them to the end of input that is given to compile_xfst_script:
+# Try the following commands:
 #
 # ```
 # up donadas     random-upper     random-lower
 # ```
-#
+
+comp.parse_line('up donadas')
+
 # You should get something like this as a result for up donadas:
 #
 # ```
@@ -105,7 +108,9 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 # don+Verb+Cont+Pres
 # donad+Guess+Verb+Pres
 # ```
-#
+
+comp.parse_line('random-upper')
+
 # for random-upper:
 #
 # ```
@@ -115,7 +120,9 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 # obr+Guess+Verb+Cont+Fut
 # opop+Guess+Verb+Cond
 # ```
-#
+
+comp.parse_line('random-lower')
+
 # for random-lower:
 #
 # ```
@@ -200,6 +207,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
 # ### 3.4. Conversion from orthography to pronunciation for Brazilian Portuguese
 #
 
+from hfst_dev import compile_xfst_script
 compile_xfst_script(
 """
 define Vowel [ a | e | i | o | u

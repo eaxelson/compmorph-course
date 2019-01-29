@@ -25,7 +25,7 @@
 # and  produce one single FST that “jumps” from the lexical-form input straight to
 # the final output in one go, without producing the intermediate steps.
 #
-# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
+# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book.</i>
 #
 # <img src="img/cascade.png">
 #
@@ -43,7 +43,7 @@
 #
 # ### 1.2. Two-level approach
 #
-# Two-level morphology is different
+# #### Two-level morphology is different
 #
 # <img src="img/series.png">
 #
@@ -52,11 +52,11 @@
 #  <li>The rule transducers are combined by intersection rather than composition</li>
 # </ul>
 #
-# Compare rule declarations for xfst vs. twol:
+# #### Compare rule declarations for xfst vs. twol:
 #
 # <img src="img/rule_declarations_compared.png">
 #
-# Some of the twol notation explained:
+# #### Some of the twol notation explained:
 #
 # <img src="img/twol_notation_explained.png">
 
@@ -110,7 +110,7 @@
 # <img src="img/xfst_and_twolc_scripts.png">
 #
 # Which one to use is mostly a matter of taste. The xfst syntax allows lexicon to be read from file
-# and composed with the rules. In twolc, this must be done by hand(?). Compare the following:
+# and composed with the rules. In twolc, this must be done by hand. Compare the following:
 
 from hfst_dev import compile_xfst_file, compile_twolc_file, compile_lexc_file
 from hfst_dev import intersect, compose, HfstTransducer

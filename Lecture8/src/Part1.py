@@ -17,7 +17,7 @@
 # ### 1.1. Example lexicon
 #
 # Let’s first create a noun lexicon from scratch and add word stems to it.
-# We use HfstIterableTransducer for this purpose.
+# We use <code>HfstIterableTransducer</code> for this purpose.
 #
 # <img src="img/noun_lexicon.png">
 
