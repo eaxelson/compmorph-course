@@ -89,7 +89,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
                  define AllPossibleVerbs ;
                  regex AllPossibleVerbs ;
 """
-comp.parse_line(script)
+comp.parse_line(script) # TODO: print to ostringstream
 
 # ### 2.5. Case study: Esperanto verb guesser example output
 #
@@ -138,7 +138,7 @@ comp.parse_line('random-lower')
 # ### 2.6. Stemming
 #
 # <ul>
-#  <li>A term used particularly in information retrieval to describe the process of reducing inflected (or sometimes derived) words to their word stem, base or root form —generally a written word form.</li>
+#  <li>A term used particularly in information retrieval to describe the process of reducing inflected (or sometimes derived) words to their word stem, base or root form — generally a written word form.</li>
 #  <ul>
 #   <li>The stem is “fish” for “fishing”, “fished”, and “fisher”.</li>
 #   <li>The stem is “argu” for “argue”, “argued”, “argues”, “arguing”, and “argus”...(!)</li>
@@ -160,7 +160,7 @@ comp.parse_line('random-lower')
 #   <li>Tidy up a bit</li>
 #  </ul>
 #  <li>Feasible for English with such “simple morphology”</li>
-#  <li>The full algorithm is described here: http://tartarus.org/martin/PorterStemmer/def.txt</li>
+#  <li>The full algorithm is described <a href="http://tartarus.org/martin/PorterStemmer/def.txt">here</a>.</li>
 #  <li>There are other English stemmers:</li>
 #  <ul>
 #   <li>Snowball</li>
@@ -198,7 +198,7 @@ comp.parse_line('random-lower')
 #
 # ### 3.3. Some example words
 #
-# <li>What applications that you can think of need a mapping between orthographic and pronounced forms?
+# What applications that you can think of need a mapping between orthographic and pronounced forms?
 #
 # <img src="img/test_data_for_portuguese.png">
 #

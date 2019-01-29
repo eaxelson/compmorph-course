@@ -157,12 +157,12 @@ print(composition_set.extract_paths()) # TODO: @_EPSILON_SYMBOL_@ is printed
 
 cat = fst({'cat':'CHAT'})
 cat.input_project()
-cat.minimize() # get rid of epsilons
+cat.remove_epsilons() # get rid of epsilons
 print(cat.extract_paths())
 
 CHAT = fst({'cat':'CHAT'})
 CHAT.output_project()
-CHAT.minimize() # get rid of epsilons
+CHAT.remove_epsilons() # get rid of epsilons
 print(CHAT.extract_paths())
 
 

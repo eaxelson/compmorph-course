@@ -59,38 +59,40 @@ print(hfst_dev.__version__)
 
 # ## 3. Course overview
 #
-# | Lecture | Topics |
-# | - | - |
-# | 1 | Theories of morphology, generators and analyzers, lexc |
-# | 2 | Finite-state basics, xfst rules |
-# | 3 | Disambiguation, probabilities, finite-state networks summarized |
-# | (4) | (Machine learning) | 
-# | 5 | Guessers, stemmers, regular expressions in xfst |
-# | 6 | Twolc, two-level rules |
-# | 7 | Flag diacritics, non-concatenative morphology |
-# | 8 | Optimization of finite-state networks |
+# <table>
+# <tr> <th>Lecture</th> <th>Topics</th> </tr>
+# <tr> <td>1</td> <td>Theories of morphology, generators and analyzers, lexc</td> </tr>
+# <tr> <td>2</td> <td>Finite-state basics, xfst rules</td> </tr>
+# <tr> <td>3</td> <td>Disambiguation, probabilities, finite-state networks summarized</td> </tr>
+# <tr> <td>(4)</td> <td>(Machine learning)</td> </tr>
+# <tr> <td>5</td> <td>Guessers, stemmers, regular expressions in xfst</td> </tr>
+# <tr> <td>6</td> <td>Twolc, two-level rules</td> </tr>
+# <tr> <td>7</td> <td>Flag diacritics, non-concatenative morphology</td> </tr>
+# <tr> <td>8</td> <td>Optimization of finite-state networks</td> </tr>
+# </table>
 
 # ## 4. Hockett's models of morphology
 #
 # ### 4.1. Word and Paradigm (W&P), Example: Finnish nouns
 #
-# | Numbers/Cases | Singular | Plural |
-# | - | - | - |
-# | *Nominative* | susi | sudet | 
-# | *Genitive* | suden | susien, sutten |
-# | *Partitive* | sutta | susia |
-# | *Inessive* | sudessa | susissa |
-# | *Elative* | sudesta | susista |
-# | *Illative* | suteen | susiin |
-# | *Adessive* | sudella | susilla |
-# | *Ablative* | sudelta | susilta |
-# | *Allative* | sudelle | susille |
-# | *Essive* | sutena | susina |
-# | *Translative* | sudeksi | susiksi |
-# | *Instructive* | - | susin |
-# | *Abessive* | sudetta | susitta |
-# | *Comitative* | - | susine(en) |
-#
+# <table>
+# <tr> <th>Numbers/Cases</th> <th>Singular</th> <th>Plural</th> </tr>
+# <tr> <th>Nominative</th> <td>susi</td> <td>sudet</td> </tr>
+# <tr> <th>Genitive</th> <td>suden</td> <td>susien, sutten</td> </tr>
+# <tr> <th>Partitive</th> <td>sutta</td> <td>susia</td> </tr>
+# <tr> <th>Inessive</th> <td>sudessa</td> <td>susissa</td> </tr>
+# <tr> <th>Elative</th> <td>sudesta</td> <td>susista</td> </tr>
+# <tr> <th>Illative</th> <td>suteen</td> <td>susiin</td> </tr>
+# <tr> <th>Adessive</th> <td>sudella</td> <td>susilla</td> </tr>
+# <tr> <th>Ablative</th> <td>sudelta</td> <td>susilta</td> </tr>
+# <tr> <th>Allative</th> <td>sudelle</td> <td>susille</td> </tr>
+# <tr> <th>Essive</th> <td>sutena</td> <td>susina</td> </tr>
+# <tr> <th>Translative</th> <td>sudeksi</td> <td>susiksi</td> </tr>
+# <tr> <th>Instructive</th> <td>-</td> <td>susin</td> </tr>
+# <tr> <th>Abessive</th> <td>sudetta</td> <td>susitta</td> </tr>
+# <tr> <th>Comitative</th> <td>-</td> <td>susine(en)</td> </tr>
+# </table>
+
 # ### 4.2. Item and Arrangement (I&A)
 #
 # #### Morphemes and allomorphs
@@ -129,11 +131,12 @@ print(hfst_dev.__version__)
 #
 # ### 4.4. Corresponding HFST tools
 #
-# | Model/Tool | [twolc](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_twolc_file-inputfilename-outputfilename-kwargs) | [lexc](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_lexc_file-filename-kwargs) | [xfst](https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_xfst_file-filename-kwargs) |
-# | - | - | - | - |
-# | Word & Paradigm |  | ✔ | ✔ |
-# | Item & Arrangement |  | ✔ | ✔ |
-# | Item & Process | ✔ |  | ✔ |
+# <table>
+# <tr> <th>Model/Tool</th> <th><a href="https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_twolc_file-inputfilename-outputfilename-kwargs">twolc</a></th> <th><a href="https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_lexc_file-filename-kwargs">lexc</a></th> <th><a href="https://github.com/hfst/python-hfst-4.0/wiki/PackageHfst#compile_xfst_file-filename-kwargs">xfst</a></th> </tr>
+# <tr> <th>Word & Paradigm</th> <td> </td> <td>✔</td> <td>✔</td> </tr>
+# <tr> <th>Item & Arrangement</th> <td> </td> <td>✔</td> <td>✔</td> </tr>
+# <tr> <th>Item & Process</th> <td>✔</td> <td> </td> <td>✔</td> </tr>
+# </table>
 #
 # See how they work. twolc:
 
@@ -179,18 +182,22 @@ help(hfst_dev.start_xfst)
 #
 # ### 5.3. Some simple noun paradigms in English
 #
-# Paradigm: N  
+# #### Paradigm: N
+#
 # __cat__ +Sg (singular)  
 # __cat|s__ +Pl (plural)  
 # __cat|'s__ +Sg +Poss (singular possessive)  
-# __cat|s'__ +Pl +Poss (plural possessive)  
+# __cat|s'__ +Pl +Poss (plural possessive)
+#
 # <i>Similarly:</i> dog, pet, book, hill, fan
 #
-# Paradigm: N_s  
+# #### Paradigm: N_s
+#
 # __kiss__ +Sg (singular)  
 # __kiss|es__ +Pl (plural)  
 # __kiss|'s__ +Sg +Poss (singular possessive)  
-# __kiss|es|'__ +Pl +Poss (plural possessive)  
+# __kiss|es|'__ +Pl +Poss (plural possessive)
+#
 # <i>Similarly:</i> wish, mess, church, search, waitress
 #
 # Let's create a morphological generator and analyzer for this data.
@@ -442,4 +449,4 @@ print(analyzer.lookup('skies'))
 
 analyzer.invert()
 analyzer.minimize()
-assert(analyzer.compare(generator))
+print(analyzer.compare(generator))
