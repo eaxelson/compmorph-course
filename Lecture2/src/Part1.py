@@ -1,10 +1,10 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 2
 #
 # <ul>
-# <li>1. Finite-State Basics</li>
-# <li>2. Set Theory for Finite-State Networks</li>
-# <li>3. Item & Process Morphology Using xfst Rules</li>
-# <li>4. Example: English Adjectives</li>
+# <li>1. <a href="#1.-Finite-State-Basics">Finite-State Basics</a></li>
+# <li>2. <a href="#2.-Set-Theory-for-Finite-State-Networks">Set Theory for Finite-State Networks</a></li>
+# <li>3. <a href="#3.-Item-&-Process-Morphology-Using-xfst-Rules">Item & Process Morphology Using xfst Rules</a></li>
+# <li>4. <a href="#4.-Example:-English-Adjectives">Example: English Adjectives</a></li>
 # </ul>
 #
 # ## 1. Finite-State Basics
@@ -17,8 +17,8 @@
 # <img src="img/noun_inflection.png">
 #
 # The yellow circles represent _states_ or _nodes_ and the arrows represent _transitions_
-# or _arcs_ between states. Each transition consumes an input symbol and produces an output symbol.
-# The special symbol ε (the epsilon) on the input side means that no symbol is consumed
+# or _arcs_ between states. Each transition _consumes_ an input symbol and _produces_ an output symbol.
+# The special symbol ε (the _epsilon_) on the input side means that no symbol is consumed
 # and on the output side that no symbol is produced when following a given transition.
 #
 # A finite-state network that has only input symbols in the transitions is called
@@ -143,7 +143,7 @@ from hfst_dev import compose
 set1 = fst({'cat':'chat'})
 set2 = fst({'chat':'Katze'})
 composition_set = compose((set1, set2))
-print(composition_set.extract_paths()) # TODO: @_EPSILON_SYMBOL_@ is printed
+print(composition_set.extract_paths(output='text'))
 
 # ### 2.10. Projection
 #
@@ -168,17 +168,17 @@ print(CHAT.extract_paths())
 
 # ### 2.11. Set operations expressed in the xfst language
 #
-# <pre>
-# [ A | B ] denotes the union of the two languages or relations A and B ("or"-operation).
-# [ A & B ] denotes the intersection ("and"-operation).
-# [ A - B ] denotes the subtraction of B from A.
-# [ A B ] denotes the concatenation.
-# [ A .o. B ] denotes the composition of the relations.
-# A.u denotes the upper (i.e. input) projection.
-# A.l denotes the lower (o.e. output) projection.
-# </pre>
+# <table>
+# <tr> <td><code>[ A | B ]</code></td> <td>denotes the union of the two languages or relations A and B ("or"-operation)</td> </tr>
+# <tr> <td><code>[ A & B ]</code></td> <td>denotes the intersection ("and"-operation)</td> </tr>
+# <tr> <td><code>[ A - B ]</code></td> <td>denotes the subtraction of B from A</td> </tr>
+# <tr> <td><code>[ A B ]</code></td> <td>denotes the concatenation</td> </tr>
+# <tr> <td><code>[ A .o. B ]</code></td> <td>denotes the composition of the relations</td> </tr>
+# <tr> <td><code>A.u</code></td> <td>denotes the upper (i.e. input) projection</td> </tr>
+# <tr> <td><code>A.l</code></td> <td>denotes the lower (o.e. output) projection</td> </tr>
+# </table>
 
-# ## 3. Item & Process morphology using xfst rules
+# ## 3. Item & Process Morphology Using xfst Rules
 #
 # Recall the finite-state transducer for purely concatenative I&A English
 # noun inflection (from previous lecture):
@@ -282,7 +282,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 #
 # <i>Images from Beesley & Karttunen (2003): Finite State Morphology.</i>
 
-# ## 4. Example: English adjectives
+# ## 4. Example: English Adjectives
 #
 # ### 4.1. Lexicon (lexc) of some English adjectives
 #

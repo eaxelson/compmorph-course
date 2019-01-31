@@ -1,12 +1,12 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 3
 #
 # <ul>
-#  <li>1. Disambiguation</li>
-#  <li>2. Probabilities, basics</li>
-#  <li>3. Back to disambiguation</li>
-#  <li>4. Spelling correction</li>
-#  <li>5. Logprobs</li>
-#  <li>6. Summary of types of finite-state automata and transducers</li>
+#  <li>1. <a href="#1.-Disambiguation">Disambiguation</a></li>
+#  <li>2. <a href="#2.-Probabilities,-basics">Probabilities, basics</a></li>
+#  <li>3. <a href="#3.-Back-to-disambiguation">Back to disambiguation</a></li>
+#  <li>4. <a href="#4.-Spelling-correction">Spelling correction</a></li>
+#  <li>5. <a href="#5.-Logprobs">Logprobs</a></li>
+#  <li>6. <a href="#6.-Summary-of-types-of-finite-state-automata-and-transducers">Summary of types of finite-state automata and transducers</a></li>
 # </ul>
 #
 # ## 1. Disambiguation

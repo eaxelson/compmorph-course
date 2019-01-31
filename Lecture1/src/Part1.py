@@ -1,13 +1,13 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 1
 #
 # <ul>
-# <li>1. Prerequisites</li>
-# <li>2. Course material</li>
-# <li>3. Course overview</li>
-# <li>4. Hockett's models of morphology</li>
-# <li>5. Morphological generators and analyzers</li>
-# <li>6. A Finite-State Transducer that implements a morphological generator</li>
-# <li>7. Lexc code that represents this transducer</li>
+# <li>1. <a href="#1.-Prerequisites">Prerequisites</a></li>
+# <li>2. <a href="#2.-Course-material">Course material</a></li>
+# <li>3. <a href="#3.-Course-overview">Course overview</a></li>
+# <li>4. <a href="#4.-Hockett's-models-of-morphology">Hockett's models of morphology</a></li>
+# <li>5. <a href="#5.-Morphological-generators-and-analyzers">Morphological generators and analyzers</a></li>
+# <li>6. <a href="#6.-A-Finite-State-Transducer-that-implements-a-morphological-generator">A Finite-State Transducer that implements a morphological generator</a></li>
+# <li>7. <a href="#7.-Lexc-code-that-represents-this-transducer">Lexc code that represents this transducer</a></li>
 # </ul>
 #
 # ## HFST - Helsinki Finite-State Technology
@@ -15,7 +15,7 @@
 # The HFST toolkit is intended for processing natural language
 # morphologies. The toolkit is demonstrated by wide-coverage
 # implementations of a number of languages of varying morphological
-# complexity. HFST is written mainly in C++, but there is a Python interface
+# complexity. HFST is written mainly in C++, but there is also a Python interface
 # which is demonstrated on these notebooks.
 #
 # ## 1. Prerequisites
@@ -138,19 +138,21 @@ print(hfst_dev.__version__)
 # <tr> <th>Item & Process</th> <td>✔</td> <td> </td> <td>✔</td> </tr>
 # </table>
 #
-# See how they work. twolc:
+# Check how they work with `help` command.
+#
+# #### twolc:
 
 help(hfst_dev.compile_twolc_file)
 
-# lexc:
+# #### lexc:
 
 help(hfst_dev.compile_lexc_file)
 
-# xfst:
+# #### xfst:
 
 help(hfst_dev.compile_xfst_file)
 
-# interactive version of xfst:
+# #### interactive version of xfst:
 
 help(hfst_dev.start_xfst)
 
@@ -184,19 +186,23 @@ help(hfst_dev.start_xfst)
 #
 # #### Paradigm: N
 #
-# __cat__ +Sg (singular)  
-# __cat|s__ +Pl (plural)  
-# __cat|'s__ +Sg +Poss (singular possessive)  
-# __cat|s'__ +Pl +Poss (plural possessive)
+# <table>
+# <tr> <td><b>cat</b></td> <td>+Sg (singular)</td> </tr>
+# <tr> <td><b>cat|s</b></td> <td>+Pl (plural)</td> </tr>
+# <tr> <td><b>cat|'s</b></td> <td>+Sg +Poss (singular possessive)</td> </tr>
+# <tr> <td><b>cat|s'</b></td> <td>+Pl +Poss (plural possessive)</td> </tr>
+# </table>
 #
 # <i>Similarly:</i> dog, pet, book, hill, fan
 #
 # #### Paradigm: N_s
 #
-# __kiss__ +Sg (singular)  
-# __kiss|es__ +Pl (plural)  
-# __kiss|'s__ +Sg +Poss (singular possessive)  
-# __kiss|es|'__ +Pl +Poss (plural possessive)
+# <table>
+# <tr> <td><b>kiss</b></td> <td>+Sg (singular)</td> </tr>
+# <tr> <td><b>kiss|es</b></td> <td>+Pl (plural)</td> </tr>
+# <tr> <td><b>kiss|'s</b></td> <td>+Sg +Poss (singular possessive)</td> </tr>
+# <tr> <td><b>kiss|es|'</b></td> <td>+Pl +Poss (plural possessive)</td> </tr>
+# </table>
 #
 # <i>Similarly:</i> wish, mess, church, search, waitress
 #
@@ -432,7 +438,7 @@ END
 
 print(generator.lookup('sky+N+Pl'))
 
-# and expect the result `(('skies', 0.0),)`, i.e. `skies` with a zero _weight_. We will return to weights in later lectures.
+# and expect the result `(('skies', 0.0),)`, i.e. <i>skies</i> with a zero _weight_. We will return to weights in later lectures.
 #
 # Next, _invert_ the transducer to get an analyzer:
 
@@ -443,7 +449,7 @@ analyzer.minimize()
 
 print(analyzer.lookup('skies'))
 
-# and expect the result `(('sky+N+Pl', 0.0),)`, i.e. "the noun sky in plural with a zero weight".
+# and expect the result `(('sky+N+Pl', 0.0),)`, i.e. "the noun <i>sky</i> in plural with a zero weight".
 #
 # Let's check that inverting the analyzer produces a transducer equivalent to the generator:
 
