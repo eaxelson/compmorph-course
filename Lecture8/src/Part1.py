@@ -1,8 +1,8 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 8
 #
 # <ul>
-#  <li>1. Optimizing unweighted finite-state networks</li>
-#  <li>2. Optimizing weighted finite-state networks</li>
+#  <li>1. <a href="#1.-Optimizing-unweighted-finite-state-networks">Optimizing unweighted finite-state networks</a></li>
+#  <li>2. <a href="#2.-Optimizing-weighted-finite-state-networks">Optimizing weighted finite-state networks</a></li>
 # </ul>
 #
 # In this lecture we show how finite-state networks can be optimized,

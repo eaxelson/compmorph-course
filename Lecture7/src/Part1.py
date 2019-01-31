@@ -1,8 +1,8 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 7
 #
 # <ul>
-#  <li>1. Flag diacritics</li>
-#  <li>2. Non-concatenative morphotactics</li>
+#  <li>1. <a href="#1.-Flag-diacritics">Flag diacritics</a></li>
+#  <li>2. <a href="#2.-Non-concatenative-morphotactics">Non-concatenative morphotactics</a></li>
 # </ul>
 #
 # ## 1. Flag diacritics

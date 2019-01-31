@@ -1,10 +1,10 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 6
 #
 # <ul>
-#  <li>1. Two-level rules</li>
-#  <li>2. Example: English adjectives</li>
-#  <li>3. Twol rule operators</li>
-#  <li>4. Example: consonant gradation in English</li>
+#  <li>1. <a href="#1.-Two-level-rules">Two-level rules</a></li>
+#  <li>2. <a href="#2.-Example:-English-adjectives">Example: English adjectives</a></li>
+#  <li>3. <a href="#3.-Twol-rule-operators">Twol rule operators</a></li>
+#  <li>4. <a href="#4.-Example:-consonant-gradation-in-Finnish">Example: consonant gradation in Finnish</a></li>
 # </ul>
 #
 # ## 1. Two-level rules

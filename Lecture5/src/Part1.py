@@ -1,12 +1,12 @@
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 5
 #
 # <ul>
-#  <li>1. Big picture</li>
-#  <li>2. Guessers and stemmers</li>
-#  <li>3. Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese</li>
-#  <li>4. Regular expressions in xfst</li>
-#  <li>5. Pronunciation lexicon for a Language with Irregular Orthography: English</li>
-#  <li>6. Sound Change in Indo-European languages</li>
+#  <li><a href="#1.-Big-picture">1. Big picture</a></li>
+#  <li><a href="#2.-Guessers-and-stemmers">2. Guessers and stemmers</a></li>
+#  <li><a href="#3.-Pronunciation-lexicon-for-a-Language-with-(almost)-regular-Orthography:-Brazilian-Portuguese">3. Pronunciation lexicon for a Language with (almost) regular Orthography: Brazilian Portuguese</a></li>
+#  <li><a href="#4.-Regular-expressions-in-xfst">4. Regular expressions in xfst</a></li>
+#  <li><a href="#5.-Pronunciation-lexicon-for-a-Language-with-Irregular-Orthography:-English">5. Pronunciation lexicon for a Language with Irregular Orthography: English</a></li>
+#  <li><a href="#6.-Sound-Change-in-Indo-European-languages">6. Sound Change in Indo-European languages</a></li>
 # </ul>
 #
 # ## 1. Big picture

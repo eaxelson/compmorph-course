@@ -483,7 +483,7 @@ apply up for
 #
 # <img src="img/fsa.png">
 #
-# <pre>HfstIterableTransducer</pre> is a special class for generating transducers
+# <code>HfstIterableTransducer</code> is a special class for generating transducers
 # from scratch or iterating them state by state and transition by transition.
 # It does not support most of the ordinary transducer functions.
 
@@ -526,7 +526,7 @@ print(tr)
 # For example, you’re running a speech recognition system and the user says "I have to go."
 # How do you know the user didn’t say, "I have two go"?
 # First, you come up with a probability of words occurring next to each other
-# (for example, <pre>P("to go")</pre> and <pre>P("two go")</pre>) - a language model.
+# (for example, <code>P("to go")</code> and <code>P("two go")</code>) - a language model.
 # Then, you translate those probabilities into weights for your finite state machine.
 # Then, when you’re deciding between "to" and "two," you pick the sentence with lower weight ("to").
 #
