@@ -89,7 +89,7 @@ define ConsClust b | c | d | f | g | h | j | k | l | m | n | p | r | s | t | v |
                  define AllPossibleVerbs ;
                  regex AllPossibleVerbs ;
 """
-comp.parse_line(script) # TODO: print to ostringstream
+comp.parse(script)
 
 # ### 2.5. Case study: Esperanto verb guesser example output
 #
@@ -99,7 +99,7 @@ comp.parse_line(script) # TODO: print to ostringstream
 # up donadas     random-upper     random-lower
 # ```
 
-comp.parse_line('up donadas')
+comp.parse('up donadas')
 
 # You should get something like this as a result for up donadas:
 #
@@ -109,7 +109,7 @@ comp.parse_line('up donadas')
 # donad+Guess+Verb+Pres
 # ```
 
-comp.parse_line('random-upper')
+comp.parse('random-upper')
 
 # for random-upper:
 #
@@ -121,7 +121,7 @@ comp.parse_line('random-upper')
 # opop+Guess+Verb+Cond
 # ```
 
-comp.parse_line('random-lower')
+comp.parse('random-lower')
 
 # for random-lower:
 #
