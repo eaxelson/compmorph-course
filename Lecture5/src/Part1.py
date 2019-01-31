@@ -425,6 +425,7 @@ start_xfst()
 #   <li>Jouna Pyysalo</li>
 #   <li>Måns Huldén</li>
 #  </ul>
+# <li><a href="http://pielexicon.hum.helsinki.fi/">Project homepage</a></li>
 # </ul>
 #
 # <img src="img/pie_lexicon.png">

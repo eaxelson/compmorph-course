@@ -251,19 +251,14 @@ tr.minimize()
 #  </ul>
 # </ul>
 #
-# #### Algorithms
+# #### Algorithms explained
+#
+# For instance, at www.tutorialspoint.com:
 #
 # <ul>
-# <li>Determinization</li>
-#  <ul>
-#   <li>For instance: https://www.tutorialspoint.com/automata_theory/ndfa_to_dfa_conversion.htm</li>
-#  </ul>
-# <li>Minimization</li>
-#  <ul>
-#   <li>For instance: http://www.cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html (todo: check)</li>
-#  </ul>
+# <li><a href="https://www.tutorialspoint.com/automata_theory/ndfa_to_dfa_conversion.htm">determinization</a></li>
+# <li><a href="https://www.tutorialspoint.com/automata_theory/dfa_minimization.htm">minimization</a></li>
 # </ul>
-#
 
 # ## 2. Optimizing weighted finite-state networks
 #
@@ -384,7 +379,7 @@ print(tr)
 # ## Further reading
 #
 # <ul>
-#  <li>To learn more, you can read the full article by Mohri et al. at: http://www.cs.nyu.edu/~mohri/pub/csl01.pdf</li>
+#  <li>To learn more, you can read the <a href="http://www.cs.nyu.edu/~mohri/pub/csl01.pdf">full article</a> by Mohri et al.</li>
 #  <li>There are more similar articles, such as the version that was actually published in Computer Speech and Language in 2002.</li>
-#  <li>Or look at the OpenFST library: http://www.cs.columbia.edu/~mohri/</li>
+#  <li>Or look at the <a href="http://www.openfst.org">OpenFST library</a></li>
 # </ul>

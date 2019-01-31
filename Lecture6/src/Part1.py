@@ -179,8 +179,8 @@ print(twolc.lookup('lar'))
 # ## More information
 #
 # <ul>
-#  <li>Unpublished chapter of Beesley & Karttunen (2003): “Two-Level Rule Compiler”: http://web.stanford.edu/~laurik/.book2software/twolc.pdf</li>
-#  <li>Karttunen & Beesley (1992): Two-Level Rule Compiler. Technical Report. ISTL-92-2. Xerox Palo Alto Research Center, California. http://www.cis.upenn.edu/~cis639/docs/twolc.html</li>
+#  <li>Unpublished chapter of Beesley & Karttunen (2003): <a href="http://web.stanford.edu/~laurik/.book2software/twolc.pdf">“Two-Level Rule Compiler”</a></li>
+#  <li>Karttunen & Beesley (1992): Two-Level Rule Compiler. Technical Report. ISTL-92-2. Xerox Palo Alto Research Center, California.</li>
 #  <li>HFST: Tutorial hfst-lexc and hfst-twolc: TODO</li>
 # </ul>
 #

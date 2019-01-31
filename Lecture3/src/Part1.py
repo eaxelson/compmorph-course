@@ -579,5 +579,5 @@ print(TR.lookup('ac'))
 # <ul>
 #  <li>The Beesley & Karttunen book does not cover weighted finite-state machines. Weights were fairly new at about the time when the book was published in 2003.</li>
 #  <li>HFST: <a href="https://github.com/hfst/python-hfst-4.0/wiki/Weights">Using weights</a></li>
-#  <li>HFST <a href="https://github.com/hfst/hfst-ospell/wiki">ospell</a></li>
+#  <li>HFST: <a href="https://github.com/hfst/hfst-ospell/wiki">ospell</a> (currently available only as a separate command line tool)</li>
 # </ul>
