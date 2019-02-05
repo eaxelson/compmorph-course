@@ -500,8 +500,8 @@ tr.add_transition(3, 4, EPSILON, EPSILON, 0)
 tr.add_transition(3, 4, 'c', 'c', 0)
 tr.set_final_weight(4, 0)
 
-# Print the transducer in AT&T format (TODO: use graphviz package instead):
-print(tr)
+# View the transducer.
+tr.view()
 
 # ### 6.2. Weighted finite-state automaton (WFSA)
 #
@@ -520,7 +520,7 @@ tr.add_transition(2, 2, 'b', 'b', 0.59961)
 tr.add_transition(2, 3, 'c', 'c', 0)
 tr.set_final_weight(2, 0)
 tr.set_final_weight(3, 1.0)
-print(tr)
+tr.view()
 
 # Weighted automata can be used to decide between two alternatives.
 # For example, you’re running a speech recognition system and the user says "I have to go."
@@ -547,7 +547,7 @@ tr.add_transition(1, 3, 'a', 'a', 0)
 tr.add_transition(2, 1, 'b', 'c', 0)
 tr.add_transition(2, 3, 'a', 'a', 0)
 tr.set_final_weight(3, 0)
-print(tr)
+tr.view()
 
 # ### 6.4. Weighted finite-state transducer (WFST)
 #
@@ -567,7 +567,7 @@ tr.add_transition(0, 1, 'a', 'x', 0.5)
 tr.add_transition(0, 1, 'b', 'y', 1.5)
 tr.add_transition(1, 2, 'c', 'z', 2.5)
 tr.set_final_weight(2, 3.5)
-print(tr)
+tr.view()
 
 # Convert to HfstTransducer before lookup.
 from hfst_dev import HfstTransducer

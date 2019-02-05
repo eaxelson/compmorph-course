@@ -425,5 +425,5 @@ print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))
 # <ul>
 #  <li>Chapter 7 of the Beesley & Karttunen book: “Flag Diacritics”</li>
 #  <li>Chapter 8 of the Beesley & Karttunen book: “Non-Concatenative Morphotactics”</li>
-#  <li>HFST: hfst-twolc − A Two-Level Grammar Compiler: TODO</li>
+#  <li>HFST: <a href="https://github.com/hfst/hfst/wiki/HfstTwolc">hfst-twolc command line tool</a></li>
 # </ul>
