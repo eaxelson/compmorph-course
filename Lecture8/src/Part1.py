@@ -358,17 +358,17 @@ tr = read_att_string(
 2 3 f f 13
 3 0
 """)
-print(tr)
+tr.view()
 
 tr.determinize()
-print(tr)
+tr.view()
 
 # Weights must be pushed before minimization can take place:
 #
 # <img src="img/weight_pushing_and_minimization.png">
 
 tr.minimize()
-print(tr)
+tr.view()
 
 # #### Other uses
 #
