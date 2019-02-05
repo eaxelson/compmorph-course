@@ -385,7 +385,6 @@ print(tagalog.lookup('RE+pili'))
 # <img src="img/malay_reduplication.png">
 
 from hfst_dev import compile_xfst_file
-# todo: Regexp must start from the same line as Define, else the parser fails.
 compile_xfst_file('malay.xfst')
 xfst = HfstTransducer.read_from_file('malay.xfst.hfst')
 print(xfst.lookup('buku+Noun+Plural'))
