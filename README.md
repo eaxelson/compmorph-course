@@ -1,4 +1,4 @@
-# 
+# compmorph-course
 
 Jupyter notebook files for course Computational Morphology with HFST.
 
