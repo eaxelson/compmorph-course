@@ -37,7 +37,7 @@
 # Rule 3 output:  skies
 # ```
 #
-# The single FST will give directly: sky+N+Pl+Poss 🡒 skies.
+# The single FST will directly give: sky+N+Pl+Poss 🡒 skies.
 # 
 # The order of the rules matters!
 #

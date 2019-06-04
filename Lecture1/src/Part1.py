@@ -163,12 +163,12 @@ help(hfst_dev.start_xfst)
 # * Input (also called lexical form): `cat+N+Sg+Poss`
 # * Output (also called surface form): `cat's`
 # * The idea is to create a model that generalizes to new word forms.
-#   - Wrong way: List all possible pairs of input and output in the lexeme:
+#   - Primitive way: List all possible pairs of input and output in the lexeme:
 #     * `cat+N+Sg` 🡒 cat
 #     * `cat+N+Pl` 🡒 cats
 #     * `cat+N+Sg+Poss` 🡒 cat's
 #     * `cat+N+Pl+Poss` 🡒 cats'
-#   - Right way: Model the inner regular morphological structure of words.
+#   - More sophisticated way: Model the inner regular morphological structure of words.
 #     * This makes it possible to add a new lemma, such as `dog`, and the model knows how to inflect this word by analogy to the word `cat`.
 #
 # ### 5.2. Morphological analyzer
@@ -196,6 +196,9 @@ help(hfst_dev.start_xfst)
 # <i>Similarly:</i> dog, pet, book, hill, fan
 #
 # #### Paradigm: N_s
+
+# (The understroke following the part-of-speech marker N with a subsequent mnemonic 's'
+# is a transparent way of indicating allomorphic inflection types.)
 #
 # <table>
 # <tr> <td><b>kiss</b></td> <td>+Sg (singular)</td> </tr>
@@ -213,12 +216,12 @@ help(hfst_dev.start_xfst)
 # Below is a finite-state transducer (FST) for purely concatenative I&A English noun inflection
 # for our simple example data.
 # The yellow circles represent _states_ and the arrows represent _transitions_ between the states.
-# State named <i>Root</i> is the initial state and state named <i>\#</i> the final one.
+# The state named <i>Root</i> is the initial state and state named <i>\#</i> the final one.
 # Above each transition, there is the input
-# that the transition <i>consumes</i> and the output that it <i>produces</i>, separated with a colon ":".
-# The symbol ε is the <i>epsilon</i>, i.e. the empty symbol. On input side it means that no symbol is consumed
-# and on output side that no symbol is produced.
-# The "ε:ε" signifies the <i>epsilon transition</i> which is possible without consuming
+# that the transition <i>consumes</i> and the output that it <i>produces</i>, separated by a colon ":".
+# The symbol ε stands for the <i>epsilon</i>, i.e. the empty symbol. On the input side it means that no symbol is consumed
+# and on the output side that no symbol is produced.
+# The "ε:ε" represents the <i>epsilon transition</i> which is possible without consuming
 # any input or producing any output.
 # We will return to finite-state transducers in more detail in the next part.
 #
@@ -335,10 +338,10 @@ help(hfst_dev.start_xfst)
 #
 # <img src="img/ny_paradigm.png">
 #
-# ### 7.7 Continuation lexicons for possessive ending
+# ### 7.7 Continuation lexicons for possessive marker
 #
 # ```
-# ! Possessive endings: usually the singular is 's and 
+# ! Possessive markers: usually the singular is 's and 
 # ! the plural is '
 #
 # LEXICON PossWithS
@@ -416,7 +419,7 @@ LEXICON Num_y
 +Sg:y   PossWithS ;
 +Pl:ies PossWithoutS ;
 
-! Possessive endings: usually the singular is 's and the plural is '
+! Possessive markers: usually the singular is 's and the plural is '
 
 LEXICON PossWithS
 +Poss:'s     # ;

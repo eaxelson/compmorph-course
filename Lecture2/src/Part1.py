@@ -18,11 +18,11 @@
 #
 # The yellow circles represent _states_ or _nodes_ and the arrows represent _transitions_
 # or _arcs_ between states. Each transition _consumes_ an input symbol and _produces_ an output symbol.
-# The special symbol ε (the _epsilon_) on the input side means that no symbol is consumed
+# The special symbol ε (_epsilon_) on the input side means that no symbol is consumed
 # and on the output side that no symbol is produced when following a given transition.
 #
 # A finite-state network that has only input symbols in the transitions is called
-# a finite-state automaton (FSA). It does not produce output, but just recognizes
+# a finite-state automaton (FSA). It does not produce output, but merely recognizes
 # (or rejects) input. Finite-state automaton for a 3-word language:
 #
 # <img src="img/three_word_language.png">
@@ -251,12 +251,12 @@ cascade = compose((lexicon, InsertE, YToI, CleanUp))
 # <pre>
 # Example input:  sky+N+Pl+Poss
 # Lexicon output: sky^s'
-# Rule 1 output:  sky^es
-# Rule 2 output:  ski^es
-# Rule 3 output:  skies
+# Rule 1 output:  sky^es'
+# Rule 2 output:  ski^es'
+# Rule 3 output:  skies'
 # </pre>
 #
-# The single FST will give directly: sky+N+Pl+Poss 🡒 skies.
+# The single FST will give directly: sky+N+Pl+Poss 🡒 skies'.
 
 print(cascade.lookup("sky+N+Pl+Poss"))
 

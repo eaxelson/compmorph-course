@@ -35,13 +35,13 @@
 #
 # <ul>
 #  <li>nainen 🡒 naida +V +Pot +Pres +Sg1 (“it seems I’ll marry”)</li>
-#  <li>lautasilla 🡒 lauta#silla +N +Sg +Ade (“board rayon”)</li>
+#  <li>lautasilla 🡒 lauta#silla +N +Sg +Nom (“board rayon”)</li>
 #  <li>lautasilta:</li>
 #  <ul>
 #   <li> 🡒 lauta#silta +N +Sg +Nom (“board bridge”)</li>
 #   <li> 🡒 lautas#ilta +N +Sg +Nom (“plate evening”)</li>
 #  </ul>
-#  <li>poikasilla 🡒 poika#silla +N +Sg +Ade (“boy rayon”)</li>
+#  <li>poikasilla 🡒 poika#silla +N +Sg +Nom (“boy rayon”)</li>
 #  <li>poikasilta:</li>
 #  <ul>
 #   <li> 🡒 poika#silta +N +Sg +Nom (“boy bridge”)</li>
@@ -53,7 +53,7 @@
 #
 # <ul>
 #  <li>We could disambiguate (= find one unambiguous analysis) by looking at the word in context.</li>
-#  <li>However, if we don’t have any context, we may still have a sense of which analyses are more likely <i>a priori</i>.</li>
+#  <li>If we don’t have any context, however, we may still have a sense of which analyses are more likely <i>a priori</i>.</li>
 #  <li>A priori = in general, without further information.</li>
 #  <li><i>A posteriori</i>, when we have more information, it may turn out that the most likely analysis a priori is not the correct one, but it is the best guess without more information.</li>
 # </ul>

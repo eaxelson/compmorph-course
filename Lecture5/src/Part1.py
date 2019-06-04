@@ -338,14 +338,14 @@ start_xfst()
 #
 # <img src="img/xfst_repetition.png">
 #
-# #### Syntax for complement (= something else than)
+# #### Syntax for complement (= something other than)
 #
 # <img src="img/xfst_complement.png">
 #
 # #### Writing regular expressions in xfst (6)
 #
 # ```
-# read regex [ b o b | j o b | r o b | k n o b ] .o. [ o -> u || \\[b | j | n] _ ];
+# read regex [ b o b | j o b | r o b | k n o b ] .o. [ o -> u || \[b | j | n] _ ];
 # upper-words
 # lower-words
 # ```
@@ -372,6 +372,7 @@ start_xfst()
 #
 # You can write a sequence of symbols, such as t a l o, together, if you enclose it in curly brackets: {talo}.
 # NOTE: exit the previous session started with start_xfst before starting a new one!
+# A session can be exited with the command 'exit'.
 
 start_xfst()
 
@@ -389,7 +390,7 @@ start_xfst()
 #
 # <ul>
 #  <li>We do not transduce between the orthographic form and the pronounced form.</li>
-#  <li>We transduce between the morphological lexical form and surface form (as earlier on this course).</li>
+#  <li>We transduce between the morphological lexical form and surface form (as earlier on this lecture).</li>
 #  <li>Every input and output symbol consists of two parts:</li>
 #  <ul>
 #   <li>orthographic form</li>
