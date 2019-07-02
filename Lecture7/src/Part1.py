@@ -247,7 +247,7 @@ print(tr.lookup('bikitaabi'))
 # <ul>
 # <li>Example: <code>@N.CASE.GEN@</code></li>
 #  <ul>
-#   <li>Set the value of <code>CASE</code> to something else than <code>GEN</code></li>
+#   <li>Set the value of <code>CASE</code> to something other than <code>GEN</code></li>
 #   <li>The value of <code>CASE</code> is not well defined after this, but there is some value and we know it is not <code>GEN</code></li>
 #   <li>It does not matter what <code>CASE</code> was before, or if it was set at all</li>
 #   <li>Never fails</li>
@@ -314,7 +314,7 @@ print(tr.lookup('bikitaabi'))
 #   <li><code>@U.CASE.GEN@</code></li>
 #    <ul>
 #     <li>Succeeds if <code>CASE</code> has the value <code>GEN</code></li>
-#     <li>Also succeeds if <code>CASE</code> is unset (neutral); in this case, <code>CASE</code> is set to <code>GEN</code> after this operation</li>
+#     <li>Also succeeds if <code>CASE</code> is unset (neutral); in this instance, <code>CASE</code> is set to <code>GEN</code> after this operation</li>
 #     <li>Otherwise fails and blocks this path</li>
 #    </ul>
 #   <li><code>al@U.ART.PRESENT@kitaab@U.ART.ABSENT@uN@U.CASE.NOM@</code></li>
@@ -333,7 +333,7 @@ from hfst_dev import regex
 failing = regex('@U.ART.PRESENT@')
 print(failing)
 
-# note that at signs must be inside double quotes to be interpreted literally
+# note that '@' has a special meaning in regular expressions, so it must be quoted to be interpreted literally
 fails = regex('al"@U.ART.PRESENT@"kitaab"@U.ART.ABSENT@"uN"@U.CASE.NOM@"')
 print(fails.lookup('alkitaabuN'))
 

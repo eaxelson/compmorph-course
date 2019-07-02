@@ -80,6 +80,7 @@ for ending in ('a','lla','lle','lta','n'):
 add_transition(start_state, end_state, EPSILON, EPSILON, 0.0)
 
 # Then we tie the lexicons together and also add an epsilon transition from the end of the stem lexicon to its beginning in order to allow compound words
+# In many languages, this will mean: an epsilon transition from the end of the case ending lexicon at Sg.Nom/absolute.
 #
 # <img src="img/compound_lexicon.png"> 
 
@@ -163,7 +164,7 @@ assert(result.compare(tr))
 # <ul>
 # <li>The automaton is non-deterministic and contains epsilon transitions</li>
 #  <ul>
-#   <li>This means that from a specific state, some symbol s can take you to more than one another state.</li>
+#   <li>This means that from a specific state, some symbol s can take you to more than one other state.</li>
 #   <li>For instance, from the initial state 0, the symbol “k” could take you to state 3, 10, 16, 22, 27, or 70.</li>
 #   <li>Imagine a scenario with a more realistic, larger vocabulary: using the network would be very slow, because of all the paths that have to be investigated.</li>
 #  </ul>
@@ -223,7 +224,7 @@ tr.minimize()
 # <li>The epsilon transition back to the beginning that produces compound words is nasty:</li>
 #  <ul>
 #   <li>Full determinization may actually bloat the size of the network.</li>
-#   <li>Consider, for instance, if we had the stem “koulu” that can get an “a” appended for partitive (“koulua”), but in addition, “a” could be the beginning of a second stem, such as “aamiainen” (“kouluaamiainen”).</li>
+#   <li>Consider, for instance, if we had the stem “koulu”, which can take an “a” appended for partitive (“koulua”), but in addition, “a” could be the beginning of a second stem, such as “aamiainen” (“kouluaamiainen”).</li>
 #   <li>Then, we would need one node in the network that is the starting point for all stems starting in “a” as the first stem in a word and another node with all the stems starting in “a” plus the endings starting in “a”.</li>
 #  </ul>
 # </ul>
@@ -247,7 +248,7 @@ tr.minimize()
 #  </ul>
 # <li>Determinization and minimization work the same in both cases.</li>
 #  <ul>
-#   <li>We just need to interpret the pairs of symbols as one single symbol, so <code>a:a</code> is another symbol than <code>a:b</code>.</li>
+#   <li>We just need to interpret the pairs of symbols as one single symbol, so <code>a:a</code> is a different symbol from <code>a:b</code>.</li>
 #  </ul>
 # </ul>
 #
@@ -262,7 +263,7 @@ tr.minimize()
 
 # ## 2. Optimizing weighted finite-state networks
 #
-# Optimizing weighted finite-state networks is basically the same as unweighted networks, but the weights may mess up things.
+# Optimizing weighted finite-state networks is basically the same as unweighted networks, but the weights may mess things up.
 # We would like the optimized weighted network to produce the same weights as the unoptimized network.
 #
 # Assume the following probabilities:
