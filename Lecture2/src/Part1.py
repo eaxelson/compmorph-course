@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0,'/data/eaxelson/hfst-git/hfst-dev-4.0/hfst/python')
+
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 2
 #
 # <ul>
@@ -5,6 +8,7 @@
 # <li>2. <a href="#2.-Set-Theory-for-Finite-State-Networks">Set Theory for Finite-State Networks</a></li>
 # <li>3. <a href="#3.-Item-&-Process-Morphology-Using-xfst-Rules">Item & Process Morphology Using xfst Rules</a></li>
 # <li>4. <a href="#4.-Example:-English-Adjectives">Example: English Adjectives</a></li>
+# <li>5. <a href="#5.-Assignments">Assignments</li>
 # </ul>
 #
 # ## 1. Finite-State Basics
@@ -330,7 +334,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 
 from hfst_dev import compile_xfst_script
 
-adj_lexicon = compile_xfst_script("""
+compile_xfst_script("""
 ! Read lexicon and make a regex of it
 read lexc en_ip_adjectives_lexicon.lexc
 define Lexicon ;
@@ -346,7 +350,7 @@ define CleanUp  %^ -> 0 ;
 regex Lexicon .o. YToI .o. CleanUp ;
 
 ! Output all surface forms of the words
-lower-words 
+lower-words
 """)
 
 # There are issues with some word forms...
@@ -371,7 +375,7 @@ lower-words
 # ### 4.3. Corrected xfst script for English adjectives
 #
 
-adj_lexicon = compile_xfst_script("""
+compile_xfst_script("""
 ! Read lexicon and make a regex of it
 read lexc en_ip_adjectives_lexicon.lexc
 define Lexicon ;
@@ -384,11 +388,13 @@ n | p | q | r | s | t | v | w | x | z ] ;
 ! y/i alternation
 define YToI     y -> i || _ %^ e ;
 
+!++++++++++++++++++++++++++++++
 ! Consonant reduplication
 define DoubleCons d -> d d ,
 g -> g g ,
 m -> m m ,
 t -> t t || Cons Vowel _ %^ e ;
+!++++++++++++++++++++++++++++++
 
 ! Last rule cleans away the boundary marker
 define CleanUp  %^ -> 0 ;
@@ -397,7 +403,7 @@ define CleanUp  %^ -> 0 ;
 regex Lexicon .o. YToI .o. DoubleCons .o. CleanUp ;
 
 ! Output all surface forms of the words
-lower-words 
+lower-words
 """)
 
 # Now it works!
@@ -425,3 +431,75 @@ lower-words
 # <li>Chapter 1 of the Beesley & Karttunen book: "A Gentle Introduction"</li>
 # <li>Chapter 3 of the Beesley & Karttunen book: "The xfst Interface"</li>
 # </ul>
+
+# ## Assignments
+#
+# ### Assignment (N.N)
+#
+# Add the following adjectives to en_ip_adjectives_lexicon.lexc: cute, nice, safe, wise.
+# Then recompile the xfst script.
+
+compile_xfst_script("""
+! Read lexicon and make a regex of it
+read lexc en_ip_adjectives_lexicon.lexc
+define Lexicon ;
+regex Lexicon ;
+
+define Vowel [ a | e | i | o | u | y ] ;
+define Cons  [ b | c | d | f | g | h | j | k | l | m |
+n | p | q | r | s | t | v | w | x | z ] ;
+
+! y/i alternation
+define YToI     y -> i || _ %^ e ;
+
+! Consonant reduplication
+define DoubleCons d -> d d ,
+g -> g g ,
+m -> m m ,
+t -> t t || Cons Vowel _ %^ e ;
+
+! Last rule cleans away the boundary marker
+define CleanUp  %^ -> 0 ;
+
+! Compose lexicon with rules
+regex Lexicon .o. YToI .o. DoubleCons .o. CleanUp ;
+
+! Output all surface forms of the words
+lower-words
+""")
+
+# Do you notice something strange with the words that you just added?
+# Add a rule to fix them. (You can modify the script above.)
+#
+# Does it work now? If it does, write/copy your fixed xfst script to file en_ip_adjectives_rules_cascade.xfst.
+# You will need it in the next assignment.
+
+# ### Assignment (2.5): English adjectives with xfst
+
+# Your task in this exercise is to test that the xfst script en_ip_adjectives_rules_cascade.xfst
+# (the last version of the xfst script that you just copied to file) works as it should. This script runs inside start_xfst.
+#
+# Start interactive xfst shell:
+
+hfst_dev.start_xfst()
+
+# You should see the prompt hfst[0]: appear.
+
+# Run the xfst script en_ip_adjectives_rules_cascade.xfst by typing:
+#
+# ```
+# source en_ip_adjectives_rules_cascade.xfst
+# ```
+
+# The last command  run by the script is lower-words, which shows the surface forms (“lower side”) of all words in your lexicon.
+# Next, run the following commands and collect their outputs. Type in the commands after the hfst prompt.
+# (After you are done  you can quit hfst-xfst by typing "exit".)
+#
+# * upper-words
+# * random-upper (repeat this one a couple of times)
+# * random-lower (repeat this one a couple of times)
+# * longest-string
+# * up shorter
+# * down long+A+Sup
+#
+# Briefly describe in your own words what the six above commands do.
