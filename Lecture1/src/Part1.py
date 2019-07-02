@@ -8,6 +8,7 @@
 # <li>5. <a href="#5.-Morphological-generators-and-analyzers">Morphological generators and analyzers</a></li>
 # <li>6. <a href="#6.-A-Finite-State-Transducer-that-implements-a-morphological-generator">A Finite-State Transducer that implements a morphological generator</a></li>
 # <li>7. <a href="#7.-Lexc-code-that-represents-this-transducer">Lexc code that represents this transducer</a></li>
+# <li>8. <a href="#8.-Assignments">Assignments</li>
 # </ul>
 #
 # ## HFST - Helsinki Finite-State Technology
@@ -358,7 +359,7 @@ help(hfst_dev.start_xfst)
 #
 # Note that `END` signifies the end of lexc file. It must be included at the end of each lexc file.
 #
-# ### 7.7. Compiling the lexc script into a transducer
+# ### 7.8. Compiling the lexc script into a transducer
 #
 # Finally, let's compile the lexc script into a transducer:
 
@@ -459,3 +460,90 @@ print(analyzer.lookup('skies'))
 analyzer.invert()
 analyzer.minimize()
 print(analyzer.compare(generator))
+
+
+# ## 8. Assignments
+#
+#
+# ### Assignment 1.1: Testing a morphological generator
+#
+# Compile the lexicon en_ia_morphology_template.lexc into an hfst transducer.
+# (The file contains the same lexc code that was used in example 7.8.)
+
+morph = hfst_dev.compile_lexc_file('en_ia_morphology_template.lexc', verbosity=2)
+
+# Optimize the transducer for lookup:
+
+morph.lookup_optimize()
+
+# Then test it:
+
+print(morph.lookup('sky+N+Pl', output='text'))
+
+# ... and expect the result: 'skies'.
+#
+# Your system works!
+
+# For the noun sky, type in all four possible analyses (= lexical forms = input forms), and collect the corresponding surface forms (= output forms) as given by HfstTransducer.lookup.
+
+pass # write your solution here
+
+# ### Assignment 1.2: Testing a morphological analyzer
+#
+# Invert your transducer, such that input becomes output and vice versa.
+# Note that a lookup-optimized transducer supports only a couple of functions, so you need to remove optimization with HfstTransducer.remove_optimization before calling e.g. HfstTransducer.invert.
+# (TODO: should the interface be changed so that we have a separate class for lookup-optimized transducers, e.g. HfstOlTransducer vs. an ordinary HfstTransducer?
+# Then it would be clearer that we are dealing with a special type of transducer that doesn't support most of the functions that are available for HfstTransducer.)
+#
+# This transducer works as an analyzer that retrieves the lexical form of surface forms.
+# Collect the analyses for the following surface forms: dog's, skies, churches', beauty, cat.
+
+pass # write your solution here
+
+# ### Assignment 1.3: Adding English nouns to the lexicon
+#
+# Add the following missing nouns to your lexc file: book, doggy, fan, hill, mess, pet, search, waitress, wish.
+#
+# Recompile the transducer using function compile_lexc_file. Collect the surface forms produced by HfstTransducer.lookup for the lexical forms:
+# book+N+Sg, doggy+N+Pl, fan+N+Sg+Poss, mess+N+Pl, wish+N+Pl+Poss.
+
+pass # write your solution here
+
+# Invert the transducer again using HfstTransducer.invert.
+# Collect the lexical forms produced by HfstTransducer.lookup for the surface forms: books, doggy, pets', waitresses, waitress's, search.
+
+pass # write your solution here
+
+# ### Assignment 1.4: Adding a new noun paradigm to the lexicon
+#
+# Add a new type of nouns to the lexc file, with a specific plural form: criterion - criteria, lexicon - lexica, phenomenon - phenomena.
+#
+# Recompile the transducer using compile_lexc_file. Collect the surface forms produced by HfstTransducer.lookup for the lexical forms: criterion+N+Pl, phenomenon+N+Sg+Poss, phenomenon+N+Pl+Poss.
+
+pass # write your solution here
+
+# For the word "lexicon", also allow the parallel regular plural form lexicon - lexicons. Recompile the transducer and collect the surface forms for the lexical forms:
+# lexicon+N+Sg, lexicon+N+Pl, lexicon+N+Pl+Poss. Do you get duplicate surface forms for some lexical forms? If so, can you explain why?
+
+pass # write your solution here
+
+# Invert the transducer and collect the lexical forms for the surface forms: lexicons, lexica, criterion's, phenomenon.
+
+pass # write your solution here
+
+# ### Assignment 1.5: Adding English verb inflection to the lexicon
+#
+# Add verb inflection to your lexc file. Include the three paradigms from the image below and all the verbs listed: jump, look, talk, walk, bake, fake, like, pile, smile, crash, hiss, kiss, miss, search.
+#
+# Use the tags +V, +Inf,  +Pres3Sg, +Past, +Prog, and remember to declare them as multichar symbols at the top of your lexc file.
+#
+# You will need seven new lexicons; you can call them: Verbs, V, V_e, V_s, Tense, Tense_e, Tense_s. (This structure is analogous to the noun lexicons Nouns, N, N_s, N_y, Num, Num_s, Num_y.)
+#
+# When you recompile your transducer, you should be able to generate word forms, such as talk+V+Prog -> talking.
+
+pass # write your solution here
+
+# When you invert your transducer, you should be able to analyze word forms, such as missed -> miss+V+Past.
+# Collect the analyses for the following surface forms: like, looked, smiling, crashing, searches.
+
+pass # write your solution here
