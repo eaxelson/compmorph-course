@@ -1,6 +1,3 @@
-import sys
-sys.path.insert(0,'/data/eaxelson/hfst-git/hfst-dev-4.0/hfst/python')
-
 # # COMPUTATIONAL MORPHOLOGY WITH HFST TOOLS - LECTURE 2
 #
 # <ul>
