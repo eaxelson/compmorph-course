@@ -478,7 +478,8 @@ lower-words
 #
 # Start interactive xfst shell:
 
-hfst_dev.start_xfst()
+from hfst_dev import start_xfst
+start_xfst()
 
 # You should see the prompt hfst[0]: appear.
 
