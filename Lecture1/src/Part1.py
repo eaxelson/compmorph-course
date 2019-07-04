@@ -502,9 +502,16 @@ pass # write your solution here
 
 # ### Assignment 1.3: Adding English nouns to the lexicon
 #
-# Add the following missing nouns to your lexc file: book, doggy, fan, hill, mess, pet, search, waitress, wish.
+# Add the following missing nouns to the lexc file en_ia_morphology_template.lexc:
+# book, doggy, fan, hill, mess, pet, search, waitress, wish.
 #
-# Recompile the transducer using function compile_lexc_file. Collect the surface forms produced by HfstTransducer.lookup for the lexical forms:
+# Go to the browser tab where you chose this lecture (probably the tab on left side)
+# and click the file en_ia_morphology_template.lexc. A new tab opens where you can edit
+# the file. After you have added the missing nouns, remember to click File -> Save.
+# (TODO: tab charaters must be inserted by copying and pasting them.)
+#
+# Recompile the transducer using function compile_lexc_file.
+# Collect the surface forms produced by HfstTransducer.lookup for the lexical forms:
 # book+N+Sg, doggy+N+Pl, fan+N+Sg+Poss, mess+N+Pl, wish+N+Pl+Poss.
 
 pass # write your solution here

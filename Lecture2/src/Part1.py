@@ -29,10 +29,10 @@
 # <img src="img/three_word_language.png">
 #
 # <ul>
-# <li>Inputs to the automaton are <i>symbols</i> like: <pre>m, e, c.</pre></li>
-# <li>The set of valid symbols that the automaton will accept is its <i>alphabet</i>: <pre>{ a, c, e, g, i, m, n, o, r, s, t }</pre>.</li>
-# <li>The sequences of symbols that the automaton will accept are <i>words</i> like: <pre>canto, mesa</pre>.</li>
-# <li>The entire set of words that the automaton accepts or recognizes is its <i>language</i>: <pre>{ canto, mesa, tigre }</pre>.</li>
+# <li>Inputs to the automaton are <i>symbols</i> like: <code>m, e, c.</code></li>
+# <li>The set of valid symbols that the automaton will accept is its <i>alphabet</i>: <code>{ a, c, e, g, i, m, n, o, r, s, t }</code>.</li>
+# <li>The sequences of symbols that the automaton will accept are <i>words</i> like: <code>canto, mesa</code>.</li>
+# <li>The entire set of words that the automaton accepts or recognizes is its <i>language</i>: <code>{ canto, mesa, tigre }</code>.</li>
 # </ul>
 #
 # ### 1.2. Sharing structure in minimal networks:
@@ -433,7 +433,7 @@ lower-words
 #
 # ### Assignment (N.N)
 #
-# Add the following adjectives to en_ip_adjectives_lexicon.lexc: cute, nice, safe, wise.
+# Add the following adjectives to en_ip_adjectives_lexicon.lexc: <tt>cute, nice, safe, wise</tt>.
 # Then recompile the xfst script.
 
 compile_xfst_script("""
@@ -470,6 +470,11 @@ lower-words
 #
 # Does it work now? If it does, write/copy your fixed xfst script to file en_ip_adjectives_rules_cascade.xfst.
 # You will need it in the next assignment.
+#
+# Go to the browser tab where you chose this lecture (probably the tab on left side)
+# and click <tt>New -> Text File</tt>. A new tab opens where you can edit
+# the file (named untitled.txt by default). After you are finished, choose <tt>File -> Rename</tt> and
+# rename the file to en_ip_adjectives_rules_cascade.xfst. Then click <tt>File -> Save</tt>.
 
 # ### Assignment (2.5): English adjectives with xfst
 
@@ -489,9 +494,9 @@ start_xfst()
 # source en_ip_adjectives_rules_cascade.xfst
 # ```
 
-# The last command  run by the script is lower-words, which shows the surface forms (“lower side”) of all words in your lexicon.
+# The last command run by the script is `lower-words`, which shows the surface forms (“lower side”) of all words in your lexicon.
 # Next, run the following commands and collect their outputs. Type in the commands after the hfst prompt.
-# (After you are done  you can quit hfst-xfst by typing "exit".)
+# (After you are done  you can quit the xfst shell by typing `exit`.)
 #
 # * upper-words
 # * random-upper (repeat this one a couple of times)
