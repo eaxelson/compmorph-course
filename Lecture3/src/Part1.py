@@ -583,9 +583,9 @@ print(TR.lookup('ac'))
 #  <li>HFST: <a href="https://github.com/hfst/hfst-ospell/wiki">ospell</a> (currently available only as a separate command line tool)</li>
 # </ul>
 
-# # 7. Assignments
+# ## 7. Assignments
 #
-# ## Assignment 3.3: Lexicon of Finnish compound words
+# ### Assignment 3.3: Lexicon of Finnish compound words
 #
 # Your task is to create a lexc file that models compounding in Finnish.
 # First create a stem lexicon thath contains the following 14 Finnish nouns:
@@ -607,7 +607,7 @@ print(TR.lookup('ac'))
 
 pass # <insert your solution here>
 
-# ## Assignment 3.4: Finnish vowel harmony
+# ### Assignment 3.4: Finnish vowel harmony
 #
 # In this task you should model Finnish vowel harmony with xfst rules.
 # You need to solve Assignment 3.3 before solving this task.
@@ -694,7 +694,7 @@ pass # <insert your solution here>
 
 pass # <insert your solution here>
 
-# ## Assignment 3.5: Adding weights to a lexicon
+# ### Assignment 3.5: Adding weights to a lexicon
 #
 # In this task you shall build on your vocabulary of Finnish compound words from Assignment 3.4.
 # If you did not manage to solve Assignment 3.4, you can use your result from Assignment 3.3 instead, but Assignment 3.4 is the preferred alternative.
@@ -714,7 +714,7 @@ pass # <insert your solution here>
 
 pass # <insert your solution here>
 
-# ## Assignment 3.6: Creating a spell checker with xfst
+# ### Assignment 3.6: Creating a spell checker with xfst
 #
 # Create an xfst script that implements a spell checker for your Finnish compound-word vocabulary.
 # Do it step by step as follows:
