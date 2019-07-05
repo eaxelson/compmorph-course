@@ -7,6 +7,7 @@
 #  <li>4. <a href="#4.-Spelling-correction">Spelling correction</a></li>
 #  <li>5. <a href="#5.-Logprobs">Logprobs</a></li>
 #  <li>6. <a href="#6.-Summary-of-types-of-finite-state-automata-and-transducers">Summary of types of finite-state automata and transducers</a></li>
+#  <li>7. <a href="#7.-Assignments"></a></li>
 # </ul>
 #
 # ## 1. Disambiguation
@@ -167,7 +168,7 @@
 # <li>Examples:</li>
 #  <ul>
 #   <li>Is there life on Mars?</li>
-#   <li>Will Trump win the presidential election in the USA? (Now, we know he did.)</li>
+#   <li>Will Trump win a second term in the USA?</li>
 #   <li>Will it snow in Helsinki tomorrow?</li>
 #   <li>Given specific symptoms, does a patient have cancer?</li>
 #  </ul>
@@ -581,3 +582,163 @@ print(TR.lookup('ac'))
 #  <li>HFST: <a href="https://github.com/hfst/python-hfst-4.0/wiki/Weights">Using weights</a></li>
 #  <li>HFST: <a href="https://github.com/hfst/hfst-ospell/wiki">ospell</a> (currently available only as a separate command line tool)</li>
 # </ul>
+
+# # 7. Assignments
+#
+# ## Assignment 3.3: Lexicon of Finnish compound words
+#
+# Your task is to create a lexc file that models compounding in Finnish.
+# First create a stem lexicon thath contains the following 14 Finnish nouns:
+# <tt>kissa, koira, melu, metsä, peli, päivä, pää, sähkö, talo, tie, tuoli, työ, väri, yö</tt>.
+# Then make your lexicon produce compund words, such that <i>any</i> combination of <i>any number</i>
+# of these nouns may be produced, for instance: <tt>kissa, kissakoira, päämelutalo, yösähköpeli, päätiepääpäivä</tt>.
+#
+# Start `hfst_dev.start_xfst()` and load your lexicon into xfst shell:
+#
+# ```
+# hfst[0]: read lexc the_name_of_your_lexicon.lexc
+# <hfst-xfst prints something here>
+# hfst[1]: define Lexicon ;
+# hfst[0]: regex Lexicon ;
+# <hfst-xfst prints something here>
+# ```
+#
+# Then have xfst print some random surface forms that your lexicon can produce.
+
+pass # <insert your solution here>
+
+# ## Assignment 3.4: Finnish vowel harmony
+#
+# In this task you should model Finnish vowel harmony with xfst rules.
+# You need to solve Assignment 3.3 before solving this task.
+#
+# Below you see an incomplete lexc file, with some inflection lexicons included.
+# Vowel harmony is here implemented using archiphonemes, written A and O, which will be realized
+# as a or ä vs o or ö in surface forms. Not all inflected forms are implemented here, but that is ok.
+# You don't have to add any missing case endings.
+#
+# What you need to do is:
+#
+# Incorporate your compound-word vocabulary from Assignment 3.3 into this file.
+# Add the clitic -han/-hän as a last possible suffix, so that words like talossakinkohan can be modeled properly.
+# Write rules for vowel harmony in an xfst script.
+# Copy-paste the lexc code below into a text editor and make your own modifications:
+#
+# ```
+# Multichar_Symbols
+#         +Nom +Gen +Ade +Abl +All +Ine +Ela +Tra +Ess
+#         +kin +kAAn +kO
+#         ! TO DO: Add more multicharacter symbols as needed
+#
+# LEXICON Root
+# ! TO DO: Add your compound-words lexicons here
+#
+# LEXICON Case
+# +Nom:0          kinkAAn ;
+# +Gen:n          kinkAAn ;
+# +Ade:llA        kinkAAn ;
+# +Abl:ltA        kinkAAn ;
+# +All:lle        kinkAAn ;
+# +Ine:ssA        kinkAAn ;
+# +Ela:stA        kinkAAn ;
+# +Tra:ksi        kinkAAn ;
+# +Ess:nA         kinkAAn ;
+#
+# LEXICON kinkAAn
+# +kin:kin        kO ;
+# +kAAn:kAAn      kO ;
+#                 kO ; ! continue without any suffix
+#
+# LEXICON kO
+# +kO:kO          # ;
+#                 # ; ! continue without any suffix
+#
+# ! TO DO: Add the -han/-hän lexicon somewhere
+#
+# END
+# ```
+#
+# Besides the lexc file you will need an xfst file with your rules.
+# If you need to refresh your memory on how to work with lexc combined with xfst, have a look at Lecture 2 or 3 or Assignment 2.5.
+#
+# Your rules should state the following:
+#
+# * The archiphoneme ‘A’ in a suffix (such as -ssA) should be realized as ‘a’ if it is preceded by a back vowel ‘a’, ‘o’ or ‘u’ anywhere in the word, such that there is no front vowel ‘ä’, ‘ö’ or ‘y’ anywhere between the back vowel and the suffix.
+# * Otherwise the archiphoneme ‘A’ should be realized as ‘ä’.
+# *Similarly, the archiphoneme ‘O’ in a suffix (such as -kO) should be realized as ‘o’ if it is preceded by a back vowel ‘a’, ‘o’ or ‘u’ anywhere in the word, such that there is no front vowel ‘ä’, ‘ö’ or ‘y’ anywhere between the back vowel and the suffix.
+# *Otherwise the archiphoneme ‘O’ should be realized as ‘ö’.
+#
+# Some hints on xfst syntax:
+#
+# * `[a|b|c]` means one character a, b or c.
+# * `$[a|b|c]` means any string of characters containing a, b or c.
+# * `~$[a|b|c]` means any other string of characters than a string of characters containing a, b or c.
+# * You can also define sets of characters as: `define MyAbc [a|b|c];` and use them in your expressions, for instance, `~$MyAbc`.
+#
+# Compose your lexicon with your rules (as described in the earlier Assignment 2.5 mentioned above).
+
+pass # <insert your solution here>
+
+# Generate the following surface forms and verify that they are correct:
+#
+# * `down talo+Ine+kAAn+kO` (should be: talossakaanko)
+# * `down metsäkissa+Gen+kin+hAn` (should be: metsäkissankinhan)
+# * `down yö+Tra+kO` (should be: yöksikö)
+# * `down päivätyö+Ess` (should be: päivätyönä)
+# * `down tuolipeli+Ela+hAn` (should be: tuolipelistähän)
+#
+# Also output at least 20 random surface forms.
+#
+# At this point it is very likely that the surface form tuolipelistähän did not come out correctly.
+# There are also some other word forms that may be incorrect. Can you explain why? Any idea how to solve the problem by modifying the lexc file and your rules slighty?
+
+pass # <insert your solution here>
+
+# ## Assignment 3.5: Adding weights to a lexicon
+#
+# In this task you shall build on your vocabulary of Finnish compound words from Assignment 3.4.
+# If you did not manage to solve Assignment 3.4, you can use your result from Assignment 3.3 instead, but Assignment 3.4 is the preferred alternative.
+#
+# a. Modify your lexc file from Assignment 3.4 (or 3.3) in such a way that compound words "cost more" than single-stem words.
+# That is, insert a weight each time you append a new stem to an existing stem.
+# The weight does not have to be a proper logprob; it is sufficient for the weight to be a positive number,
+# such that the more stems you add, the more "expensive" the generated word form becomes.
+#
+# b. Start the xfst shell with `hfst_dev.start_xfst()`.
+# First run `set show-weights ON`.
+# This makes the program show the weights of every word form it displays.
+#
+# c. Output some random lexical forms (upper level) and random surface forms (lower level) sorted by weight.
+# The most probable ("cheapest") forms should be on the top and the least probable ("most expensive") words should be at the bottom of your list.
+# The sorting happens automatically; you don't have to use any special command for that. Make sure the weights show, not just the word forms.
+
+pass # <insert your solution here>
+
+# ## Assignment 3.6: Creating a spell checker with xfst
+#
+# Create an xfst script that implements a spell checker for your Finnish compound-word vocabulary.
+# Do it step by step as follows:
+#
+# a. First add one substitution rule that permits the substitution of the letter 'k' by the letter 'j' with some weight.
+# Again, the weight does not have to be a logprob; some positive number is sufficient.
+# Do not yet project your vocabulary transducer (using the .l operator), nor invert the final transducer (using the .i operator).
+#
+# b. Again, start the xfst shell and run `set show-weights ON`, so that the weights are displayed.
+# (TODO: two xfst shells cannot be run at the same time - exit any running shells with `exit` first.)
+# Generate all surface forms for the lexical string “kissa+Nom+kO”.
+# The command “down kissa+Nom+kO” should produce four forms: “kissako”, “jissako”, “kissajo”, and “jissajo”.
+#
+# c. Next, project the vocabulary transducer to its lower level and invert the final transducer (check lecture slide 51).
+# Now, you should have a “proper” spell checker; for instance, when you type “down jissajo” the output should be the corrected form: “kissako”.
+#
+# d. Add more noise-introducing alternations with weights:
+# you should have at least 5 different cases of each of the following types: substitutions, insertions, deletions and transpositions.
+#
+# e. Start the xfst shell and run `set show-weights ON`, and output some random upper (noisy) and lower (corrected) forms sorted by weight.
+#
+# f. Figure out what the correct spellings are for some of the weirdest noisy random words you produced in e).
+# Depending on your model, you would type something like: down ähmöpäiialo (a misspelled variant of the funny word “sähköpääkissako”).
+#
+# g. Generate all possible erroneous spelling variants that your model can produce for “kissa”: up kissa
+
+pass # <insert your solution here>
