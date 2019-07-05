@@ -7,6 +7,7 @@
 #  <li><a href="#4.-Regular-expressions-in-xfst">4. Regular expressions in xfst</a></li>
 #  <li><a href="#5.-Pronunciation-lexicon-for-a-Language-with-Irregular-Orthography:-English">5. Pronunciation lexicon for a Language with Irregular Orthography: English</a></li>
 #  <li><a href="#6.-Sound-Change-in-Indo-European-languages">6. Sound Change in Indo-European languages</a></li>
+#  <li><a href="#7.-Assignments">7. Assignments</a></li>
 # </ul>
 #
 # ## 1. Big picture
@@ -444,3 +445,85 @@ start_xfst()
 # <ul>
 #  <li>Selected parts of Chapter 2 and 3 of the Beesley & Karttunen book: “A Systematic Introduction” and “The xfst Interface”</li>
 # </ul>
+#
+# ## 7. Assignments
+#
+# ### Assignment 5.1: Analysis of vocabularies
+#
+# The HFST project has produced open-source morphological analyzers for some languages.
+# You can download them from here: ??
+#
+# a. Decide what language you want to work on.
+# You can choose one of the following analyzers: english.hfst, finnish-analysis.hfst, french.hfst, german.hfst, swedish.hfst, or turkish.hfst.
+#
+# b. Test one of the analyzers using start_xfst or HfstTransducer.lookup.
+# Type in a few word forms and check what analyses you get for these word forms (the format of the tags is slightly different in the different languages).
+#
+# c. Pick a text file containing words of the language you chose.
+# There should be one word per line in the file.
+# If you don’t have any text file available, you can use one of the pre-prepared files english-words.txt, finnish-words.txt, french-words.txt, german-words.txt or swedish-words.txt. ??
+#
+# d. Run the entire text file through the analyzer, as follows:
+#
+# TODO: in python: `hfst-lookup -i some_analyzer.hfst -I some_text_file.txt`
+#
+# e. Browse through the analyses of the words.
+# Find a few words that are out-of-vocabulary, that is, the analyzer does not recognize them and cannot provide any analysis.
+# Why aren't these words covered in the vocabulary of the analyzer?
+
+# ### Assignment 5.2: Creating a translating guesser
+#
+# Your task is to create a guesser that translates words between related languages or dialects.
+# For instance, in the attached file there is an example xfst script that translates English words ending in “-ity” to Swedish words ending in “-itet”.
+#
+# For instance,
+#
+# * down electricity produces elektricitet,
+# * down university produces universitet, and
+# * down popularity produces popularitet.
+#
+# You can solve this tasks in two ways:
+# 
+# * either using only an xfst script as in English-to-Swedish translation example,
+# * or using a lexc file in combination with an xfst script as in the Esperanto guesser (check lecture slides).
+#
+# If you use a lexc file you can do translation between suffixes of two languages in the continuation lexicons, such that the lexical form of a suffix is “ity” and its surface form is “itet”.
+#
+# * a. Choose the two languages you want to translate between.
+# * b. You must have a regular expression that produces plausible words (or stems) in your source language.
+# * c. Implement at least two translation rules (or equivalent translations in lexc).
+# * d. You must test your system on at least five word forms and include the output of the test in your answer.
+
+# ### Assignment 5.3: Regular expressions
+#
+# In this assignment, you will practice writing regular expressions in xfst.
+# Please note that in this assignment multicharachters are not allowed.
+# 
+# Write regular expressions that denote languages which would accept:
+#
+# * a. union of the words: cat cats cat's and cats' .
+# * b. anything but set of the words: [sing, sang, sung] .
+# * c. subtraction of the sets: [cat, dog, rat, mouse, cow] and [mouse, rat].
+#
+# Run each regular expression in xfst shell with `read regex` command. After each regular expression run command print net.
+
+# ### Assignment 5.4: Drawing automata and transducers with hfst
+#
+# In this exercise, you will learn how to draw network graphs of finite-state automata and transducers.
+# TODO: learn to save dot files to file instead?
+#
+# 1. Draw union from Assignment 2.2.
+# 
+# * a. Start xfst shell and run following commands:
+#
+# ```
+# read regex [ s i n g | s o n g | s i n g e r ] |  [ f l i n g | f i n g e r ] ;`
+# view net
+# ```
+#
+# After you have done that, exit with `exit`.
+#
+# 2. Following the same instructions, view images for regular expressions:
+#
+# * a. `{ready} .o. [ a |e | i |o | u ] -> %[ ... %]`
+# * b. `(r e) [ [m a k e] | [c o m p i l e] ]`
