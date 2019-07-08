@@ -429,9 +429,9 @@ lower-words
 # <li>Chapter 3 of the Beesley & Karttunen book: "The xfst Interface"</li>
 # </ul>
 
-# ## Assignments
+# ## 5. Assignments
 #
-# ### Assignment (N.N)
+# ### Assignment 2.1
 #
 # Add the following adjectives to en_ip_adjectives_lexicon.lexc: <tt>cute, nice, safe, wise</tt>.
 # Then recompile the xfst script.
@@ -476,7 +476,7 @@ lower-words
 # the file (named untitled.txt by default). After you are finished, choose <tt>File -> Rename</tt> and
 # rename the file to en_ip_adjectives_rules_cascade.xfst. Then click <tt>File -> Save</tt>.
 
-# ### Assignment (2.5): English adjectives with xfst
+# ### Assignment 2.2: English adjectives with xfst
 
 # Your task in this exercise is to test that the xfst script en_ip_adjectives_rules_cascade.xfst
 # (the last version of the xfst script that you just copied to file) works as it should. This script runs inside start_xfst.

@@ -585,7 +585,7 @@ print(TR.lookup('ac'))
 
 # ## 7. Assignments
 #
-# ### Assignment 3.3: Lexicon of Finnish compound words
+# ### Assignment 3.1: Lexicon of Finnish compound words
 #
 # Your task is to create a lexc file that models compounding in Finnish.
 # First create a stem lexicon thath contains the following 14 Finnish nouns:
@@ -607,10 +607,10 @@ print(TR.lookup('ac'))
 
 pass # <insert your solution here>
 
-# ### Assignment 3.4: Finnish vowel harmony
+# ### Assignment 3.2: Finnish vowel harmony
 #
 # In this task you should model Finnish vowel harmony with xfst rules.
-# You need to solve Assignment 3.3 before solving this task.
+# You need to solve Assignment 3.1 before solving this task.
 #
 # Below you see an incomplete lexc file, with some inflection lexicons included.
 # Vowel harmony is here implemented using archiphonemes, written A and O, which will be realized
@@ -619,7 +619,7 @@ pass # <insert your solution here>
 #
 # What you need to do is:
 #
-# Incorporate your compound-word vocabulary from Assignment 3.3 into this file.
+# Incorporate your compound-word vocabulary from Assignment 3.1 into this file.
 # Add the clitic -han/-hän as a last possible suffix, so that words like talossakinkohan can be modeled properly.
 # Write rules for vowel harmony in an xfst script.
 # Copy-paste the lexc code below into a text editor and make your own modifications:
@@ -659,7 +659,7 @@ pass # <insert your solution here>
 # ```
 #
 # Besides the lexc file you will need an xfst file with your rules.
-# If you need to refresh your memory on how to work with lexc combined with xfst, have a look at Lecture 2 or 3 or Assignment 2.5.
+# If you need to refresh your memory on how to work with lexc combined with xfst, have a look at Lecture 2 or 3 or Assignment 2.1.
 #
 # Your rules should state the following:
 #
@@ -675,7 +675,7 @@ pass # <insert your solution here>
 # * `~$[a|b|c]` means any other string of characters than a string of characters containing a, b or c.
 # * You can also define sets of characters as: `define MyAbc [a|b|c];` and use them in your expressions, for instance, `~$MyAbc`.
 #
-# Compose your lexicon with your rules (as described in the earlier Assignment 2.5 mentioned above).
+# Compose your lexicon with your rules (as described in the earlier Assignment 2.1 mentioned above).
 
 pass # <insert your solution here>
 
@@ -694,12 +694,12 @@ pass # <insert your solution here>
 
 pass # <insert your solution here>
 
-# ### Assignment 3.5: Adding weights to a lexicon
+# ### Assignment 3.3: Adding weights to a lexicon
 #
-# In this task you shall build on your vocabulary of Finnish compound words from Assignment 3.4.
-# If you did not manage to solve Assignment 3.4, you can use your result from Assignment 3.3 instead, but Assignment 3.4 is the preferred alternative.
+# In this task you shall build on your vocabulary of Finnish compound words from Assignment 3.2.
+# If you did not manage to solve Assignment 3.2, you can use your result from Assignment 3.1 instead, but Assignment 3.2 is the preferred alternative.
 #
-# a. Modify your lexc file from Assignment 3.4 (or 3.3) in such a way that compound words "cost more" than single-stem words.
+# a. Modify your lexc file from Assignment 3.2 (or 3.1) in such a way that compound words "cost more" than single-stem words.
 # That is, insert a weight each time you append a new stem to an existing stem.
 # The weight does not have to be a proper logprob; it is sufficient for the weight to be a positive number,
 # such that the more stems you add, the more "expensive" the generated word form becomes.
@@ -714,7 +714,7 @@ pass # <insert your solution here>
 
 pass # <insert your solution here>
 
-# ### Assignment 3.6: Creating a spell checker with xfst
+# ### Assignment 3.4: Creating a spell checker with xfst
 #
 # Create an xfst script that implements a spell checker for your Finnish compound-word vocabulary.
 # Do it step by step as follows:

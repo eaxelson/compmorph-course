@@ -533,7 +533,7 @@ pass # <write your solution here>
 
 # ### Assignment 5.4: Drawing automata and transducers with hfst
 #
-# 1. Draw union from Assignment 2.2.
+# 1. Draw union
 # 
 # * a. Start xfst shell and run following commands:
 #
