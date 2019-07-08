@@ -1,5 +1,5 @@
 ! Read lexicon and make a regex of it
-read lexc en_ip_adjectives_lexicon.lexc
+read lexc en_adjectives.lexc
 define Lexicon ;
 
 define Vowel [ a | e | i | o | u | y ] ;

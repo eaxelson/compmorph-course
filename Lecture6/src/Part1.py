@@ -122,7 +122,7 @@ xfst = HfstTransducer.read_from_file('en_adjectives.xfst.hfst')
 print(xfst.lookup('big+A+Pos'))
 
 # Explicitely compile the lexicon.
-lexicon = compile_lexc_file('en_ip_adjectives_lexicon.lexc')
+lexicon = compile_lexc_file('en_adjectives.lexc')
 # Compile the twolc file and store the result to en_adjectives.twolc.hfst.
 compile_twolc_file('en_adjectives.twolc', 'en_adjectives.twolc.hfst')
 # Read the rules from file,
