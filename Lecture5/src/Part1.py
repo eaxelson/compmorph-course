@@ -451,23 +451,33 @@ start_xfst()
 # ### Assignment 5.1: Analysis of vocabularies
 #
 # The HFST project has produced open-source morphological analyzers for some languages.
-# You can download them from here: ??
+# You can download them from <a href="https://korp.csc.fi/download/hfst-morphologies/">Kielipankki (The Language Bank of Finland) pages</a>.
 #
-# a. Decide what language you want to work on.
-# You can choose one of the following analyzers: english.hfst, finnish-analysis.hfst, french.hfst, german.hfst, swedish.hfst, or turkish.hfst.
+# <b>a.</b> Decide what language you want to work on.
+# You can choose one of the following analyzers:
+# <a href="https://korp.csc.fi/download/hfst-morphologies/en/wn-bnc/">English</a>,
+# <a href="https://korp.csc.fi/download/hfst-morphologies/fi/omorfi/">Finnish</a>,
+# <a href="https://korp.csc.fi/download/hfst-morphologies/test/fr/morphalou/">French</a>,
+# <a href="https://korp.csc.fi/download/hfst-morphologies/test/de/morphisto-smor/">German</a>,
+# <a href="https://korp.csc.fi/download/hfst-morphologies/sv/dsso/">Swedish</a>,
+# or <a href="https://korp.csc.fi/download/hfst-morphologies/test/tr/trmorph/">Turkish</a>.
 #
-# b. Test one of the analyzers using start_xfst or HfstTransducer.lookup.
+# <b>b.</b> Test one of the analyzers using start_xfst or HfstTransducer.lookup.
 # Type in a few word forms and check what analyses you get for these word forms (the format of the tags is slightly different in the different languages).
-#
-# c. Pick a text file containing words of the language you chose.
+
+pass # <write your solution here>
+
+# <b>c.</b> Pick a text file containing words of the language you chose.
 # There should be one word per line in the file.
-# If you don’t have any text file available, you can use one of the pre-prepared files english-words.txt, finnish-words.txt, french-words.txt, german-words.txt or swedish-words.txt. ??
+# If you don’t have any text file available, you can use one of the pre-prepared files english-words.txt, finnish-words.txt, french-words.txt, german-words.txt or swedish-words.txt.
 #
-# d. Run the entire text file through the analyzer, as follows:
-#
-# TODO: in python: `hfst-lookup -i some_analyzer.hfst -I some_text_file.txt`
-#
-# e. Browse through the analyses of the words.
+# <b>d.</b> Run the entire text file through the analyzer, as follows:
+
+# <you must edit the code so that it will work for the language you have chosen>
+for line in some_text_file:
+    some_analyzer.lookup(line)
+
+# <b>e.</b> Browse through the analyses of the words.
 # Find a few words that are out-of-vocabulary, that is, the analyzer does not recognize them and cannot provide any analysis.
 # Why aren't these words covered in the vocabulary of the analyzer?
 
@@ -494,23 +504,34 @@ start_xfst()
 # * c. Implement at least two translation rules (or equivalent translations in lexc).
 # * d. You must test your system on at least five word forms and include the output of the test in your answer.
 
+pass # <write your solution here>
+
 # ### Assignment 5.3: Regular expressions
 #
 # In this assignment, you will practice writing regular expressions in xfst.
-# Please note that in this assignment multicharachters are not allowed.
+# Please note that in this assignment multicharacters are not allowed.
 # 
-# Write regular expressions that denote languages which would accept:
+# 1. Write regular expressions that denote languages which would accept:
 #
-# * a. union of the words: cat cats cat's and cats' .
-# * b. anything but set of the words: [sing, sang, sung] .
-# * c. subtraction of the sets: [cat, dog, rat, mouse, cow] and [mouse, rat].
+# * a. union of the words: cat, cats, cat's, and cats'.
+# * b. anything but the set of words: {sing, sang, sung}.
+# * c. subtraction of the sets: {cat, dog, rat, mouse, cow} and {mouse, rat}.
 #
-# Run each regular expression in xfst shell with `read regex` command. After each regular expression run command print net.
+# Run each regular expression in xfst shell with `read regex` command. After each regular expression run command `print net`.
+#
+# Next you will write regular expressions that contain composition with replace rules.
+#
+# 2. Write an expression where an English verb vocabulary {sing, sit, ring, win} will be changed into past tense {sang, sat, rang, won}.
+
+pass # <write your solution here>
+
+# 3. Write an expression where a set of Finnish words {makkara, hattara, jäkälä, läsnä} will be composed with rules that change a into ä, and ä into a,
+# so that we get set {mäkkärä, hättärä, jakala, lasna} as final output. If you want, you can use parallel replace rules
+# to solve this although they haven't been thought in the lectures (check the book for that), but also other solutions are possible.
+
+pass # <write your solution here>
 
 # ### Assignment 5.4: Drawing automata and transducers with hfst
-#
-# In this exercise, you will learn how to draw network graphs of finite-state automata and transducers.
-# TODO: learn to save dot files to file instead?
 #
 # 1. Draw union from Assignment 2.2.
 # 
