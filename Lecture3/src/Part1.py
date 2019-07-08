@@ -7,7 +7,7 @@
 #  <li>4. <a href="#4.-Spelling-correction">Spelling correction</a></li>
 #  <li>5. <a href="#5.-Logprobs">Logprobs</a></li>
 #  <li>6. <a href="#6.-Summary-of-types-of-finite-state-automata-and-transducers">Summary of types of finite-state automata and transducers</a></li>
-#  <li>7. <a href="#7.-Assignments"></a></li>
+#  <li>7. <a href="#7.-Assignments">Assignments</a></li>
 # </ul>
 #
 # ## 1. Disambiguation
@@ -665,8 +665,8 @@ pass # <insert your solution here>
 #
 # * The archiphoneme ‘A’ in a suffix (such as -ssA) should be realized as ‘a’ if it is preceded by a back vowel ‘a’, ‘o’ or ‘u’ anywhere in the word, such that there is no front vowel ‘ä’, ‘ö’ or ‘y’ anywhere between the back vowel and the suffix.
 # * Otherwise the archiphoneme ‘A’ should be realized as ‘ä’.
-# *Similarly, the archiphoneme ‘O’ in a suffix (such as -kO) should be realized as ‘o’ if it is preceded by a back vowel ‘a’, ‘o’ or ‘u’ anywhere in the word, such that there is no front vowel ‘ä’, ‘ö’ or ‘y’ anywhere between the back vowel and the suffix.
-# *Otherwise the archiphoneme ‘O’ should be realized as ‘ö’.
+# * Similarly, the archiphoneme ‘O’ in a suffix (such as -kO) should be realized as ‘o’ if it is preceded by a back vowel ‘a’, ‘o’ or ‘u’ anywhere in the word, such that there is no front vowel ‘ä’, ‘ö’ or ‘y’ anywhere between the back vowel and the suffix.
+# * Otherwise the archiphoneme ‘O’ should be realized as ‘ö’.
 #
 # Some hints on xfst syntax:
 #
@@ -705,7 +705,7 @@ pass # <insert your solution here>
 # such that the more stems you add, the more "expensive" the generated word form becomes.
 #
 # b. Start the xfst shell with `hfst_dev.start_xfst()`.
-# First run `set show-weights ON`.
+# First run `set print-weight ON`.
 # This makes the program show the weights of every word form it displays.
 #
 # c. Output some random lexical forms (upper level) and random surface forms (lower level) sorted by weight.
@@ -723,7 +723,7 @@ pass # <insert your solution here>
 # Again, the weight does not have to be a logprob; some positive number is sufficient.
 # Do not yet project your vocabulary transducer (using the .l operator), nor invert the final transducer (using the .i operator).
 #
-# b. Again, start the xfst shell and run `set show-weights ON`, so that the weights are displayed.
+# b. Again, start the xfst shell and run `set print-weight ON`, so that the weights are displayed.
 # (TODO: two xfst shells cannot be run at the same time - exit any running shells with `exit` first.)
 # Generate all surface forms for the lexical string “kissa+Nom+kO”.
 # The command “down kissa+Nom+kO” should produce four forms: “kissako”, “jissako”, “kissajo”, and “jissajo”.
@@ -734,7 +734,7 @@ pass # <insert your solution here>
 # d. Add more noise-introducing alternations with weights:
 # you should have at least 5 different cases of each of the following types: substitutions, insertions, deletions and transpositions.
 #
-# e. Start the xfst shell and run `set show-weights ON`, and output some random upper (noisy) and lower (corrected) forms sorted by weight.
+# e. Start the xfst shell and run `set print-weight ON`, and output some random upper (noisy) and lower (corrected) forms sorted by weight.
 #
 # f. Figure out what the correct spellings are for some of the weirdest noisy random words you produced in e).
 # Depending on your model, you would type something like: down ähmöpäiialo (a misspelled variant of the funny word “sähköpääkissako”).
