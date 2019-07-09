@@ -374,8 +374,7 @@ print(succeeds.lookup('bialkitaabi'))
 
 from hfst_dev import compile_lexc_file, compile_twolc_file, HfstTransducer, intersect, compose
 lexc = compile_lexc_file('tagalog.lexc')
-compile_twolc_file('tagalog.twolc', 'tagalog.twolc.hfst')
-twolc_rules = HfstTransducer.read_all_from_file('tagalog.twolc.hfst')
+twolc_rules = compile_twolc_file('tagalog.twolc')
 twolc = intersect(twolc_rules)
 tagalog = compose((lexc, twolc))
 print(tagalog.lookup('RE+pili'))
@@ -414,8 +413,7 @@ print(xfst.lookup('buku+Noun+Plural'))
 
 lexc = compile_lexc_file('arabic.lexc')
 # todo: unresolvable conflicting rules
-compile_twolc_file('arabic.twolc', 'arabic.twolc.hfst')
-twolc_rules = HfstTransducer.read_all_from_file('arabic.twolc.hfst')
+twolc_rules = compile_twolc_file('arabic.twolc')
 twolc = intersect(twolc_rules)
 arabic = compose((lexc, twolc))
 print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))

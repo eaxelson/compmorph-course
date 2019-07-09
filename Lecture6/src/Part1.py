@@ -123,11 +123,9 @@ print(xfst.lookup('big+A+Pos'))
 
 # Explicitely compile the lexicon.
 lexicon = compile_lexc_file('en_adjectives.lexc')
-# Compile the twolc file and store the result to en_adjectives.twolc.hfst.
-compile_twolc_file('en_adjectives.twolc', 'en_adjectives.twolc.hfst')
-# Read the rules from file,
-twolc_rules = HfstTransducer.read_all_from_file('en_adjectives.twolc.hfst')
-# intersect them (not compose!),
+# Compile the twolc file
+twolc_rules = compile_twolc_file('en_adjectives.twolc')
+# intersect the rules (not compose!),
 twolc_rule = intersect(twolc_rules)
 # and the lexicon with them.
 twolc = compose((lexicon, twolc_rule))
@@ -152,8 +150,7 @@ assert(twolc.compare(xfst))
 #
 # <img src="img/resolving_conflicting_rules.png">
 
-compile_twolc_file('conflicting_rules.twolc', 'conflicting_rules.twolc.hfst')
-twolc_rules = HfstTransducer.read_all_from_file('conflicting_rules.twolc.hfst')
+twolc_rules = compile_twolc_file('conflicting_rules.twolc')
 twolc = intersect(twolc_rules)
 print(twolc.lookup('rar'))
 print(twolc.lookup('lar'))
