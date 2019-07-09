@@ -3,6 +3,7 @@
 # <ul>
 #  <li>1. <a href="#1.-Flag-diacritics">Flag diacritics</a></li>
 #  <li>2. <a href="#2.-Non-concatenative-morphotactics">Non-concatenative morphotactics</a></li>
+#  <li>3. <a href="#3.-Assignments">Assignments</a></li>
 # </ul>
 #
 # ## 1. Flag diacritics
@@ -425,3 +426,100 @@ print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))
 #  <li>Chapter 8 of the Beesley & Karttunen book: “Non-Concatenative Morphotactics”</li>
 #  <li>HFST: <a href="https://github.com/hfst/hfst/wiki/HfstTwolc">hfst-twolc command line tool</a></li>
 # </ul>
+
+# ## 3. Assignments
+#
+# ### Assignment 7.1: Flag diacritics: succeed or fail?
+#
+# Assume that the sequences of flag diacritics listed below appear in this precise order in paths in finite-state networks.
+# For each of the sequences, you need to figure out whether it will succeed or fail.
+# In case of failure and the path being blocked, also figure out which flag diacritic in the sequence causes the failure.
+# Check your answers using hfst_dev.regex and HfstTransducer.extract_paths.
+#
+# * `bi @U.CASE.GEN@ al @U.ART.PRESENT@ kitaab @U.ART.ABSENT@ iN @U.CASE.GEN@`
+# * `bi @P.CASE.GEN@ al @P.ART.PRESENT@ kitaabi @U.CASE.GEN@`
+# * `@P.CASE.NOM@ @C.ART@ @D.CASE.NOM@`
+# * `@N.VOWEL.BACK@ @D.VOWEL.HIGH@`
+# * `@P.VOWEL.BACK@ @U.CASE.NOM@ @D.VOWEL.FRONT@ @R.CASE@`
+
+pass # <write your solution here>
+
+# ### Assignment 7.2: Simple Danish noun phrases
+#
+# Below you see a lexc script for some simple Danish noun phrases.
+# (The same script is also available in file danish.lexc.)
+# The problem with this lexc file is that it overgenerates.
+# Many of the surface forms it creates are not valid Danish.
+# The only thing that is needed in order to fix the problem is to add some appropriate flag diacritics in the right places.
+# That is all you need to do, and that is in fact all you are allowed to do.
+
+pass # <write your solution here>
+
+danish_lexc="""
+Multichar_Symbols
++Indef  ! indefinite form
++Def    ! definite form
+! Remember to list all your flag diacritics as multichar symbols, too
+
+LEXICON Root
+Articles ;
+
+LEXICON Articles
+NounStems ;  ! no article
+:et_    AdjStems ;   ! indefinite article (a/an)
+:det_   AdjStems ;   ! definite article (the)
+
+LEXICON AdjStems
+NounStems ;     ! no adjective attribute
+dejlig  AdjSuffixes ;   ! nice
+god     AdjSuffixes ;   ! good
+gul     AdjSuffixes ;   ! yellow
+ny      AdjSuffixes ;   ! new
+stor    AdjSuffixes ;   ! big
+
+LEXICON AdjSuffixes
+t_      NounStems ;     ! indefinite adj. suffix
+t_:e_   NounStems ;     ! definite adj. suffix
+
+LEXICON NounStems
+brev    NounSuffixes ;  ! letter
+hegn    NounSuffixes ;  ! fence
+fly     NounSuffixes ;  ! plane
+hus     NounSuffixes ;  ! house
+tog     NounSuffixes ;  ! train
+
+LEXICON NounSuffixes
++Indef: # ;             ! no noun suffix
++Def:   # ;             ! no noun suffix
++Def:et # ;             ! definite suffix
+
+END
+"""
+
+# This is the kind of patterns that your Danish lexicon should produce:
+#
+# | Lexical form | Surface form | English translation |
+# | ------------ | ------------ | ------------------- |
+# | hus+Indef | et_hus | a house |
+# | hus+Def | huset | the house |
+# | stort_hus+Indef | et_stort_hus | a big house |
+# | stort_hus+Def | det_store_hus | the big house |
+# | gult_hus+Indef | et_gult_hus | a yellow house |
+# | gult_hus+Def | det_gule_hus | the yellow house |
+#
+# Then there are some patterns that your lexicon is not supposed to produce:
+#
+# | Invalid surface form | Comment |
+# | -------------------- | ------- |
+# | hus | Missing indefinite article "et" |
+# | stort_hus | Missing indefinite article "et" |
+# | store_hus | Missing definite article "det" |
+# | det_hus | Unlike English and German (the house, das Haus) definiteness is marked using the suffix -et, when there is no adjective attribute. |
+# | store_huset | When there is an adjective attribute, definiteness is marked with the article "det". |
+# | det_store_huset | Unlike Swedish (det stora huset) definiteness is not double-marked; there is either the article "det" or the suffix -et. |
+# | det_stort_hus | The adjective attribute has the wrong suffix. |
+# | et_store_hus | The adjective attribute has the wrong suffix. |
+#
+# You are supposed to add flag diacritics to the lexc file.
+# Then you are supposed to test this lexicon using both the xfst commands `upper-words` and `lower-words`.
+# That is, you need to produce all possible noun phrases in the vocabulary, both in their lexical and surface forms.
