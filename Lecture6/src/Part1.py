@@ -5,6 +5,7 @@
 #  <li>2. <a href="#2.-Example:-English-adjectives">Example: English adjectives</a></li>
 #  <li>3. <a href="#3.-Twol-rule-operators">Twol rule operators</a></li>
 #  <li>4. <a href="#4.-Example:-consonant-gradation-in-Finnish">Example: consonant gradation in Finnish</a></li>
+#  <li>5. <a href="#5.-Assignments"></a>Assignments</li>
 # </ul>
 #
 # ## 1. Two-level rules
@@ -181,3 +182,83 @@ print(twolc.lookup('lar'))
 #  <li>HFST: hfst-lexc (todo) and <a href="https://github.com/hfst/hfst/wiki/HfstTwolc">hfst-twolc</a> command line tools</li>
 # </ul>
 #
+
+# ## 5. Assignments
+#
+# ### Assignment 6.1: Test twolc
+#
+# In this task, you will test how two-level rules, so-called twol rules, work.
+#
+# First, compile the lexicon and twol rules.
+# They are the same that were presented in section 1.2 of this lecture.
+
+# Compile the twolc file
+lexicon = compile_lexc_file('en_adjectives.lexc')
+# Compile the twolc file
+twolc_rules = compile_twolc_file('en_adjectives.twolc')
+# intersect the rules (not compose!),
+twolc_rule = intersect(twolc_rules)
+# and the lexicon with them.
+twolc = compose((lexicon, twolc_rule))
+print(twolc.lookup('big+A+Pos'))
+
+# Write the transducer to file.
+twolc.write_to_file('en_adjectives_generator.hfst')
+
+# Then, invert the transducer to get an analyzer
+
+twolc.invert()
+twolc.minimize()
+print(twolc.lookup('craziest'))
+
+# Finally, test the xfst shell.
+# When you see the prompt <tt>hfst[0]</tt>, load the twol transducer as follows:
+# `load stack en_adjectives_generator.hfst`
+# Then collect some random surface forms by typing random-lower a couple of times.
+
+from hfst_dev import start_xfst
+start_xfst()
+
+# ### Assignment 6.2: English adjectives using twolc
+#
+# If you have done Assignment 2.1, you will need the file en_ip_adjectives_lexicon.lexc with your modifications.
+#
+# If you have not done Assignment 2.1, you need to add four new adjectives to the Adjectives lexicon in the file en_ip_adjectives_lexicon.lexc: cute, nice, safe, wise.
+#
+# Next, modify the twol rules in the file en_adjectives.twolc to produce the correct inflections for the new adjectives “cute”, “nice”, “safe”, and “wise”.
+# Remember to update the alphabet section at the top of the twol file as well.
+#
+# Rebuild the FST as described in Assignment 6.1.
+#
+# Test the FST using xfst shell as described in Assignment 6.1.
+#
+# Collect all surface forms using the command lower-words. Verify that all forms are correct.
+
+pass # <write your solution here>
+
+# ### Assignment 6.3: Consonant gradation for Finnish nouns with lexc and twolc
+#
+# In this assignment you will work on Finnish consonant gradation. You have the following files: fin_cons_grad.lexc and fin_cons_grad.twolc.
+#
+# In Assignment 6.1, there are detailed instruction how to build a transducer out of these files.
+# You just need to replace the file names.
+# The model file that you produce and should load into xfst shell using the load stack command will be called fin_cons_grad_generator.hfst (rather than en_adjectives_generator.hfst).
+#
+# Start the task by verifying that you can load the existing model into xfst shell and run `upper-words` and `lower-words`.
+
+pass # <write your solution here>
+
+# Next, your task is to extend the vocabulary in the lexc file. You don't need to modify any other file. Don't change the two-level rules.
+#
+# Add at least ten new Finnish nouns to the lexicon.
+#
+# * The nouns should have different morpho-phonological structure, such that you demonstrate the different consonant gradation patterns through these nouns.
+# * At least five of the new nouns should contain front-vowels (ä, ö, y, e, i) and take the ending -ä in partitive singular. Currently, there are no such nouns in the lexicon file.
+# * If you don't know Finnish, you are allowed to invent your own nonsense words, as long as they behave as Finnish words with consonant gradation.
+# * After you have added your words, recompile your model. Load it into xfst shell and run `upper-words` and `lower-words`.
+
+pass # <write your solution here>
+
+# PS: Vowel harmony can be implemented using two-level rules as well,
+# but in this assignment we create two different inflection paradigms in the lexc file:
+# stems with back vowels, on the one hand, and stems with front vowels, on the other hand.
