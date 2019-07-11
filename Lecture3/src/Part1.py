@@ -724,7 +724,7 @@ pass # <insert your solution here>
 # Do not yet project your vocabulary transducer (using the .l operator), nor invert the final transducer (using the .i operator).
 #
 # b. Again, start the xfst shell and run `set print-weight ON`, so that the weights are displayed.
-# (TODO: two xfst shells cannot be run at the same time - exit any running shells with `exit` first.)
+# (TODO: <i>two xfst shells cannot be run at the same time - exit any running shells with command "exit" first</i>.)
 # Generate all surface forms for the lexical string “kissa+Nom+kO”.
 # The command “down kissa+Nom+kO” should produce four forms: “kissako”, “jissako”, “kissajo”, and “jissajo”.
 #

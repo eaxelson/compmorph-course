@@ -179,7 +179,7 @@ print(twolc.lookup('lar'))
 # <ul>
 #  <li>Unpublished chapter of Beesley & Karttunen (2003): <a href="http://web.stanford.edu/~laurik/.book2software/twolc.pdf">“Two-Level Rule Compiler”</a></li>
 #  <li>Karttunen & Beesley (1992): Two-Level Rule Compiler. Technical Report. ISTL-92-2. Xerox Palo Alto Research Center, California.</li>
-#  <li>HFST: hfst-lexc (todo) and <a href="https://github.com/hfst/hfst/wiki/HfstTwolc">hfst-twolc</a> command line tools</li>
+#  <li><a href="https://github.com/hfst/hfst/wiki/HfstTwolc">hfst-twolc</a> command line tool</li>
 # </ul>
 #
 
