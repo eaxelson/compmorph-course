@@ -302,7 +302,9 @@ braços
 from hfst_dev import start_xfst
 start_xfst()
 
-# Also test the examples given below.
+# Also test the examples given below. <b>NOTE: Do not start xfst shell if you already
+# have an xfst shell running.</b> If you wish to start another shell, first exit
+# the current shell with command `exit`.
 
 # #### Writing regular expressions in xfst (2)
 #
@@ -372,8 +374,6 @@ start_xfst()
 # ```
 #
 # You can write a sequence of symbols, such as t a l o, together, if you enclose it in curly brackets: {talo}.
-# NOTE: exit the previous session started with start_xfst before starting a new one!
-# A session can be exited with the command 'exit'.
 
 start_xfst()
 
