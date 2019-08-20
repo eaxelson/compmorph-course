@@ -136,9 +136,12 @@ print(concatenation_set.extract_paths())
 
 # ### 2.9. Composition of transducers
 #
+# The composition of two relations is a relation that contains all such string pairs
+# <A, C> where the first relation contains <A, B> and the second relation contains <B, C>.
+#
 # <img src="img/composition.png">
 #
-# The composition is <code>{<"cat","Katze">}</code>.
+# The composition of <code><"cat","chat"></code> and <code><"chat","Katze"></code> is <code>{<"cat","Katze">}</code>.
 
 from hfst_dev import compose
 set1 = fst({'cat':'chat'})
@@ -192,12 +195,19 @@ print(CHAT.extract_paths())
 #
 # ### 3.1. Cascade of transducers: Rule 1
 #
+# We will create a cascade of transducers, i.e. a set of transducers that will
+# be applied in order to a given input. The output of one transducer will become
+# the input of the next transducer until there are no more transducers in the cascade.
+# The transducers apply morpholocial/phonological rules to their input one rule at a time.
+#
 # Insert 'e' after the end of the stem in front of 's', if the stem ends in
 # 's', 'x', 'ch', 'sh' or 'y'.
 #
 # Expressed as an xfst rule:
 #
 # <code>define InsertE   [. .] -> e || [ s | x | c h | s h | y ] %^ _ s ;</code>
+#
+# When the rule is compiled to a transducer the result is as follows:
 #
 # <img src="img/InsertE.png">
 

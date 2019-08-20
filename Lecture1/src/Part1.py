@@ -444,7 +444,9 @@ print(generator.lookup('sky+N+Pl'))
 
 # and expect the result `(('skies', 0.0),)`, i.e. <i>skies</i> with a zero _weight_. We will return to weights in later lectures.
 #
-# Next, _invert_ the transducer to get an analyzer:
+# Next, <a href="https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#invert-self">invert</a> the transducer to get an analyzer (i.e. swap the symbols of input and output side).
+# After inversion, it is good to <a href="https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#minimize-self">minimize</a>
+# the transducer (i.e. reduce it to an equivalent transducer with the smallest number of states).
 
 from hfst_dev import HfstTransducer
 analyzer = HfstTransducer(generator) # create a copy
@@ -455,7 +457,7 @@ print(analyzer.lookup('skies'))
 
 # and expect the result `(('sky+N+Pl', 0.0),)`, i.e. "the noun <i>sky</i> in plural with a zero weight".
 #
-# Let's check that inverting the analyzer produces a transducer equivalent to the generator:
+# Let's check that inverting the analyzer produces a transducer equivalent to the generator with HfstTransducer.compare:
 
 analyzer.invert()
 analyzer.minimize()
@@ -484,14 +486,16 @@ print(morph.lookup('sky+N+Pl', output='text'))
 #
 # Your system works!
 
-# For the noun sky, type in all four possible analyses (= lexical forms = input forms), and collect the corresponding surface forms (= output forms) as given by HfstTransducer.lookup.
+# For the noun sky, type in all four possible analyses (= lexical forms = input forms), and collect the corresponding surface forms (= output forms) as given by function HfstTransducer.lookup.
 
 pass # write your solution here
 
 # ### Assignment 1.2: Testing a morphological analyzer
 #
 # Invert your transducer, such that input becomes output and vice versa.
-# Note that a lookup-optimized transducer supports only a couple of functions, so you need to remove optimization with HfstTransducer.remove_optimization before calling e.g. HfstTransducer.invert.
+# Note that a lookup-optimized transducer supports only a couple of functions, so you need to remove optimization with
+# <a href="https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#remove_optimization-self">HfstTransducer.remove_optimization</a> before calling e.g.
+# <a href=https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#invert-self"">HfstTransducer.invert</a>.
 # (TODO: should the interface be changed so that we have a separate class for lookup-optimized transducers, e.g. HfstOlTransducer vs. an ordinary HfstTransducer?
 # Then it would be clearer that we are dealing with a special type of transducer that doesn't support most of the functions that are available for HfstTransducer.)
 #
