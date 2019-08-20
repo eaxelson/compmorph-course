@@ -495,7 +495,7 @@ pass # write your solution here
 # Invert your transducer, such that input becomes output and vice versa.
 # Note that a lookup-optimized transducer supports only a couple of functions, so you need to remove optimization with
 # <a href="https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#remove_optimization-self">HfstTransducer.remove_optimization</a> before calling e.g.
-# <a href=https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#invert-self"">HfstTransducer.invert</a>.
+# <a href="https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#invert-self">HfstTransducer.invert</a>.
 # (TODO: should the interface be changed so that we have a separate class for lookup-optimized transducers, e.g. HfstOlTransducer vs. an ordinary HfstTransducer?
 # Then it would be clearer that we are dealing with a special type of transducer that doesn't support most of the functions that are available for HfstTransducer.)
 #
