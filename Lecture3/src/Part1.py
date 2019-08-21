@@ -341,7 +341,14 @@
 # = 1.65 * 10^-11    
 # </pre>
 #
-# This product of probabilities can be written as:
+# This product of probabilities can also be written as addition of so called
+# <i>negative logarithms</i>. Some mathematical background is needed to understand this transformation,
+# i.e. concepts of <a href="https://en.wikipedia.org/wiki/Exponentiation">exponentiation</a> and
+# <a href="https://en.wikipedia.org/wiki/Logarithm">logarithm</a>.
+#
+# #### 5.1.2 Logarithms
+#
+# With logarithms, the above probability can be expressed as:
 #
 # <pre>
 # (5 * 10^-1) * 10^-3 * 10^-1 * 10^-6 * (6 * 10^-1) * (5.5 * 10^-1)
