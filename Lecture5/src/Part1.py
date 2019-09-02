@@ -462,14 +462,21 @@ start_xfst()
 # <a href="https://korp.csc.fi/download/hfst-morphologies/sv/dsso/">Swedish</a>,
 # or <a href="https://korp.csc.fi/download/hfst-morphologies/test/tr/trmorph/">Turkish</a>.
 #
-# <b>b.</b> Test one of the analyzers using start_xfst or HfstTransducer.lookup.
+# Download the zip package, extract it, and search for file with extension `.hfst`. This is the analyzer file.
+#
+# <b>b.</b> Read the transducer from file and test it with HfstTransducer.read_from_file and HfstTransducer.lookup.
 # Type in a few word forms and check what analyses you get for these word forms (the format of the tags is slightly different in the different languages).
+
+pass # <write your solution here>
+
+# Perform the same test in an interactive xfst shell (open it with with start_xfst). Use commands `load stack` and `lookup` instead.
 
 pass # <write your solution here>
 
 # <b>c.</b> Pick a text file containing words of the language you chose.
 # There should be one word per line in the file.
 # If you don’t have any text file available, you can use one of the pre-prepared files english-words.txt, finnish-words.txt, french-words.txt, german-words.txt or swedish-words.txt.
+# For reading, you can use Python's `open(path,mode)` and `<file>.read()`, `<file>.readline()`, or `<file>.readlines()`.
 #
 # <b>d.</b> Run the entire text file through the analyzer, as follows:
 
