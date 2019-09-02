@@ -157,6 +157,8 @@ help(hfst_dev.compile_xfst_file)
 
 help(hfst_dev.start_xfst)
 
+# We will get back to these tools in later sections.
+
 # ## 5. Morphological generators and analyzers
 #
 # ### 5.1. Morphological generator
@@ -544,7 +546,15 @@ pass # write your solution here
 
 # ### Assignment 1.5: Adding English verb inflection to the lexicon
 #
-# Add verb inflection to your lexc file. Include the three paradigms from the image below and all the verbs listed: jump, look, talk, walk, bake, fake, like, pile, smile, crash, hiss, kiss, miss, search.
+# Add verb inflection to your lexc file. Include the three paradigms from the table below and all the verbs listed:
+# jump, look, talk, walk, bake, fake, like, pile, smile, crash, hiss, kiss, miss, search.
+#
+# <table>
+# <tr> <th>Base form</th> <th>Third Person Singular Present</th> <th>Present Participle</th> <th>Past</th> </tr>
+# <tr> <td>jump</td> <td>jumps</td> <td>jumping</td> <td>jumped</td> </tr>
+# <tr> <td>bake</td> <td>bakes</td> <td>baking</td> <td>baked</td> </tr>
+# <tr> <td>crash</td> <td>crashes</td> <td>crashing</td> <td>crashed</td> </tr>
+# </table>
 #
 # Use the tags +V, +Inf,  +Pres3Sg, +Past, +Prog, and remember to declare them as multichar symbols at the top of your lexc file.
 #

@@ -359,7 +359,7 @@
 # </pre>
 #
 # If we agree on some base, such as 10, then instead of multiplying actual probabilities
-# of co-occuring indendent events, we can add the (negative) exponents of the probabilities,
+# of co-occuring independent events, we can add the (negative) exponents of the probabilities,
 # which is faster and more manageable.
 #
 # Instead of <pre>0.5 * 0.001 * 0.1 * 0.000001 * 0.6 * 0.55 = 0.0000000000165</pre>,
@@ -681,6 +681,7 @@ pass # <insert your solution here>
 # * `$[a|b|c]` means any string of characters containing a, b or c.
 # * `~$[a|b|c]` means any other string of characters than a string of characters containing a, b or c.
 # * You can also define sets of characters as: `define MyAbc [a|b|c];` and use them in your expressions, for instance, `~$MyAbc`.
+# * Contexts of rules can consist of multiple elements, e.g. `$[d|e|f] ~$[a|b|c] $[d|e|f] _ $[a|b|c] ~$[d|e|f]`.
 #
 # Compose your lexicon with your rules (as described in the earlier Assignment 2.1 mentioned above).
 
@@ -735,7 +736,7 @@ pass # <insert your solution here>
 # Generate all surface forms for the lexical string “kissa+Nom+kO”.
 # The command “down kissa+Nom+kO” should produce four forms: “kissako”, “jissako”, “kissajo”, and “jissajo”.
 #
-# c. Next, project the vocabulary transducer to its lower level and invert the final transducer (check lecture slide 51).
+# c. Next, project the vocabulary transducer to its lower level and invert the final transducer.
 # Now, you should have a “proper” spell checker; for instance, when you type “down jissajo” the output should be the corrected form: “kissako”.
 #
 # d. Add more noise-introducing alternations with weights:
