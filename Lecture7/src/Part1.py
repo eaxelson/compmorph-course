@@ -417,7 +417,7 @@ lexc = compile_lexc_file('arabic.lexc')
 twolc_rules = compile_twolc_file('arabic.twolc')
 twolc = intersect(twolc_rules)
 arabic = compose((lexc, twolc))
-print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))
+print(arabic.lookup('[ktb+Verb+FormI+Pass]+3P+Fem+Sg'))
 
 # ## More information
 #
@@ -434,13 +434,21 @@ print(arabic.lookup('[ktb+FormI+Pass]+3P+Fem+Sg'))
 # Assume that the sequences of flag diacritics listed below appear in this precise order in paths in finite-state networks.
 # For each of the sequences, you need to figure out whether it will succeed or fail.
 # In case of failure and the path being blocked, also figure out which flag diacritic in the sequence causes the failure.
-# Check your answers using hfst_dev.regex and HfstTransducer.extract_paths.
 #
 # * `bi @U.CASE.GEN@ al @U.ART.PRESENT@ kitaab @U.ART.ABSENT@ iN @U.CASE.GEN@`
 # * `bi @P.CASE.GEN@ al @P.ART.PRESENT@ kitaabi @U.CASE.GEN@`
 # * `@P.CASE.NOM@ @C.ART@ @D.CASE.NOM@`
 # * `@N.VOWEL.BACK@ @D.VOWEL.HIGH@`
 # * `@P.VOWEL.BACK@ @U.CASE.NOM@ @D.VOWEL.FRONT@ @R.CASE@`
+#
+# Check your answers using hfst_dev.regex and HfstTransducer.extract_paths.
+# For instance, for the first example you would run (in pseudocode):
+#
+# ```
+# tr = regex(bi @U.CASE.GEN@ al @U.ART.PRESENT@ kitaab @U.ART.ABSENT@ iN @U.CASE.GEN@)
+# tr.extract_paths
+# ```
+# and check if the transducer recognizes any strings.
 
 pass # <write your solution here>
 

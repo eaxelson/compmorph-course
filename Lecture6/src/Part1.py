@@ -233,6 +233,8 @@ start_xfst()
 # Test the FST using xfst shell as described in Assignment 6.1.
 #
 # Collect all surface forms using the command lower-words. Verify that all forms are correct.
+#
+# See <a href="https://github.com/hfst/hfst/wiki/HfstLexcAndTwolcTutorial">lexc and twolc tutorial</a> and also instructions of <a href="https://github.com/hfst/hfst/wiki/HfstTwolc">hfst-twolc command line tool</a>.
 
 pass # <write your solution here>
 
