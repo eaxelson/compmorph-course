@@ -60,6 +60,10 @@ print(hfst_dev.__version__)
 
 # ## 3. Course overview
 #
+# This web course is based largely on the course <a href="https://courses.helsinki.fi/en/LDA-T3101/120259674">”Computational Morphology”</a> held at the University of Helsinki spring 2018.
+# The course was taught and planned by Mathias Creutz. Senka Drobac also contributed to the exercises.
+# The web course uses the same examples and exercises, but HFST command line tools have been replaced with HFST Python interface.
+#
 # <table>
 # <tr> <th>Lecture</th> <th>Topics</th> </tr>
 # <tr> <td>1</td> <td>Theories of morphology, generators and analyzers, lexc</td> </tr>
