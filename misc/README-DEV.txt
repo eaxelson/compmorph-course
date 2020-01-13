@@ -15,6 +15,6 @@ Create images from att files
 
 Create all ipynb and html files from py files:
 
-  for file in */src/Part1.py; do echo $file && jupytext --to notebook $file ; done
-  for file in */src/Part1.ipynb; do echo $file && jupyter-nbconvert --to html $file ; done
-  for dir in */src/; do cd $dir && pwd && mv Part1.ipynb ../ && mv Part1.html ../ && cd ../.. ; done
+  for file in */src/Lecture.py; do echo $file && jupytext --to notebook $file ; done
+  for file in */src/Lecture.ipynb; do echo $file && jupyter-nbconvert --to html $file ; done
+  for dir in */src/; do cd $dir && pwd && mv Lecture.ipynb ../ && mv Lecture.html ../ && cd ../.. ; done
