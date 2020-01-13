@@ -11,3 +11,9 @@ cp -r /home/jovyan/work/compmorph-course /home/jovyan/Lectures
 
 python3 -m pip install graphviz
 python3 -m pip install hfst-dev
+
+cd /home/jovyan/Lectures
+rm -fR misc
+rm -fR src
+rm -f README.md
+mv README_FOR_USER.md README.md
