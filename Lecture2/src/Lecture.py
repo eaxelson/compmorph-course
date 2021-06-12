@@ -47,7 +47,7 @@
 #
 # ## 2. Set Theory for Finite-State Networks
 #
-# <i>Images from Beesley & Karttunen (2003): Finite State Morphology.</i>
+# <i>Images from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 #
 # ### 2.1. Examples of sets:
 #
@@ -247,7 +247,7 @@ print(CleanUp.lookup("ski^es'"))
 #
 # <img src="img/cascade.png">
 #
-# <i>Image from Beesley & Karttunen (2003): Finite State Morphology.</i>
+# <i>Image from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 
 from hfst_dev import compile_lexc_file
 lexicon = compile_lexc_file('en_ia_morphology.lexc')
@@ -291,7 +291,7 @@ print(cascade.lookup("sky+N+Pl+Poss"))
 #
 # <img src="img/xfst_notation_explained_5.png">
 #
-# <i>Images from Beesley & Karttunen (2003): Finite State Morphology.</i>
+# <i>Images from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 
 # ## 4. Example: English Adjectives
 #

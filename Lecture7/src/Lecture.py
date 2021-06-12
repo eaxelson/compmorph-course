@@ -345,7 +345,7 @@ print(succeeds.lookup('bialkitaabi'))
 #
 # <img src="img/n_foo_blah.png">
 #
-# <i>Image from Beesley & Karttunen: Finite State Morphology (2003).</i>
+# <i>Image from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 #
 # <ul>
 #  <li><code>@P.FEAT.M@</code> <code>@D.FEAT.M@</code> will fail.</li>
@@ -393,7 +393,7 @@ print(xfst.lookup('buku+Noun+Plural'))
 #
 # <img src="img/arabic_morphemes.png">
 #
-# <i>Image from Beesley & Karttunen: Finite State Morphology (2003).</i>
+# <i>Image from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 #
 # #### Arabic morphotactics using merge and compile-replace
 #

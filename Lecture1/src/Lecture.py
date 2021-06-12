@@ -502,8 +502,6 @@ pass # write your solution here
 # Note that a lookup-optimized transducer supports only a couple of functions, so you need to remove optimization with
 # <a href="https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#remove_optimization-self">HfstTransducer.remove_optimization</a> before calling e.g.
 # <a href="https://github.com/hfst/python-hfst-4.0/wiki/HfstTransducer#invert-self">HfstTransducer.invert</a>.
-# (TODO: should the interface be changed so that we have a separate class for lookup-optimized transducers, e.g. HfstOlTransducer vs. an ordinary HfstTransducer?
-# Then it would be clearer that we are dealing with a special type of transducer that doesn't support most of the functions that are available for HfstTransducer.)
 #
 # This transducer works as an analyzer that retrieves the lexical form of surface forms.
 # Collect the analyses for the following surface forms: dog's, skies, churches', beauty, cat.
@@ -518,7 +516,7 @@ pass # write your solution here
 # Go to the browser tab where you chose this lecture (probably the tab on left side)
 # and click the file en_ia_morphology_template.lexc. A new tab opens where you can edit
 # the file. After you have added the missing nouns, remember to click File -> Save.
-# (TODO: tab charaters must be inserted by copying and pasting them.)
+# (Tab charaters must be inserted by copying and pasting them.)
 #
 # Recompile the transducer using function compile_lexc_file.
 # Collect the surface forms produced by HfstTransducer.lookup for the lexical forms:

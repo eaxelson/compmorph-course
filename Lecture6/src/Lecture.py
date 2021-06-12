@@ -26,7 +26,7 @@
 # and  produce one single FST that “jumps” from the lexical-form input straight to
 # the final output in one go, without producing the intermediate steps.
 #
-# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book.</i>
+# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 #
 # <img src="img/cascade.png">
 #
@@ -137,7 +137,7 @@ assert(twolc.compare(xfst))
 
 # ## 3. Twol rule operators
 #
-# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of the Beesley & Karttunen 2003 book."</i>
+# <i>Figures taken from an unpublished chapter "Two-Level Rule Compiler" of Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003."</i>
 #
 # ### 3.1. twolc rule operators
 #
@@ -164,7 +164,7 @@ print(twolc.lookup('lar'))
 
 # ## 4. Example: consonant gradation in Finnish
 #
-# <i>Examples taken from from: Karttunen & Beesley's "Two-Level Rule Compiler".</i>
+# <i>Examples taken from an unpublished chapter "Two-Level Rule Compiler" of Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003..</i>
 #
 # ### 4.1. Consonant gradation in Finnish
 #

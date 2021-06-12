@@ -195,7 +195,7 @@ comp.parse_line('random-lower')
 #
 # <img src="img/phonetic_symbols_for_portuguese.png">
 #
-# <i>Table from Beesley & Karttunen (2003).</i>
+# <i>Table from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 #
 # ### 3.3. Some example words
 #
@@ -203,7 +203,7 @@ comp.parse_line('random-lower')
 #
 # <img src="img/test_data_for_portuguese.png">
 #
-# <i>Table from Beesley & Karttunen (2003).</i>
+# <i>Table from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 #
 # ### 3.4. Conversion from orthography to pronunciation for Brazilian Portuguese
 #
@@ -270,7 +270,7 @@ braços
 
 # ## 4. Regular expressions in xfst
 #
-# <i>Figures and tables taken from Beesley & Karttunen (2003).</i>
+# <i>Figures and tables taken from Beesley & Karttunen: Finite State Morphology, CSLI Publications, 2003.</i>
 #
 # ### 4.1. Kleene (1956): Formal language theory
 #
@@ -379,13 +379,11 @@ start_xfst()
 
 # ## 5. Pronunciation lexicon for a Language with Irregular Orthography: English
 #
-# <i>Figures taken fron Jurafsky & Martin: Speech and Language Processing, Prentice Hall, 1999.</i>
+# <i>Figures taken from Jurafsky & Martin: Speech and Language Processing, Prentice Hall, 1999.</i>
 #
 # ### 5.1. Symbol set for English pronunciation
 #
 # <img src="img/english_phonemes.png">
-#
-# From: Jurafsky & Martin: Speech and Language Processing, Prentice Hall, 1999.
 #
 # ### 5.2. "Two levels times two"
 #
