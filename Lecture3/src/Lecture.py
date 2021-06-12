@@ -250,7 +250,7 @@
 # LEXICON Number
 # +Sg:0               Case "weight: 0.6" ;
 # +Pl:^I              Case "weight: 0.3" ;
-# \#:0  Nouns "weight: 0.1" ; ! Back to collect more stems
+# &#35;:0  Nouns "weight: 0.1" ; &#33; Back to collect more stems
 # 
 # LEXICON Case
 # +Nom:0              # "weight: 0.55" ;
@@ -304,23 +304,23 @@
 # #### xfst script snippet for a spell checker
 #
 # <pre>
-# ! Use the .l operator to project only lower level (= surface forms) of the
-# ! transducer; we are not interested in the upper level (= lexical forms)
+# &#33; Use the .l operator to project only lower level (= surface forms) of the
+# &#33; transducer; we are not interested in the upper level (= lexical forms)
 # define Vocabulary [ Lexicon .o. AlternationRules ].l ;
 # 
-# ! Add "noise" (spelling errors); replace rules are optional when in brackets ()
+# &#33; Add "noise" (spelling errors); replace rules are optional when in brackets ()
 # define Substitution  [ f (->) d::0.1 ] .o. [ f (->) g::0.1 ] .o.
 #                      [ f (->) r::0.025 ] .o. [ f (->) t::0.025 ] .o.
 #                      etc ... ;
 # 
-# ! Define a transducer from correctly spelled words to words containing errors
+# &#33; Define a transducer from correctly spelled words to words containing errors
 # define NoisyVocabulary  Vocabulary .o. Substitution ;
 # 
-# ! Use the .i operator to invert the transducer, such that the input is noisy
-# ! words and the output is correctly spelled words
+# &#33; Use the .i operator to invert the transducer, such that the input is noisy
+# &#33; words and the output is correctly spelled words
 # define SpellChecker  [ NoisyVocabulary ].i ;
 # 
-# ! The spell checker is ready to use
+# &#33; The spell checker is ready to use
 # regex SpellChecker ;
 # 
 # </pre>
@@ -635,10 +635,10 @@ pass # <insert your solution here>
 # Multichar_Symbols
 #         +Nom +Gen +Ade +Abl +All +Ine +Ela +Tra +Ess
 #         +kin +kAAn +kO
-#         ! TO DO: Add more multicharacter symbols as needed
+#         &#33; TO DO: Add more multicharacter symbols as needed
 #
 # LEXICON Root
-# ! TO DO: Add your compound-words lexicons here
+# &#33; TO DO: Add your compound-words lexicons here
 #
 # LEXICON Case
 # +Nom:0          kinkAAn ;
@@ -654,13 +654,13 @@ pass # <insert your solution here>
 # LEXICON kinkAAn
 # +kin:kin        kO ;
 # +kAAn:kAAn      kO ;
-#                 kO ; ! continue without any suffix
+#                 kO ; &#33; continue without any suffix
 #
 # LEXICON kO
 # +kO:kO          # ;
-#                 # ; ! continue without any suffix
+#                 # ; &#33; continue without any suffix
 #
-# ! TO DO: Add the -han/-hän lexicon somewhere
+# &#33; TO DO: Add the -han/-hän lexicon somewhere
 #
 # END
 # ```

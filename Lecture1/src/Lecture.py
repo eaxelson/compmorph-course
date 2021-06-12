@@ -8,7 +8,7 @@
 # <li>5. <a href="#5.-Morphological-generators-and-analyzers">Morphological generators and analyzers</a></li>
 # <li>6. <a href="#6.-A-Finite-State-Transducer-that-implements-a-morphological-generator">A Finite-State Transducer that implements a morphological generator</a></li>
 # <li>7. <a href="#7.-Lexc-code-that-represents-this-transducer">Lexc code that represents this transducer</a></li>
-# <li>8. <a href="#8.-Assignments">Assignments</li>
+# <li>8. <a href="#8.-Assignments">Assignments</a></li>
 # </ul>
 #
 # ## HFST - Helsinki Finite-State Technology
@@ -223,7 +223,7 @@ help(hfst_dev.start_xfst)
 # Below is a finite-state transducer (FST) for purely concatenative I&A English noun inflection
 # for our simple example data.
 # The yellow circles represent _states_ and the arrows represent _transitions_ between the states.
-# The state named <i>Root</i> is the initial state and state named <i>\#</i> the final one.
+# The state named <i>Root</i> is the initial state and state named <i>#</i> the final one.
 # Above each transition, there is the input
 # that the transition <i>consumes</i> and the output that it <i>produces</i>, separated by a colon ":".
 # The symbol ε stands for the <i>epsilon</i>, i.e. the empty symbol. On the input side it means that no symbol is consumed
@@ -240,68 +240,69 @@ help(hfst_dev.start_xfst)
 #
 # ```
 # Multichar_Symbols
-#         +N      ! Noun tag
-#         +Sg     ! Singular
-#         +Pl     ! Plural
-#         +Poss   ! Possessive form
-#                 ! Another comment that is ignored by the compiler
+#         +N      &#33; Noun tag
+#         +Sg     &#33; Singular
+#         +Pl     &#33; Plural
+#         +Poss   &#33; Possessive form
+#                 &#33; Another comment that is ignored by the compiler
 # ```
-#
+
 # Anything between an exclamation mark and the end of a line
 # is a comment. Comments are ignored by the lexc compiler.
 # Use comments a lot!
 # Your code will be clearer to yourself and to others.
-#
+
 # ### 7.2 Define the compulsory Root lexicon
 #
 # ```
 # LEXICON Root
-#         Nouns ; ! No input, no output
+#         Nouns ; &#33; No input, no output
 # ```
 #
 # This is equivalent to writing:
 #
 # ```
 # LEXICON Root
-# 0:0     Nouns ; ! Explicitly showing no input, no output
+# 0:0     Nouns ; &#33; Explicitly showing no input, no output
 # ```
 #
 # This is further equivalent to writing:
 #
 # ```
 # LEXICON Root
-# 0       Nouns ; ! When the input and output are identical,
-#                 ! you can type only the input side
+# 0       Nouns ; &#33; When the input and output are identical,
+#                 &#33; you can type only the input side
 # ```
 #
 # <img src="img/root_lexicon.png">
-#
+
 # ### 7.3 Define the Nouns lexicon
 #
 # ```
-# !
-# ! NOUNS start here
-# !
+# &#33;
+# &#33; NOUNS start here
+# &#33;
 #
 # LEXICON Nouns
 #
-# cat     N ;
+# &#99;at     N ;
 # dog     N ;
 #
-# church    N_s ;
-# kiss      N_s ;
+# church  N_s ;
+# kiss    N_s ;
 #
 # beauty:beaut    N_y ;
 # sky:sk          N_y ; 
 #
 # ```
-# <img src="img/nouns_lexicon.png">
 #
+# <img src="img/nouns_lexicon.png">
+
 # ### 7.4 Continuation lexicons for the N paradigm
 #
 # ```
-# ! The noun lexica N and Num are used for stems without
-# ! any alternation
+# &#33; The noun lexica N and Num are used for stems without
+# &#33; any alternation
 # 
 # LEXICON N
 # +N:0    Num ;
@@ -312,12 +313,12 @@ help(hfst_dev.start_xfst)
 # ```
 #
 # <img src="img/n_paradigm.png">
-#
+
 # ### 7.5 Continuation lexicons for the N_s paradigm
 #
 # ```
-# ! The noun lexica N_s and Num_s are used for stems that
-# ! end in a sibilant and need an extra inserted "e"
+# &#33; The noun lexica N_s and Num_s are used for stems that
+# &#33; end in a sibilant and need an extra inserted "e"
 #
 # LEXICON N_s
 # +N:0    Num_s ;
@@ -328,12 +329,12 @@ help(hfst_dev.start_xfst)
 # ```
 #
 # <img src="img/ns_paradigm.png">
-#
+
 # ### 7.6 Continuation lexicons for the N_y paradigm
 #
 # ```
-# ! The noun lexica N_y and Num_y are used for stems with
-# ! "y" -> "ie" alternation
+# &#33; The noun lexica N_y and Num_y are used for stems with
+# &#33; "y" -> "ie" alternation
 #
 # LEXICON N_y
 # +N:0    Num_y ;
@@ -344,27 +345,27 @@ help(hfst_dev.start_xfst)
 # ```
 #
 # <img src="img/ny_paradigm.png">
-#
+
 # ### 7.7 Continuation lexicons for possessive marker
 #
 # ```
-# ! Possessive markers: usually the singular is 's and 
-# ! the plural is '
+# &#33; Possessive markers: usually the singular is 's and
+# &#33; the plural is '
 #
 # LEXICON PossWithS
 # +Poss:'s    # ; 
-#             # ; ! No ending: no input/output 
+#             # ; &#33; No ending: no input/output
 # 
 # LEXICON PossWithoutS 
 # +Poss:'     # ;
-#             # ; ! No ending: no input/output
+#             # ; &#33; No ending: no input/output
 #
 # END
 # ```
 # <img src="img/poss_ending.png">
 #
 # Note that `END` signifies the end of lexc file. It must be included at the end of each lexc file.
-#
+
 # ### 7.8. Compiling the lexc script into a transducer
 #
 # Finally, let's compile the lexc script into a transducer:
