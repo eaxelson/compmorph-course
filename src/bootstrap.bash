@@ -12,6 +12,6 @@ cp -r /home/jovyan/work/compmorph-course/* /home/jovyan/
 python3 -m pip install graphviz
 python3 -m pip install hfst-dev
 
-rm -fR misc
 rm -fR src
 rm -fR work
+rm -fR doc
